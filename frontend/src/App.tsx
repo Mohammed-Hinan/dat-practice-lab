@@ -11,7 +11,7 @@ import {
   TrendingUp,
   X,
 } from 'lucide-react';
-import { api } from './api';
+import { api, API_BASE } from './api';
 import { Dashboard } from './components/Dashboard';
 import { ExamSimulator } from './components/ExamSimulator';
 import { PracticeHistory } from './components/PracticeHistory';
@@ -44,6 +44,7 @@ export default function App() {
   const [settings, setSettings] = useState<AppSettings | null>(null);
   const [llmStatus, setLlmStatus] = useState<LLMConnectionStatus | null>(null);
   const [bootError, setBootError] = useState<string | null>(null);
+  const [bootingMessage, setBootingMessage] = useState<string>('Loading exam studio...');
 
   const [genPreset, setGenPreset] = useState<{
     mode?: GenerationMode;
@@ -51,35 +52,46 @@ export default function App() {
     themeId?: string | null;
   } | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const [tax, cfg] = await Promise.all([api.getTaxonomy(), api.getSettings()]);
-        setTaxonomy(tax);
-        setSettings(cfg);
-      } catch (err) {
-        setBootError(
-          err instanceof Error
-            ? err.message
-            : 'Unable to reach DAT Practice Lab backend API at http://127.0.0.1:8000.'
-        );
-        return;
+  const initStudio = async (retriesLeft = 3) => {
+    try {
+      setBootError(null);
+      if (retriesLeft < 3) {
+        setBootingMessage(`Waking backend server (attempt ${4 - retriesLeft}/3)...`);
       }
+      const [tax, cfg] = await Promise.all([api.getTaxonomy(), api.getSettings()]);
+      setTaxonomy(tax);
+      setSettings(cfg);
+    } catch (err) {
+      if (retriesLeft > 1) {
+        setBootingMessage(`Waiting for backend to wake up (attempt ${4 - retriesLeft}/3)...`);
+        await new Promise((r) => setTimeout(r, 2500));
+        return initStudio(retriesLeft - 1);
+      }
+      setBootError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to connect to DAT Practice Lab backend.'
+      );
+      return;
+    }
 
-      try {
-        const st = await api.getLLMStatus();
-        setLlmStatus(st);
-      } catch {
-        setLlmStatus({
-          connected: false,
-          provider: 'ollama',
-          endpoint: 'http://localhost:11434',
-          models: [],
-          selected_model: '',
-          message: 'Local LLM status check failed.',
-        });
-      }
-    })();
+    try {
+      const st = await api.getLLMStatus();
+      setLlmStatus(st);
+    } catch {
+      setLlmStatus({
+        connected: false,
+        provider: 'gemini',
+        endpoint: '',
+        models: [],
+        selected_model: '',
+        message: 'LLM status check unavailable.',
+      });
+    }
+  };
+
+  useEffect(() => {
+    initStudio(3);
 
     // Periodically verify LLM connection so status auto-recovers after model load/unload
     const timer = setInterval(async () => {
@@ -107,23 +119,84 @@ export default function App() {
   };
 
   if (bootError) {
+    const isCloudHost = typeof window !== 'undefined' && 
+      window.location.hostname !== 'localhost' && 
+      window.location.hostname !== '127.0.0.1';
+    const isMixedContent = typeof window !== 'undefined' && 
+      window.location.protocol === 'https:' && 
+      API_BASE.startsWith('http://');
+    const isMissingCloudEnv = isCloudHost && API_BASE === '/api';
+
     return (
       <div className="min-h-screen flex items-center justify-center p-6 bg-[#F7F6F2]">
-        <div className="max-w-md w-full bg-white border border-[#E4E1DA] rounded-xl p-6 space-y-3">
-          <h1 className="font-serif-editorial text-2xl font-medium text-[#18181B]">
-            Backend Not Reachable
-          </h1>
-          <p className="text-sm text-[#57534E] leading-relaxed">{bootError}</p>
-          <p className="text-xs font-mono-exam bg-[#FAF9F6] border border-[#E4E1DA] rounded p-3 text-[#27272A]">
-            cd backend && .venv/bin/uvicorn app.main:app --reload --port 8000
-          </p>
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="text-xs font-semibold px-4 py-2 rounded-lg bg-[#1E3A5F] text-white cursor-pointer"
-          >
-            Retry Connection
-          </button>
+        <div className="max-w-lg w-full bg-white border border-[#E4E1DA] rounded-xl p-6 sm:p-8 space-y-4 shadow-sm">
+          <div className="flex items-center gap-3 border-b border-[#E4E1DA] pb-4">
+            <div className="w-10 h-10 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-700 font-semibold text-lg">
+              !
+            </div>
+            <div>
+              <h1 className="font-serif-editorial text-xl sm:text-2xl font-semibold text-[#18181B]">
+                Backend Not Reachable
+              </h1>
+              <p className="text-xs text-[#78716C] font-mono-exam mt-0.5">
+                Target endpoint: {API_BASE.startsWith('http') ? API_BASE : `${typeof window !== 'undefined' ? window.location.origin : ''}${API_BASE}`}
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-rose-50/70 border border-rose-200 p-3.5 text-xs text-rose-900 leading-relaxed font-mono-exam">
+            Error: {bootError}
+          </div>
+
+          {isMixedContent ? (
+            <div className="space-y-2 text-xs text-[#44403C] bg-amber-50 border border-amber-200 rounded-lg p-3.5">
+              <p className="font-semibold text-amber-900">⚠️ Browser Security Block (Mixed Content):</p>
+              <p>Your web app is loaded securely over <strong>HTTPS</strong>, but your API endpoint is configured with insecure <code>http://</code>. Web browsers automatically block this.</p>
+              <p className="font-mono-exam text-[11px] bg-white/70 p-2 rounded border border-amber-200">
+                Change your <code>VITE_API_BASE_URL</code> environment variable to use <code>https://</code>.
+              </p>
+            </div>
+          ) : isMissingCloudEnv ? (
+            <div className="space-y-2 text-xs text-[#44403C] bg-sky-50 border border-sky-200 rounded-lg p-3.5">
+              <p className="font-semibold text-sky-950">🌐 Missing Backend Cloud URL on Vercel:</p>
+              <p>Your frontend is deployed to the cloud, but doesn't know where your backend lives yet.</p>
+              <ol className="list-decimal list-inside space-y-1 font-sans text-sky-900 pl-1">
+                <li>Copy your <strong>Render Web Service URL</strong> (e.g. <code>https://dat-practice-lab-backend.onrender.com</code>).</li>
+                <li>Go to <strong>Vercel &rarr; Your Project &rarr; Settings &rarr; Environment Variables</strong>.</li>
+                <li>Add variable: <code>VITE_API_BASE_URL</code> with your Render URL.</li>
+                <li>Click <strong>Redeploy</strong> in Vercel.</li>
+              </ol>
+            </div>
+          ) : (
+            <div className="space-y-2 text-xs text-[#44403C] bg-[#FAF9F6] border border-[#E4E1DA] rounded-lg p-3.5">
+              <p className="font-semibold text-[#18181B]">💡 How to resolve:</p>
+              {isCloudHost ? (
+                <p className="leading-relaxed">
+                  If your backend is hosted on Render (free tier), it may take <strong>30–50 seconds</strong> to wake up from idle on the first request.
+                </p>
+              ) : (
+                <>
+                  <p>Ensure your local backend server is running in terminal:</p>
+                  <pre className="font-mono-exam text-[11px] bg-white p-2.5 rounded border border-[#E4E1DA] text-[#27272A] overflow-x-auto">
+                    cd backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+                  </pre>
+                </>
+              )}
+            </div>
+          )}
+
+          <div className="pt-2 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => initStudio(3)}
+              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-[#1E3A5F] text-white hover:bg-[#162C49] cursor-pointer transition-colors shadow-sm"
+            >
+              Retry Connection
+            </button>
+            <span className="text-[11px] text-[#78716C]">
+              {bootingMessage}
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -132,9 +205,12 @@ export default function App() {
   if (!taxonomy || !settings) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F7F6F2]">
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-3">
           <div className="font-serif-editorial text-2xl text-[#18181B]">DAT Practice Lab</div>
-          <p className="text-xs text-[#78716C]">Loading local studio...</p>
+          <div className="inline-flex items-center gap-2 text-xs text-[#78716C] bg-white px-3 py-1.5 rounded-full border border-[#E4E1DA] shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#1E3A5F] animate-pulse" />
+            <span>{bootingMessage}</span>
+          </div>
         </div>
       </div>
     );
