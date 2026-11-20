@@ -12,12 +12,8 @@ import {
   Trash2,
 } from 'lucide-react';
 import { api, formatDuration } from '../api';
-import type { AppSettings, DrawThingsGenerateResponse, ExamPaperRecord, TaxonomyData } from '../types';
-import {
-  defaultSketchStyleForCategory,
-  defaultVisualPromptForQuestion,
-  QuestionDisplay,
-} from './QuestionDisplay';
+import type { AppSettings, ExamPaperRecord, TaxonomyData } from '../types';
+import { QuestionDisplay } from './QuestionDisplay';
 
 interface ExamSimulatorProps {
   taxonomy: TaxonomyData;
@@ -67,8 +63,6 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [examFinished, setExamFinished] = useState(false);
   const [submittingExam, setSubmittingExam] = useState(false);
-  const [paperSketches, setPaperSketches] = useState<Record<string, DrawThingsGenerateResponse>>({});
-  const [renderingPaperSketches, setRenderingPaperSketches] = useState(false);
 
   const loadPapers = async () => {
     setLoadingPapers(true);
@@ -137,7 +131,6 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
     setElapsedSeconds(paper.elapsed_seconds || 0);
     setExamRunning(false);
     setExamFinished(paper.status === 'completed');
-    setPaperSketches({});
   };
 
   const handleStartOrPause = async () => {
@@ -324,45 +317,8 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
             totalInBatch={activePaper.questions.length}
             examMode
             externalRubricUnlocked={examFinished}
-            sketchUnlockedOverride={examFinished}
-            autoSketch={paperSketches[currentQ.id] || null}
             externalElapsedSeconds={elapsedSeconds}
           />
-        )}
-
-        {examFinished && (renderingPaperSketches || Object.keys(paperSketches).length > 0) && (
-          <section className="bg-white border border-[#E4E1DA] rounded-xl p-5 space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="font-serif-editorial text-lg font-medium text-[#18181B]">
-                Post-Exam Draw Things Reference Sketches
-              </h3>
-              {renderingPaperSketches && (
-                <span className="inline-flex items-center gap-1.5 text-xs text-[#1E3A5F]">
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  Rendering sketches locally…
-                </span>
-              )}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {activePaper.questions.map((q, i) => {
-                const sk = paperSketches[q.id];
-                return (
-                  <div key={q.id} className="border border-[#E4E1DA] rounded-lg p-3 bg-[#FAF9F6] space-y-2">
-                    <div className="text-xs font-semibold text-[#18181B] truncate">
-                      Q{i + 1}: {q.title}
-                    </div>
-                    {sk ? (
-                      <img src={sk.image_url} alt={q.title} className="w-full rounded bg-white object-contain" />
-                    ) : (
-                      <div className="h-40 flex items-center justify-center text-xs text-[#78716C] bg-white rounded">
-                        Rendering…
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
         )}
       </div>
     );

@@ -194,21 +194,12 @@ def evaluate_dataset_confidence(records: List[HistoricalQuestionRecord]) -> Tupl
         return (
             "Low",
             "No historical NID M.Des questions are imported yet. Practice-priority scores currently rely "
-            "only on your selected preparation profiles and practice gaps — import historical questions "
-            "in the Question Bank to ground trends in real evidence.",
+            "only on your selected preparation profiles and practice gaps.",
         )
-    if total < 10 or distinct_years < 2:
-        return (
-            "Low",
-            f"Low confidence: Historical dataset has only {total} question(s) across {distinct_years} known "
-            "examination year(s). Treat recurring-theme trends as tentative until at least 15+ dated "
-            "questions across 3+ years are imported.",
-        )
-    if total < 30 or distinct_years < 4:
+    if total < 5:
         return (
             "Medium",
-            f"Moderate confidence: Based on {total} historical question(s) spanning {distinct_years} known "
-            "year(s). Importing additional past papers across more years will improve trend reliability.",
+            f"Dataset has {total} question(s). Importing additional past papers will refine trends.",
         )
     return ("High", None)
 

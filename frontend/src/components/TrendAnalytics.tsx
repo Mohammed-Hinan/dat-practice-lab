@@ -86,27 +86,7 @@ export const TrendAnalytics: React.FC<TrendAnalyticsProps> = ({ onNavigate }) =>
         </div>
       </header>
 
-      {/* Explicit Low-Confidence Warning */}
-      {data.low_confidence_warning && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-start gap-3 max-w-3xl">
-            <AlertTriangle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-            <div className="space-y-1">
-              <div className="text-sm font-semibold text-amber-950">
-                Low Historical Data Confidence Warning
-              </div>
-              <p className="text-xs text-amber-900 leading-relaxed">{data.low_confidence_warning}</p>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={() => onNavigate('bank')}
-            className="text-xs font-semibold px-3.5 py-2 rounded-lg bg-amber-900 text-white hover:bg-amber-800 cursor-pointer shrink-0"
-          >
-            Import Historical Questions
-          </button>
-        </div>
-      )}
+
 
       {/* Evidence Transparency Strip */}
       <section className="grid grid-cols-2 lg:grid-cols-5 gap-3">

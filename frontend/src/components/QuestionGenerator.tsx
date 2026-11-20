@@ -7,7 +7,6 @@ import {
   Check,
   CheckCircle2,
   Clock,
-  Image as ImageIcon,
   Loader2,
   RefreshCw,
   Sparkles,
@@ -18,23 +17,17 @@ import { api } from '../api';
 import type {
   AppSettings,
   DifficultyLevel,
-  DrawThingsGenerateResponse,
   GeneratedQuestion,
   GenerationMode,
   TaxonomyData,
 } from '../types';
-import {
-  defaultSketchStyleForCategory,
-  defaultVisualPromptForQuestion,
-  QuestionDisplay,
-} from './QuestionDisplay';
+import { QuestionDisplay } from './QuestionDisplay';
 
 interface QuestionGeneratorProps {
   taxonomy: TaxonomyData;
   settings: AppSettings;
   llmConnected: boolean;
   initialPreset?: { mode?: GenerationMode; categories?: string[]; themeId?: string | null } | null;
-  onGoToSettings: () => void;
 }
 
 const COUNT_PRESETS = [1, 2, 3, 4, 5, 6, 8];
@@ -44,7 +37,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   settings,
   llmConnected,
   initialPreset,
-  onGoToSettings,
 }) => {
   const [activeTab, setActiveTab] = useState<'generate' | 'saved'>('generate');
 
@@ -66,13 +58,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   const [batch, setBatch] = useState<GeneratedQuestion[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
   const [attemptedIds, setAttemptedIds] = useState<string[]>([]);
-
-  // Post-set automatic Draw Things reference sketches for every question in the set
-  const [setSketches, setSetSketches] = useState<Record<string, DrawThingsGenerateResponse>>({});
-  const [renderingSetSketches, setRenderingSetSketches] = useState(false);
-  const [sketchProgress, setSketchProgress] = useState<{ current: number; total: number } | null>(null);
-  const [setSketchError, setSetSketchError] = useState<string | null>(null);
-  const sketchesTriggeredForSetRef = useRef<string>('');
 
   // Background pre-generation buffer (for 1-question sets: 0s wait for next question!)
   const [prefetchedNext, setPrefetchedNext] = useState<GeneratedQuestion | null>(null);
@@ -147,44 +132,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
       setSelectedCategories(initialPreset.categories);
     }
   }, [initialPreset]);
-
-  // Automatically render Draw Things visual reference sketches for EVERY question once ALL in the set are attempted!
-  const renderAllSketchesForBatch = async (questionsToRender: GeneratedQuestion[]) => {
-    if (questionsToRender.length === 0) return;
-    // Cancel any background LLM prefetch first so Draw Things has clean 8 GB M1 unified memory
-    cancelPrefetch();
-    setRenderingSetSketches(true);
-    setSetSketchError(null);
-    setSketchProgress({ current: 0, total: questionsToRender.length });
-
-    for (let i = 0; i < questionsToRender.length; i++) {
-      const q = questionsToRender[i];
-      setSketchProgress({ current: i + 1, total: questionsToRender.length });
-      try {
-        const res = await api.generateReferenceSketch({
-          question_id: q.id,
-          prompt: defaultVisualPromptForQuestion(q),
-          negative_prompt: q.visual_negative_prompt || undefined,
-          style_preset: defaultSketchStyleForCategory(q.category, `${q.title} ${q.scenario}`),
-        });
-        setSetSketches((prev) => ({ ...prev, [q.id]: res }));
-      } catch (err) {
-        setSetSketchError(
-          err instanceof Error
-            ? err.message
-            : 'Draw Things could not render reference sketches. Check Draw Things HTTP server (port 7860).'
-        );
-        break;
-      }
-    }
-
-    setRenderingSetSketches(false);
-    setSketchProgress(null);
-  };
-
-  useEffect(() => {
-    // Post-set Draw Things auto-rendering disabled (cloud Gemini generation active)
-  }, [allQuestionsAttempted, batchSignature]);
 
   const loadSaved = async () => {
     setLoadingSaved(true);
@@ -283,9 +230,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
 
   const resetSetTracking = () => {
     setAttemptedIds([]);
-    setSetSketches({});
-    setSetSketchError(null);
-    sketchesTriggeredForSetRef.current = '';
   };
 
   const handleGenerate = async (excludeTitles: string[] = []) => {
@@ -400,24 +344,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
 
   const handleQuestionAttempted = (questionId: string) => {
     setAttemptedIds((prev) => (prev.includes(questionId) ? prev : [...prev, questionId]));
-  };
-
-  const handleRegenerateOneSketch = async (q: GeneratedQuestion) => {
-    setSetSketchError(null);
-    setRenderingSetSketches(true);
-    try {
-      const res = await api.generateReferenceSketch({
-        question_id: q.id,
-        prompt: defaultVisualPromptForQuestion(q),
-        negative_prompt: q.visual_negative_prompt || undefined,
-        style_preset: defaultSketchStyleForCategory(q.category, `${q.title} ${q.scenario}`),
-      });
-      setSetSketches((prev) => ({ ...prev, [q.id]: res }));
-    } catch (err) {
-      setSetSketchError(err instanceof Error ? err.message : 'Could not regenerate sketch.');
-    } finally {
-      setRenderingSetSketches(false);
-    }
   };
 
   const handleDeleteSaved = async (id: string) => {
@@ -804,10 +730,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
                 questionNumber={activeIdx + 1}
                 totalInBatch={batch.length}
                 initialAttempted={attemptedIds.includes(activeQuestion.id)}
-                autoSketch={setSketches[activeQuestion.id] || null}
-                onSketchGenerated={(qId, sketch) =>
-                  setSetSketches((prev) => ({ ...prev, [qId]: sketch }))
-                }
                 onAttemptSaved={handleQuestionAttempted}
                 onRegenerate={handleRegenerateSingle}
                 regenerating={generating}
@@ -833,109 +755,7 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
               </div>
             )}
 
-            {/* Automatic Full-Set Visual Reference Gallery (appears once ALL questions in the set are attempted!) */}
-            {allQuestionsAttempted && batch.length > 0 && (
-              <section className="bg-white border border-[#1E3A5F]/25 rounded-xl p-6 space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[#1E3A5F]">
-                      <ImageIcon className="w-3.5 h-3.5" />
-                      Set Complete • Local Draw Things Visual Reference Gallery
-                    </div>
-                    <h2 className="font-serif-editorial text-2xl font-medium text-[#18181B] mt-0.5">
-                      Reference Sketches for All {batch.length} Question{batch.length > 1 ? 's' : ''}
-                    </h2>
-                  </div>
 
-                  <button
-                    type="button"
-                    onClick={() => renderAllSketchesForBatch(batch)}
-                    disabled={renderingSetSketches}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-[#FAF9F6] text-[#18181B] hover:bg-stone-100 disabled:opacity-50 cursor-pointer"
-                  >
-                    <RefreshCw className={`w-3.5 h-3.5 ${renderingSetSketches ? 'animate-spin' : ''}`} />
-                    {renderingSetSketches ? 'Rendering…' : 'Regenerate All Sketches'}
-                  </button>
-                </div>
-
-                {renderingSetSketches && sketchProgress && (
-                  <div className="rounded-lg bg-[#F7F9FC] border border-[#1E3A5F]/20 px-4 py-3 flex items-center gap-2.5 text-xs text-[#1E3A5F]">
-                    <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-                    <span>
-                      Generating local reference sketch {sketchProgress.current} of {sketchProgress.total} via
-                      Draw Things…
-                    </span>
-                  </div>
-                )}
-
-                {setSketchError && (
-                  <div className="rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-xs text-amber-950">
-                    {setSketchError}
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {batch.map((q, idx) => {
-                    const sk = setSketches[q.id];
-                    return (
-                      <div
-                        key={q.id}
-                        className="border border-[#E4E1DA] rounded-xl overflow-hidden bg-[#FAF9F6] flex flex-col"
-                      >
-                        <div className="px-4 py-2.5 bg-white border-b border-[#E4E1DA] flex items-center justify-between gap-2">
-                          <div className="min-w-0">
-                            <span className="font-mono-exam text-[11px] font-semibold text-[#1E3A5F] mr-1.5">
-                              Q{idx + 1}
-                            </span>
-                            <span className="text-xs font-semibold text-[#18181B] truncate">
-                              {q.title}
-                            </span>
-                            <span className="block text-[11px] text-[#78716C]">{q.category}</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleRegenerateOneSketch(q)}
-                            disabled={renderingSetSketches}
-                            className="text-[11px] px-2 py-1 rounded border border-[#D8D4CB] bg-white text-[#44403C] hover:bg-stone-50 cursor-pointer shrink-0"
-                            title="Regenerate sketch"
-                          >
-                            Retry
-                          </button>
-                        </div>
-
-                        <div className="p-3 flex-1 flex items-center justify-center min-h-[220px] bg-white">
-                          {sk ? (
-                            <img
-                              src={sk.image_url}
-                              alt={`Reference sketch for ${q.title}`}
-                              className="w-full max-h-72 object-contain rounded"
-                            />
-                          ) : renderingSetSketches ? (
-                            <div className="text-xs text-[#78716C] flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 animate-spin text-[#1E3A5F]" />
-                              Waiting in local Draw Things queue…
-                            </div>
-                          ) : (
-                            <div className="text-xs text-[#78716C] text-center">
-                              No sketch generated yet. Click Retry to render via Draw Things.
-                            </div>
-                          )}
-                        </div>
-
-                        {sk && (
-                          <div className="px-3.5 py-2 border-t border-[#E4E1DA] text-[11px] font-mono-exam text-[#78716C] flex items-center justify-between">
-                            <span>
-                              {sk.width}×{sk.height} • {sk.steps} steps
-                            </span>
-                            <span>{(sk.latency_ms / 1000).toFixed(1)}s</span>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
           </div>
         </div>
       )}

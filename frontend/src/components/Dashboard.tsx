@@ -282,12 +282,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, llmConnected }
             </button>
           </div>
 
-          {data.low_confidence_warning && (
-            <div className="text-xs bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-amber-900">
-              {data.low_confidence_warning}
-            </div>
-          )}
-
           <div className="space-y-3">
             {data.top_themes.map((t) => (
               <div key={t.theme_id} className="space-y-1">

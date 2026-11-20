@@ -6,7 +6,6 @@ import {
   History,
   LayoutDashboard,
   Menu,
-  Settings as SettingsIcon,
   Sparkles,
   TrendingUp,
   X,
@@ -282,18 +281,6 @@ export default function App() {
           </div>
           <div className="font-mono-exam text-[10px] text-[#78716C] flex items-center justify-between">
             <span className="truncate">{llmStatus?.selected_model || 'Cloud Ready'}</span>
-            {typeof window !== 'undefined' &&
-              (window.location.hostname === 'localhost' ||
-                window.location.hostname === '127.0.0.1') && (
-                <button
-                  type="button"
-                  onClick={() => handleNavigate('settings')}
-                  title="Host Configuration"
-                  className="text-[#78716C] hover:text-[#18181B] p-0.5 rounded cursor-pointer"
-                >
-                  <SettingsIcon className="w-3.5 h-3.5" />
-                </button>
-              )}
           </div>
         </div>
       </div>
@@ -349,7 +336,6 @@ export default function App() {
               settings={settings}
               llmConnected={Boolean(llmStatus?.connected)}
               initialPreset={genPreset}
-              onGoToSettings={() => handleNavigate('settings')}
             />
           )}
           {section === 'simulator' && (

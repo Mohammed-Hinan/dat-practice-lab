@@ -8,12 +8,10 @@ import {
   ChevronDown,
   ChevronUp,
   Clock,
-  Code2,
   Copy,
   ExternalLink,
   Eye,
   Image as ImageIcon,
-  Loader2,
   Lock,
   Pause,
   PenTool,
@@ -22,148 +20,14 @@ import {
   RotateCcw,
   ShieldAlert,
   Sparkles,
-  Upload,
   X,
 } from 'lucide-react';
 import { api, formatDuration } from '../api';
 import type {
   AttemptStatus,
-  DrawThingsEssence,
-  DrawThingsGenerateResponse,
   GeneratedQuestion,
   SelfDifficulty,
-  SketchStylePreset,
-  VisualLearningRecord,
 } from '../types';
-
-export function defaultSketchStyleForCategory(
-  category: string,
-  promptContext = ''
-): SketchStylePreset {
-  const low = promptContext.toLowerCase();
-  if (
-    low.includes('worm') ||
-    low.includes("ant's-eye") ||
-    low.includes('ants eye') ||
-    low.includes('ground level looking up') ||
-    low.includes('low angle') ||
-    low.includes('low-angle')
-  ) {
-    return 'perspective_worm_eye';
-  }
-  if (
-    low.includes("bird's-eye") ||
-    low.includes('birds eye') ||
-    low.includes('balcony looking down') ||
-    low.includes('high angle') ||
-    low.includes('high-angle') ||
-    low.includes('aerial')
-  ) {
-    return 'perspective_bird_eye';
-  }
-  if (
-    low.includes('exploded') ||
-    low.includes('internal mechanism') ||
-    low.includes('spring, ink cartridge') ||
-    low.includes('components aligned')
-  ) {
-    return 'exploded_view';
-  }
-  if (
-    low.includes('metamorphosis') ||
-    low.includes('transforming into') ||
-    low.includes('4-stage') ||
-    low.includes('morphing')
-  ) {
-    return 'metamorphosis_4stage';
-  }
-  if (
-    low.includes('mascot') ||
-    low.includes('character design') ||
-    low.includes('turnaround')
-  ) {
-    return 'character_mascot';
-  }
-  if (
-    low.includes('pain point') ||
-    low.includes('struggling with') ||
-    low.includes('ergonomic analysis')
-  ) {
-    return 'problem_ergonomic_analysis';
-  }
-
-  if (category === 'Storyboard') return 'storyboard_frame';
-  if (category === 'Composition') return 'poster_metaphor';
-  if (category === 'Creativity') return 'metamorphosis_4stage';
-  if (category === 'Logos, Symbols & Signs') return 'logo_symbol';
-  if (category === 'Product sketch') return 'product_sketch';
-  if (category === 'Problem identification') return 'problem_ergonomic_analysis';
-  if (category === 'Drawing' || category === 'Design aptitude') return 'observational_pencil';
-  return 'product_sketch';
-}
-
-export function defaultVisualPromptForQuestion(question: GeneratedQuestion): string {
-  // Harvest all authentic clues embedded directly in the question structure
-  const rawCurated = question.visual_sketch_prompt?.trim() || '';
-  const isGeneric =
-    !rawCurated ||
-    rawCurated.length < 25 ||
-    /^user\s+(carrying|doing|struggling|using|handling|moving)/i.test(rawCurated);
-
-  // 1. Clean scenario into authentic persona & setting (removing second-person examination phrasing)
-  let personaSetting = (question.scenario || '').trim();
-  personaSetting = personaSetting
-    .replace(/^(?:you are an?|imagine someone|picture someone|you have to|as an?)\s+/i, '')
-    .trim();
-  if (personaSetting.length > 0) {
-    personaSetting = personaSetting.charAt(0).toUpperCase() + personaSetting.slice(1);
-  }
-
-  // 2. Extract concrete functional intervention / practical fix from subquestions or sketching requirements
-  let intervention = '';
-  if (question.sketching_requirements && question.sketching_requirements.length > 0) {
-    const fixReq =
-      question.sketching_requirements.find((r) =>
-        /intervention|solution|practical fix|fix|redesign|carrier|mechanism|tool|device/i.test(r)
-      ) || question.sketching_requirements[question.sketching_requirements.length - 1];
-    if (fixReq) {
-      intervention = fixReq.replace(/^(?:show|draw|illustrate|depict)\s+(?:yourself\s+|the\s+user\s+)?/i, '').trim();
-    }
-  }
-
-  if (!intervention && question.subquestions && question.subquestions.length > 0) {
-    const taskB = question.subquestions.find(
-      (sq) => sq.label === 'B' || /design|intervention|fix|redesign|solution|deliverable/i.test(sq.instruction)
-    );
-    if (taskB) {
-      const bText = taskB.deliverables?.[0] || taskB.instruction;
-      intervention = bText.replace(/^(?:sketch of a|design a|present your|sketch a|deliverable:?)\s+/i, '').trim();
-    }
-  }
-
-  // 3. Extract key environmental constraints
-  const constraintsSummary =
-    question.constraints && question.constraints.length > 0
-      ? question.constraints.slice(0, 2).join(', ')
-      : '';
-
-  // 4. Combine into cohesive, context-rich visual prompt
-  if (personaSetting && intervention) {
-    const constraintClause = constraintsSummary ? `, taking into account ${constraintsSummary}` : '';
-    return `${personaSetting}, actively using a practical functional intervention: ${intervention}${constraintClause}`.trim();
-  }
-
-  if (personaSetting) {
-    const constraintClause = constraintsSummary ? `, with ${constraintsSummary}` : '';
-    return `${personaSetting}${constraintClause}`.trim();
-  }
-
-  if (!isGeneric) {
-    return rawCurated;
-  }
-
-  return `${question.title}. ${question.scenario}`;
-}
 
 interface QuestionDisplayProps {
   question: GeneratedQuestion;
@@ -171,14 +35,9 @@ interface QuestionDisplayProps {
   totalInBatch?: number;
   onSaveToggle?: (updated: GeneratedQuestion) => void;
   onAttemptSaved?: (questionId: string) => void;
-  onSketchGenerated?: (questionId: string, sketch: DrawThingsGenerateResponse) => void;
   onRegenerate?: () => void;
   regenerating?: boolean;
-  /** When part of a multi-question set, track persisted attempted status & gate sketches until full set is finished */
   initialAttempted?: boolean;
-  sketchUnlockedOverride?: boolean;
-  autoSketch?: DrawThingsGenerateResponse | null;
-  /** When inside ExamSimulator, allow external paper timer to control rubric lock */
   examMode?: boolean;
   externalRubricUnlocked?: boolean;
   externalElapsedSeconds?: number;
@@ -190,12 +49,9 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   totalInBatch,
   onSaveToggle,
   onAttemptSaved,
-  onSketchGenerated,
   onRegenerate,
   regenerating = false,
   initialAttempted = false,
-  sketchUnlockedOverride,
-  autoSketch = null,
   examMode = false,
   externalRubricUnlocked = false,
   externalElapsedSeconds,
@@ -219,40 +75,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 
   // Disclosures
   const [showPriorityDetails, setShowPriorityDetails] = useState(false);
-  const [showRawDebug, setShowRawDebug] = useState(false);
-
-  // Post-attempt Draw Things Reference Sketch state (strictly gated until attempted)
-  const [showSketchLab, setShowSketchLab] = useState(false);
-  const [sketchStyle, setSketchStyle] = useState<SketchStylePreset>(() =>
-    defaultSketchStyleForCategory(question.category, `${question.title} ${question.scenario}`)
-  );
-  const [sketchPrompt, setSketchPrompt] = useState(() => defaultVisualPromptForQuestion(question));
-  const [sketchNegativePrompt, setSketchNegativePrompt] = useState(
-    () => question.visual_negative_prompt?.trim() || ''
-  );
-  const [craftingPrompt, setCraftingPrompt] = useState(false);
-  const [showEssencePrompt, setShowEssencePrompt] = useState(false);
-  const [sketchEssence, setSketchEssence] = useState<DrawThingsEssence | null>(null);
-  const [uploadedSketchB64, setUploadedSketchB64] = useState<string | null>(null);
-  const [uploadedSketchName, setUploadedSketchName] = useState<string>('');
-  const [denoiseStrength, setDenoiseStrength] = useState<number>(0.58);
-  const [renderingSketch, setRenderingSketch] = useState(false);
-  const [sketchResult, setSketchResult] = useState<DrawThingsGenerateResponse | null>(null);
-  const [sketchError, setSketchError] = useState<string | null>(null);
-  const [learnedRules, setLearnedRules] = useState<VisualLearningRecord[]>([]);
-
-  useEffect(() => {
-    let cancelled = false;
-    api
-      .listLearnedRules(question.category)
-      .then((rules) => {
-        if (!cancelled) setLearnedRules(rules);
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, [question.category, sketchResult]);
 
   // Reset per-question session state when question changes
   useEffect(() => {
@@ -265,29 +87,11 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     setRubricRevealed(false);
     setAttemptNotes('');
     setAttemptFeedback(null);
-    setShowRawDebug(false);
-    setShowSketchLab(Boolean(autoSketch));
-    setSketchStyle(
-      defaultSketchStyleForCategory(question.category, `${question.title} ${question.scenario}`)
-    );
-    setSketchPrompt(defaultVisualPromptForQuestion(question));
-    setSketchNegativePrompt(question.visual_negative_prompt?.trim() || '');
-    setUploadedSketchB64(null);
-    setUploadedSketchName('');
-    setSketchResult(autoSketch);
-    setSketchError(null);
   }, [question.id]);
 
   useEffect(() => {
     if (initialAttempted) setAttemptRecorded(true);
   }, [initialAttempted]);
-
-  useEffect(() => {
-    if (autoSketch) {
-      setSketchResult(autoSketch);
-      setShowSketchLab(true);
-    }
-  }, [autoSketch]);
 
   useEffect(() => {
     if (!timerRunning || examMode) return;
@@ -336,36 +140,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     }
   };
 
-  const handleGenerateSketch = async () => {
-    setRenderingSketch(true);
-    setSketchError(null);
-    setShowSketchLab(true);
-    try {
-      const res = await api.generateReferenceSketch({
-        question_id: question.id,
-        question_title: question.title,
-        category: question.category,
-        prompt: sketchPrompt.trim() || question.title,
-        negative_prompt: sketchNegativePrompt.trim() || undefined,
-        style_preset: sketchStyle,
-        init_image_base64: uploadedSketchB64,
-        denoising_strength: denoiseStrength,
-        older_image_url: sketchResult?.image_url,
-        older_prompt: sketchResult?.prompt_used || sketchPrompt.trim(),
-      });
-      setSketchResult(res);
-      onSketchGenerated?.(question.id, res);
-    } catch (err) {
-      setSketchError(
-        err instanceof Error
-          ? err.message
-          : 'Draw Things sketch generation failed. Make sure Draw Things is running and API Server is enabled on port 7860.'
-      );
-    } finally {
-      setRenderingSketch(false);
-    }
-  };
-
   const handleRecordAttempt = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmittingAttempt(true);
@@ -397,42 +171,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     }
   };
 
-  const handleUploadPaperSketch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploadedSketchName(file.name);
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        setUploadedSketchB64(reader.result);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleCraftVisualPrompt = async () => {
-    setCraftingPrompt(true);
-    setSketchError(null);
-    try {
-      const res = await api.craftSketchPrompt({
-        title: question.title,
-        scenario: question.scenario,
-        category: question.category,
-        subquestions: question.subquestions.map((sq) => `${sq.label}) ${sq.instruction}`),
-        constraints: question.constraints,
-        sketching_requirements: question.sketching_requirements,
-        time_minutes: question.time_minutes,
-        style_preset: sketchStyle,
-      });
-      setSketchPrompt(res.visual_sketch_prompt);
-      setSketchNegativePrompt(res.visual_negative_prompt);
-    } catch (err) {
-      setSketchError(err instanceof Error ? err.message : 'Could not craft visual prompt.');
-    } finally {
-      setCraftingPrompt(false);
-    }
-  };
-
   const [copiedGeminiPrompt, setCopiedGeminiPrompt] = useState(false);
 
   const handleCopyGeminiPrompt = () => {
@@ -461,19 +199,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     navigator.clipboard.writeText(lines.join('\n'));
     setCopiedGeminiPrompt(true);
     setTimeout(() => setCopiedGeminiPrompt(false), 3500);
-  };
-
-  const handleToggleEssencePrompt = async () => {
-    const next = !showEssencePrompt;
-    setShowEssencePrompt(next);
-    if (next && !sketchEssence) {
-      try {
-        const data = await api.getDrawThingsEssence();
-        setSketchEssence(data);
-      } catch {
-        // non-fatal
-      }
-    }
   };
 
   const confidenceBadgeStyle =
@@ -642,13 +367,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
         </div>
       )}
 
-      {/* Low-Confidence Banner if dataset is sparse */}
-      {question.low_confidence_warning && (
-        <div className="bg-amber-50/80 border-b border-amber-200/80 px-6 py-2.5 flex items-start gap-2.5 text-xs text-amber-900">
-          <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-          <p className="leading-relaxed">{question.low_confidence_warning}</p>
-        </div>
-      )}
 
       {/* Main Examination Prompt Body */}
       <div className="px-6 sm:px-8 py-6 space-y-6">
