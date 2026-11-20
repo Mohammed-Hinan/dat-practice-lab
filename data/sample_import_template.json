@@ -1,0 +1,26 @@
+{
+  "questions": [
+    {
+      "title": "Public Hospital OPD Waiting Audit",
+      "prompt_text": "Observe a crowded public hospital outpatient waiting area during peak morning hours. Identify five distinct usability or communication problems faced by patients, caregivers, and staff. Prioritise one critical problem and propose an annotated design intervention.",
+      "year": 2024,
+      "category": "Problem identification",
+      "programme_tags": ["Universal Design", "Strategic Design Management"],
+      "marks": 20,
+      "time_minutes": 30,
+      "source": "Import Template Example",
+      "notes": "Replace with your own verified historical prompts"
+    },
+    {
+      "title": "Five-Frame Wordless Monsoon Story",
+      "prompt_text": "Create a five-frame wordless storyboard showing an unexpected interaction between a street bookseller and a curious schoolchild when a sudden monsoon downpour begins.",
+      "year": null,
+      "category": "Storyboard",
+      "programme_tags": ["Animation Film Design", "Film & Video Communication"],
+      "marks": null,
+      "time_minutes": 30,
+      "source": "Import Template Example",
+      "notes": "Year and marks intentionally null to demonstrate Unknown handling"
+    }
+  ]
+}

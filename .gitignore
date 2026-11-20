@@ -1,0 +1,25 @@
+# Node dependencies and build
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python Virtual Environments & Bytecode
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+*$py.class
+backend/.pytest_cache/
+
+# Local database & temp runtime files (peer logs/tunnels)
+peer_tunnel.log
+peer_tunnel_url.txt
+.DS_Store
+**/sketches/
+test_*.json
+*.env.local
+.env
+*.env
+
+# Keep the pre-seeded SQLite database so historical past papers are deployed!
+!data/dat_practice_lab.db
+!backend/data/dat_practice_lab.db
