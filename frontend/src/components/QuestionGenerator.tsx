@@ -203,10 +203,7 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4 border-b border-[#E4E1DA] pb-5">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#78716C]">
-            Common-Paper Equal Practice • 2025–2027 NID M.Des DAT Prelims
-          </p>
-          <h1 className="font-serif-editorial text-3xl font-medium text-[#18181B] mt-1">
+          <h1 className="font-serif-editorial text-3xl font-medium text-[#18181B]">
             Practice Studio
           </h1>
         </div>
