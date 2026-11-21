@@ -185,7 +185,9 @@ def _summarize_historical_evidence(
     else:
         pool = relevant if len(relevant) >= 3 else list({r.id: r for r in (relevant + historical_records[:40])}.values())
 
-    sample = random.sample(pool, k=min(4, len(pool))) if pool else []
+    # Prioritize recent 2024–2026 examination records to ground in latest NID style
+    pool = sorted(pool, key=lambda r: (r.year or 2000), reverse=True)
+    sample = pool[:4] if pool else []
     evidence_bullets: List[str] = []
     for rec in sample:
         yr = str(rec.year) if rec.year is not None else "Unknown"
@@ -732,7 +734,11 @@ class QuestionGenerator:
 
     async def generate_questions(self, req: GenerateQuestionsRequest) -> GenerateQuestionsResponse:
         settings = self.db.get_settings()
-        active_profiles = req.active_profiles if req.active_profiles else settings.active_profiles
+        # When no optional programme focus is picked, strictly lock to the authentic 2026 NID M.Des Common Paper model ("general_nid_mdes")
+        if not req.programme_focus:
+            active_profiles = ["general_nid_mdes"]
+        else:
+            active_profiles = req.active_profiles if req.active_profiles else settings.active_profiles
         historical_records = self.db.list_historical_questions()
         attempts = self.db.list_practice_attempts(limit=300)
         weak_areas = self.db.list_weak_areas()
@@ -828,7 +834,11 @@ class QuestionGenerator:
     async def generate_exam_paper(self, req: ExamPaperCreateRequest) -> ExamPaperRecord:
         """Mode D — Exam Simulator: generates a multi-question mock paper with diverse skills."""
         settings = self.db.get_settings()
-        active_profiles = req.active_profiles if req.active_profiles else settings.active_profiles
+        # When no optional programme focus is picked, strictly lock to the authentic 2026 NID M.Des Common Paper model ("general_nid_mdes")
+        if not req.programme_focus:
+            active_profiles = ["general_nid_mdes"]
+        else:
+            active_profiles = req.active_profiles if req.active_profiles else settings.active_profiles
         historical_records = self.db.list_historical_questions()
         attempts = self.db.list_practice_attempts(limit=300)
         weak_areas = self.db.list_weak_areas()

@@ -721,11 +721,15 @@ def pick_nid_blueprint_and_topic(
             recent_sigs.add(_fingerprint_text(fp))
 
     pool = NID_BLUEPRINTS.get(category, NID_BLUEPRINTS["Design aptitude"])
+    # Filter pool by active_profiles so the 2026 common paper ("general_nid_mdes") gets authentic common blueprints
+    matching_bps = [bp for bp in pool if any(p in bp[1] for p in active_profiles)]
+    usable_pool = matching_bps if matching_bps else pool
+
     # 50% chance of curated blueprint pool, 50% chance of combinatorial synthesis
     use_combinatorial = random.random() < 0.50
 
     if not use_combinatorial:
-        bp_tuple = pool[slot_idx % len(pool)] if slot_idx > 0 else random.choice(pool)
+        bp_tuple = usable_pool[slot_idx % len(usable_pool)] if slot_idx > 0 else random.choice(usable_pool)
         bp_text, _, topics = bp_tuple
 
         available_topics = []

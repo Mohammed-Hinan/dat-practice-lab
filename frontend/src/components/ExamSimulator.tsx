@@ -112,7 +112,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
         category_distribution: categoryDistribution,
         custom_categories: categoryDistribution === 'custom' ? customCategories : [],
         programme_focus: programmeFocus,
-        active_profiles: settings.active_profiles,
+        active_profiles: programmeFocus.length > 0 ? settings.active_profiles : ['general_nid_mdes'],
         paper_strategy: paperStrategy,
         historical_relevance: historicalRelevance,
       });

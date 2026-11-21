@@ -167,8 +167,7 @@ class AppSettings(BaseModel):
     strict_originality_check: bool = True
     active_profiles: List[str] = Field(
         default_factory=lambda: [
-            "nid_gandhinagar_sdm",
-            "nid_haryana_creative_leadership",
+            "general_nid_mdes",
         ]
     )
     prediction_weights: PredictionWeights = Field(default_factory=PredictionWeights)
