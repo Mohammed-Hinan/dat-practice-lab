@@ -255,13 +255,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 
       {/* Main Examination Prompt Body */}
       <div className="px-6 sm:px-8 py-6 space-y-6">
-        {/* Title */}
-        <div>
-          <h2 className="font-serif-editorial text-2xl sm:text-[26px] font-medium text-[#18181B] leading-snug">
-            {question.title}
-          </h2>
-        </div>
-
         {/* Scenario */}
         <section className="space-y-2">
           <h3 className="text-[11px] font-semibold uppercase tracking-widest text-[#78716C]">
