@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronUp, Radio, Sparkles, Users, X } from 'lucide-react';
+import { Radio, Sparkles, Users, X } from 'lucide-react';
 import { api } from '../api';
 
 interface LiveCommunityPresenceProps {
@@ -7,68 +7,59 @@ interface LiveCommunityPresenceProps {
 }
 
 const CROWD_STAGES = [
-  { threshold: 1, img: '/assets/crowd/crowd_1.png', label: 'Solo Midnight Sprint', desc: 'Deep focus: drafting & thumbnail ideation' },
-  { threshold: 6, img: '/assets/crowd/crowd_6.png', label: 'Studio Worktable', desc: 'Brainstorming with peers & testing mechanisms' },
+  { threshold: 1, img: '/assets/crowd/crowd_1.png', label: 'Solo Focus Sprint', desc: 'Deep individual practice: framing & sketching' },
+  { threshold: 6, img: '/assets/crowd/crowd_6.png', label: 'Studio Worktable', desc: 'Brainstorming with peers & exploring mechanisms' },
   { threshold: 18, img: '/assets/crowd/crowd_18.png', label: 'Design Studio Batch', desc: 'Peer critique on isometric angles & exploded views' },
   { threshold: 80, img: '/assets/crowd/crowd_80.png', label: 'Mock Exam Hall', desc: '3-Hour timed DAT Prelims simulation in progress' },
-  { threshold: 370, img: '/assets/crowd/crowd_370.png', label: 'Zonal Centers', desc: 'Ahmedabad • Bengaluru • Delhi • Mumbai • Pune' },
+  { threshold: 370, img: '/assets/crowd/crowd_370.png', label: 'Zonal Centers', desc: 'Ahmedabad, Bengaluru, Delhi, Mumbai, Pune test centers' },
   { threshold: 5000, img: '/assets/crowd/crowd_5000.png', label: '5,000+ Aspirants United', desc: "India's design community united in craft ❤️" },
 ];
 
 export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ className = '' }) => {
-  const [liveCount, setLiveCount] = useState<number>(14);
-  const [activeCities, setActiveCities] = useState<string[]>([
-    'Ahmedabad',
-    'Bengaluru',
-    'Delhi NCR',
-    'Mumbai',
-    'Pune',
-  ]);
+  // 100% real live data: starts at 1 for the current active user
+  const [liveCount, setLiveCount] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState<number>(14);
+  const [sliderValue, setSliderValue] = useState<number>(1);
   const [isDragging, setIsDragging] = useState(false);
-  const [minimized, setMinimized] = useState(false);
 
-  // Client session id
+  // Client session id stored in localStorage
   const clientId = useMemo(() => {
     if (typeof window === 'undefined') return 'anon';
     let id = localStorage.getItem('dat_presence_cid');
     if (!id) {
-      id = 'usr_' + Math.random().toString(36).substring(2, 10);
+      id = 'usr_' + Math.random().toString(36).substring(2, 12);
       localStorage.setItem('dat_presence_cid', id);
     }
     return id;
   }, []);
 
-  // Poll heartbeat every 25s
+  // Poll heartbeat ping every 20s strictly for real live active clients
   useEffect(() => {
     let mounted = true;
     const sendPing = async () => {
       try {
         const res = await api.pingPresence(clientId);
-        if (mounted && res?.live_count) {
-          setLiveCount(res.live_count);
-          if (res.active_cities?.length) setActiveCities(res.active_cities);
+        if (mounted && typeof res?.real_connected === 'number') {
+          // Strictly live data
+          setLiveCount(Math.max(1, res.real_connected));
         }
       } catch {
-        // Fallback: subtle daytime organic variance
         if (mounted) {
-          const hour = new Date().getHours();
-          const base = hour >= 9 && hour <= 23 ? 16 : 8;
-          setLiveCount((prev) => Math.max(5, base + Math.floor(Math.random() * 5)));
+          // If offline/unreachable, user is strictly 1 live local session
+          setLiveCount(1);
         }
       }
     };
 
     sendPing();
-    const interval = setInterval(sendPing, 25000);
+    const interval = setInterval(sendPing, 20000);
     return () => {
       mounted = false;
       clearInterval(interval);
     };
   }, [clientId]);
 
-  // Sync initial slider value to current live count
+  // Sync initial slider value to current real live count
   useEffect(() => {
     if (!isModalOpen) {
       setSliderValue(liveCount);
@@ -84,6 +75,16 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
     if (sliderValue <= 900) return CROWD_STAGES[4];
     return CROWD_STAGES[5];
   }, [sliderValue]);
+
+  // Image displayed on the persistent dock based on ACTUAL live count
+  const dockImage = useMemo(() => {
+    if (liveCount <= 1) return '/assets/crowd/crowd_1.png';
+    if (liveCount <= 6) return '/assets/crowd/crowd_6.png';
+    if (liveCount <= 20) return '/assets/crowd/crowd_18.png';
+    if (liveCount <= 100) return '/assets/crowd/crowd_80.png';
+    if (liveCount <= 500) return '/assets/crowd/crowd_370.png';
+    return '/assets/crowd/crowd_5000.png';
+  }, [liveCount]);
 
   // Ruler tick marks (15 ticks representing scale)
   const rulerTicks = useMemo(() => Array.from({ length: 15 }, (_, i) => i), []);
@@ -142,29 +143,29 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
   return (
     <>
       {/* ============================================================== */}
-      {/* 1. PERSISTENT GLOBAL DOCK FOOTER                               */}
+      {/* 1. PERSISTENT GLOBAL DOCK FOOTER (STRICT REAL LIVE SESSIONS)   */}
       {/* ============================================================== */}
       <footer
         className={`fixed bottom-4 inset-x-0 mx-auto w-fit z-30 max-w-[94vw] sm:max-w-xl transition-all duration-300 no-print ${className}`}
         aria-label="Live Active Learners Presence"
       >
         <div className="bg-white/95 backdrop-blur-md border border-[#D8D4CB] rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.08)] px-3.5 py-1.5 flex items-center gap-3 sm:gap-4 hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-shadow">
-          {/* Miniature 3D Figures Preview */}
+          {/* Miniature 3D Figure Preview (Actual representation of live count) */}
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
             className="flex items-center gap-2 group cursor-pointer focus:outline-none"
-            title="Click to open interactive community crowd explorer"
+            title="Click to open interactive crowd explorer"
           >
-            <div className="relative -my-1 h-8 w-10 flex items-center justify-center shrink-0">
+            <div className="relative -my-1 h-8 w-8 flex items-center justify-center shrink-0">
               <img
-                src={liveCount <= 8 ? '/assets/crowd/crowd_6.png' : '/assets/crowd/crowd_18.png'}
-                alt="3D miniature candidate figures"
+                src={dockImage}
+                alt="Miniature candidate figure"
                 className="h-8 w-auto object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-200"
               />
             </div>
 
-            {/* Live Indicator Dot */}
+            {/* Real Live Beacon */}
             <div className="flex items-center gap-1.5 shrink-0">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -176,21 +177,21 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
             </div>
           </button>
 
-          {/* Center Info Text */}
+          {/* Center Info Text (Real Live Count) */}
           <div
             onClick={() => setIsModalOpen(true)}
             className="cursor-pointer select-none text-left leading-tight py-0.5"
           >
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[#18181B]">
               <span className="font-mono-exam font-bold text-sm text-[#1E3A5F]">{liveCount}</span>
-              <span>designers practicing now</span>
+              <span>{liveCount === 1 ? 'designer practicing live' : 'designers practicing live'}</span>
             </div>
-            <div className="text-[10px] text-[#78716C] truncate max-w-[200px] sm:max-w-xs">
-              NID M.Des & CEED • {activeCities.slice(0, 3).join(' • ')}
+            <div className="text-[10px] text-[#78716C]">
+              {liveCount === 1 ? 'Your active studio session' : `${liveCount} verified live sessions`}
             </div>
           </div>
 
-          {/* Interactive Button / Trigger */}
+          {/* Interactive Button */}
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
@@ -203,7 +204,7 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
       </footer>
 
       {/* ============================================================== */}
-      {/* 2. INTERACTIVE CROWD EXPLORATION MODAL (Adi's Interaction)     */}
+      {/* 2. INTERACTIVE CROWD EXPLORATION MODAL                         */}
       {/* ============================================================== */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in no-print">
@@ -225,13 +226,15 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
             <div className="space-y-1">
               <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                <span>{liveCount} candidates live right now</span>
+                <span>
+                  {liveCount} {liveCount === 1 ? 'candidate' : 'candidates'} live right now (verified)
+                </span>
               </div>
               <h2 className="font-serif-editorial text-2xl font-semibold text-[#18181B]">
-                Live Community Presence
+                Community Scale Explorer
               </h2>
               <p className="text-xs text-[#78716C]">
-                Drag the ruler below to see how the NID M.Des aspirant community scales together!
+                Drag the ruler below to preview how the community scales from 1 solo designer up to 5,000+ aspirants.
               </p>
             </div>
 
@@ -249,7 +252,7 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
               </div>
             </div>
 
-            {/* Dynamic Dark Pill Badge (Exact replica of Adi's badge) */}
+            {/* Dynamic Dark Pill Badge */}
             <div className="flex justify-center select-none">
               <div className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#18181B] text-white shadow-lg font-mono-exam font-semibold text-sm tabular-nums tracking-wide">
                 {sliderValue.toLocaleString()}
@@ -284,7 +287,7 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
                   })}
                 </div>
 
-                {/* Hand Slider Pointer Cursor Indicator (Exact match from interaction video) */}
+                {/* Hand Slider Pointer Cursor Indicator */}
                 <div
                   className="absolute top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-75"
                   style={{ left: `calc(${rulerProgressPct}% - 14px)` }}
@@ -313,7 +316,7 @@ export const LiveCommunityPresence: React.FC<LiveCommunityPresenceProps> = ({ cl
                 className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white text-[#1E3A5F] hover:bg-stone-50 cursor-pointer shadow-xs"
               >
                 <Radio className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-                <span>Sync to Live ({liveCount} Online)</span>
+                <span>Sync to Real Live ({liveCount} Active)</span>
               </button>
 
               <button

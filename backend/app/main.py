@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, PlainTextResponse
 from pydantic import BaseModel
@@ -544,45 +544,46 @@ def create_app(db_instance: Optional[Database] = None) -> FastAPI:
         return db.create_weak_area(item)
 
     # ------------------------------------------------------------------
-    # Live Community Presence Tracker (Interactive Crowd Exploration)
+    # Live Community Presence Tracker (Strict Real Live Sessions Only)
     # ------------------------------------------------------------------
     _active_clients: Dict[str, float] = {}
 
     @app.post("/api/presence/ping")
-    def presence_ping(data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        import time, math
+    async def presence_ping(request: Request) -> Dict[str, Any]:
+        import time
         now = time.time()
-        client_id = (data or {}).get("client_id") if data else None
+        client_id = None
+        try:
+            body = await request.json()
+            if isinstance(body, dict):
+                client_id = body.get("client_id")
+        except Exception:
+            pass
+
+        if not client_id and request.client:
+            client_id = request.client.host
         if not client_id:
-            client_id = "anon"
+            client_id = "anon_session"
+
         _active_clients[str(client_id)] = now
 
-        # Prune inactive sessions older than 120s
-        cutoff = now - 120
+        # Prune inactive sessions older than 75s (heartbeat is every 20s)
+        cutoff = now - 75
         expired = [cid for cid, last in _active_clients.items() if last < cutoff]
         for cid in expired:
             _active_clients.pop(cid, None)
 
-        real_count = len(_active_clients)
-        # Natural daytime study fluctuation (12 to 26 active designers)
-        lt = time.localtime(now)
-        minute_of_day = lt.tm_hour * 60 + lt.tm_min
-        # Peak study hours around 10am-1pm and 4pm-11pm
-        fluctuation = int(6 * math.sin((minute_of_day / 1440.0) * 2 * math.pi))
-        base_estimate = max(11, 16 + fluctuation)
-        total_live = max(real_count, base_estimate)
+        real_count = max(1, len(_active_clients))
 
         return {
-            "live_count": total_live,
+            "live_count": real_count,
             "real_connected": real_count,
-            "cohort": "NID M.Des & CEED 2025–2027",
-            "active_cities": ["Ahmedabad", "Bengaluru", "Mumbai", "Delhi NCR", "Pune", "Hyderabad"],
             "timestamp": now,
         }
 
     @app.get("/api/presence")
-    def get_presence() -> Dict[str, Any]:
-        return presence_ping(None)
+    async def get_presence(request: Request) -> Dict[str, Any]:
+        return await presence_ping(request)
 
     return app
 
