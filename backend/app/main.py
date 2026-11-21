@@ -37,14 +37,6 @@ from .schemas import (
     DrawThingsStatus,
     ExamPaperCreateRequest,
     ExamPaperRecord,
-    GATAttemptCreate,
-    GATAttemptResult,
-    GATLearningTopicRecord,
-    GATMockTestCreate,
-    GATMockTestRecord,
-    GATOverviewResponse,
-    GATQuestionRecord,
-    GATVisualGKRecord,
     GenerateQuestionsRequest,
     GenerateQuestionsResponse,
     HistoricalQuestionCreate,
@@ -592,92 +584,6 @@ def create_app(db_instance: Optional[Database] = None) -> FastAPI:
     @app.get("/api/presence")
     async def get_presence(request: Request) -> Dict[str, Any]:
         return await presence_ping(request)
-
-    # ------------------------------------------------------------------
-    # GAT (General Ability Test) API Routes
-    # ------------------------------------------------------------------
-
-    @app.get("/api/gat/overview", response_model=GATOverviewResponse)
-    def gat_overview() -> GATOverviewResponse:
-        return db.get_gat_overview()
-
-    @app.get("/api/gat/questions", response_model=List[GATQuestionRecord])
-    def list_gat_questions(
-        section: Optional[str] = None,
-        topic: Optional[str] = None,
-        difficulty: Optional[str] = None,
-        question_type: Optional[str] = None,
-        exam: Optional[str] = None,
-        search: Optional[str] = None,
-        bookmarked_only: bool = False,
-        incorrect_only: bool = False,
-        limit: int = 100,
-        offset: int = 0,
-    ) -> List[GATQuestionRecord]:
-        return db.list_gat_questions(
-            section=section,
-            topic=topic,
-            difficulty=difficulty,
-            question_type=question_type,
-            exam=exam,
-            search=search,
-            bookmarked_only=bookmarked_only,
-            incorrect_only=incorrect_only,
-            limit=limit,
-            offset=offset,
-        )
-
-    @app.get("/api/gat/questions/{question_id}", response_model=GATQuestionRecord)
-    def get_gat_question(question_id: str) -> GATQuestionRecord:
-        q = db.get_gat_question(question_id)
-        if not q:
-            raise HTTPException(status_code=404, detail="GAT question not found.")
-        return q
-
-    @app.post("/api/gat/questions/{question_id}/attempt", response_model=GATAttemptResult)
-    def record_gat_attempt(question_id: str, payload: GATAttemptCreate) -> GATAttemptResult:
-        if payload.question_id != question_id:
-            payload.question_id = question_id
-        try:
-            return db.record_gat_attempt(payload)
-        except ValueError as e:
-            raise HTTPException(status_code=404, detail=str(e))
-
-    @app.post("/api/gat/questions/{question_id}/bookmark")
-    def toggle_gat_bookmark(question_id: str, payload: Dict[str, bool]) -> Dict[str, bool]:
-        is_bookmarked = payload.get("is_bookmarked", True)
-        db.toggle_gat_bookmark(question_id, is_bookmarked)
-        return {"is_bookmarked": is_bookmarked}
-
-    @app.get("/api/gat/learn/topics", response_model=List[GATLearningTopicRecord])
-    def list_gat_learning_topics(section: Optional[str] = None) -> List[GATLearningTopicRecord]:
-        return db.list_gat_learning_topics(section=section)
-
-    @app.get("/api/gat/gk/visual-boards", response_model=List[GATVisualGKRecord])
-    def list_gat_visual_gk(subcategory: Optional[str] = None) -> List[GATVisualGKRecord]:
-        return db.list_gat_visual_gk(subcategory=subcategory)
-
-    @app.post("/api/gat/mock-tests", response_model=GATMockTestRecord)
-    def create_gat_mock_test(payload: GATMockTestCreate) -> GATMockTestRecord:
-        return db.create_gat_mock_test(payload)
-
-    @app.get("/api/gat/mock-tests", response_model=List[GATMockTestRecord])
-    def list_gat_mock_tests() -> List[GATMockTestRecord]:
-        return db.list_gat_mock_tests()
-
-    @app.get("/api/gat/mock-tests/{test_id}", response_model=GATMockTestRecord)
-    def get_gat_mock_test(test_id: str) -> GATMockTestRecord:
-        t = db.get_gat_mock_test(test_id)
-        if not t:
-            raise HTTPException(status_code=404, detail="GAT Mock test not found.")
-        return t
-
-    @app.post("/api/gat/mock-tests/{test_id}/submit", response_model=GATMockTestRecord)
-    def submit_gat_mock_test(test_id: str, payload: Dict[str, List[str]]) -> GATMockTestRecord:
-        try:
-            return db.submit_gat_mock_test(test_id, payload)
-        except ValueError as e:
-            raise HTTPException(status_code=404, detail=str(e))
 
     return app
 

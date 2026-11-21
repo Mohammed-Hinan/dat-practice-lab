@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Archive,
-  BookOpenCheck,
   ClipboardList,
   Compass,
   Menu,
@@ -10,7 +9,6 @@ import {
 } from 'lucide-react';
 import { api, API_BASE } from './api';
 import { ExamSimulator } from './components/ExamSimulator';
-import { GATModule } from './components/gat/GATModule';
 import { LiveCommunityPresence } from './components/LiveCommunityPresence';
 import { QuestionBank } from './components/QuestionBank';
 import { QuestionGenerator } from './components/QuestionGenerator';
@@ -23,8 +21,7 @@ import type {
 } from './types';
 
 const NAV_ITEMS: { id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-  { id: 'generate', label: 'Creative Practice', icon: Sparkles },
-  { id: 'gat', label: 'GAT Practice', icon: BookOpenCheck },
+  { id: 'generate', label: 'Practice Studio', icon: Sparkles },
   { id: 'simulator', label: 'Exam Simulator', icon: ClipboardList },
   { id: 'bank', label: 'Question Bank', icon: Archive },
 ];
@@ -329,7 +326,6 @@ export default function App() {
               initialPreset={genPreset}
             />
           )}
-          {section === 'gat' && <GATModule />}
           {section === 'simulator' && (
             <ExamSimulator
               taxonomy={taxonomy}
