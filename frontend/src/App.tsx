@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { api, API_BASE } from './api';
 import { ExamSimulator } from './components/ExamSimulator';
+import { LiveCommunityPresence } from './components/LiveCommunityPresence';
 import { QuestionBank } from './components/QuestionBank';
 import { QuestionGenerator } from './components/QuestionGenerator';
 import type {
@@ -315,7 +316,7 @@ export default function App() {
       )}
 
       {/* Main Content Canvas */}
-      <main className="flex-1 min-w-0 pt-16 lg:pt-0">
+      <main className="flex-1 min-w-0 pt-16 lg:pt-0 pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
           {section === 'generate' && (
             <QuestionGenerator
@@ -335,6 +336,9 @@ export default function App() {
           {section === 'bank' && <QuestionBank taxonomy={taxonomy} />}
         </div>
       </main>
+
+      {/* Global Live Community Presence Dock Footer */}
+      <LiveCommunityPresence />
     </div>
   );
 }

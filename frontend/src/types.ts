@@ -6,6 +6,14 @@ export type RandomStrategy = 'completely_balanced' | 'weighted';
 export type AttemptStatus = 'completed' | 'skipped' | 'in_progress';
 export type SelfDifficulty = 'Easy' | 'Medium' | 'Hard' | 'Very Hard';
 
+export interface PresenceData {
+  live_count: number;
+  real_connected: number;
+  cohort: string;
+  active_cities: string[];
+  timestamp: number;
+}
+
 export type NavSection =
   | 'generate'
   | 'simulator'

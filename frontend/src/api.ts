@@ -213,6 +213,26 @@ export const api = {
     request<WeakArea>('/weak-areas', { method: 'POST', body: JSON.stringify(payload) }),
   deleteWeakArea: (id: string) =>
     request<{ deleted: boolean }>(`/weak-areas/${id}`, { method: 'DELETE' }),
+
+  pingPresence: (clientId?: string) =>
+    request<{
+      live_count: number;
+      real_connected: number;
+      cohort: string;
+      active_cities: string[];
+      timestamp: number;
+    }>('/presence/ping', {
+      method: 'POST',
+      body: JSON.stringify({ client_id: clientId }),
+    }),
+  getPresence: () =>
+    request<{
+      live_count: number;
+      real_connected: number;
+      cohort: string;
+      active_cities: string[];
+      timestamp: number;
+    }>('/presence'),
 };
 
 export function formatDuration(totalSeconds: number): string {
