@@ -497,8 +497,8 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
             ],
         ),
         (
-            "Product differentiation + launch risks + poster: Reimagine the given everyday product for its target users. Subquestion A: propose 5 ideas that make it stand out from existing brands and note 2-3 launch hurdles. Subquestion B: sketch a promotional poster highlighting its main feature.",
-            ["nid_gandhinagar_sdm"],
+            "Product innovation & ergonomic redesign: Observe the user and working conditions in the given everyday scenario. Subquestion A: identify 5 concrete functional or ergonomic pain points and propose 5 distinct design features that solve them. Subquestion B: present your redesigned concept in clean 3/4 perspective showing the product in active use on-site, with circular detail callouts for key mechanisms and material notes.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
             [
                 "a children's school backpack for ages 6 to 10 that protects spine posture during monsoon walks",
                 "a commuter lunchbox for young working professionals that keeps wet gravies and crisp breads fresh",

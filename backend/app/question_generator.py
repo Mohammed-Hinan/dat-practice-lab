@@ -91,6 +91,7 @@ Voice & style:
 - Write in crisp, direct, plain-English second-person ("You are...", "Imagine...", "Picture someone...", "Pick one...").
 - Real NID questions are deceptively simple, concrete, playful or observant—NEVER use corporate/academic jargon ("stakeholder optimization", "holistic ergonomic framework") and NEVER mention NID campus names (like Gandhinagar or Haryana) inside a question.
 - STRICT SINGLE-FOCUS RULE: Every question must focus on ONE single coherent challenge or product. NEVER blend multiple conflicting tasks together (e.g. NEVER mix product ergonomics with fantasy characters, never ask for "5 usability issues" when designing a visual metaphor or animal illustration, and never mash unrelated objects together). Subquestion A and Subquestion B must address the exact same subject.
+- STRICT TASK-CONTEXT COHERENCE: Subquestion A and Subquestion B must directly serve the exact challenge established in the scenario. If the scenario asks to design a physical product, container, or tool, Subquestions MUST evaluate that physical product (e.g., pain points, ergonomic features, 3D perspective drawing, exploded view, user interaction in context). NEVER switch disciplines or ask for a promotional poster, advertising flyer, or marketing pitch when the scenario is designing a physical product!
 - COMPLETE GRAMMATICAL SENTENCES: Every constraint, scenario, and instruction MUST be a complete, grammatically sound sentence ending with a period. NEVER end mid-phrase or with dangling words like "without compromising on", "such as", or "due to".
 - Ground every prompt in a vivid, ordinary Indian or universal situation with clever constraints (e.g., carrying awkward items without spilling, two unexpected visual elements in a poster, what changes in 2047 vs what stays the same, turning factory surplus into products, 4-frame wordless action).
 - Also write `visual_sketch_prompt`: a concrete 18-32 word purely visual description of ONE cohesive drawn solution/scene/symbol answering this question (exact objects, perspective angle, human posture/gesture, everyday Indian props). NEVER write "examination sheet", "annotations", "labels", "table", "20 minutes", "realistic", or drawing-tool names (our 2D line-art renderer applies the hand-drawn sketch style automatically).
@@ -392,6 +393,7 @@ Avoid repeating these recent titles: {recent_line}{extra_warning}
 CRITICAL ANTI-HALLUCINATION RULES:
 - SINGLE COHESIVE SUBJECT ONLY: Pick ONE single everyday object, situation, or user challenge. NEVER blend multiple unrelated objects or domains together (e.g. do NOT mix animals with furniture, or cartoon characters with ergonomics).
 - Subquestion A and Subquestion B MUST address the exact same subject. Never switch topics mid-question.
+- COHERENT DELIVERABLE DISCIPLINE: If the scenario asks to design a physical product, wearable, container, or equipment, Subquestion B MUST require drawing the product (e.g. 3/4 perspective, exploded view, or in-use scene). NEVER ask to sketch a poster, logo, or advertising graphic for a physical product challenge. Posters are strictly reserved for Composition / Awareness campaigns.
 - Deliverables must match this category ({cat_deliverables_hint}). Never put "usability issues" on character/creative questions!
 - COMPLETE SENTENCES: Every constraint and instruction MUST be a complete, grammatically sound sentence ending with a period. NEVER end mid-phrase or with dangling words like "without compromising on", "such as", or "due to".
 
@@ -580,6 +582,21 @@ class QuestionGenerator:
                     if not any(bad in d.lower() for bad in ("usability", "ergonomic issue", "pain point"))
                 ]
             sq.deliverables = cleaned_deliv or (["Design rationale"] if sq.label == "A" else ["Annotated sketch"])
+
+        # Safeguard against cross-discipline deliverable contamination (e.g. asking for a poster on a physical product)
+        physical_keywords = (
+            "container", "bottle", "backpack", "tiffin", "lunchbox", "lamp", "stool",
+            "device", "tool", "chair", "desk", "carrier", "harness", "peeler", "kettle",
+            "cutter", "packaging", "dispenser", "gear", "hardware"
+        )
+        is_physical_problem = (
+            any(w in payload.scenario.lower() or w in payload.title.lower() for w in physical_keywords)
+            or payload.category in ("Product sketch",)
+        )
+        for sq in payload.subquestions:
+            if is_physical_problem and any(bad in sq.instruction.lower() for bad in ("promotional poster", "poster", "advertising campaign")):
+                sq.instruction = "Present your redesigned concept in clean 3/4 perspective showing the product in active use on-site, with circular detail callouts for key mechanisms and material notes."
+                sq.deliverables = ["Annotated 3/4 perspective sketch", "Ergonomic & mechanism callouts"]
 
         # Guarantee complete, grammatically sound constraints (no dangling prepositions/cut-offs)
         cleaned_constraints: List[str] = []
