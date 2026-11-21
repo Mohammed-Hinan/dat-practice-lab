@@ -735,7 +735,7 @@ class QuestionGenerator:
     async def generate_questions(self, req: GenerateQuestionsRequest) -> GenerateQuestionsResponse:
         settings = self.db.get_settings()
         # When no optional programme focus is picked, strictly lock to the authentic 2026 NID M.Des Common Paper model ("general_nid_mdes")
-        if not req.programme_focus:
+        if not req.programme_tags:
             active_profiles = ["general_nid_mdes"]
         else:
             active_profiles = req.active_profiles if req.active_profiles else settings.active_profiles
