@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Bookmark,
   Check,
-  CheckCircle2,
   Clock,
   Loader2,
   RefreshCw,
@@ -57,7 +56,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   const [warnings, setWarnings] = useState<string[]>([]);
   const [batch, setBatch] = useState<GeneratedQuestion[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [attemptedIds, setAttemptedIds] = useState<string[]>([]);
 
   // Background pre-generation buffer (for 1-question sets: 0s wait for next question!)
   const [prefetchedNext, setPrefetchedNext] = useState<GeneratedQuestion | null>(null);
@@ -86,10 +84,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
       }),
     [selectedCategories, difficulty, timeMinutes, count]
   );
-
-  const batchSignature = useMemo(() => batch.map((q) => q.id).join('|'), [batch]);
-  const allQuestionsAttempted =
-    batch.length > 0 && batch.every((q) => attemptedIds.includes(q.id));
 
   const cancelPrefetch = () => {
     if (prefetchTimeoutRef.current) {
@@ -229,7 +223,7 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   };
 
   const resetSetTracking = () => {
-    setAttemptedIds([]);
+    // tracking reset
   };
 
   const handleGenerate = async (excludeTitles: string[] = []) => {
@@ -328,7 +322,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
         const next = [...batch];
         next[activeIdx] = replacement;
         setBatch(next);
-        setAttemptedIds((prev) => prev.filter((id) => id !== current.id));
         const updatedSeen = [...seenTitlesRef.current, replacement.title].slice(-12);
         seenTitlesRef.current = updatedSeen;
         if (count === 1) {
@@ -340,10 +333,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
     } finally {
       setGenerating(false);
     }
-  };
-
-  const handleQuestionAttempted = (questionId: string) => {
-    setAttemptedIds((prev) => (prev.includes(questionId) ? prev : [...prev, questionId]));
   };
 
   const handleDeleteSaved = async (id: string) => {
@@ -363,7 +352,7 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
             Common-Paper Equal Practice • 2025–2027 NID M.Des DAT Prelims
           </p>
           <h1 className="font-serif-editorial text-3xl font-medium text-[#18181B] mt-1">
-            Generate Practice Set
+            Practice Studio
           </h1>
         </div>
 
@@ -682,22 +671,19 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
               </div>
             )}
 
-            {/* Set Stepper + Attempt Progress Bar (for multi-question sets) */}
+            {/* Set Stepper (for multi-question sets) */}
             {batch.length > 1 && (
               <div className="bg-white border border-[#E4E1DA] rounded-xl p-4 space-y-3 no-print">
                 <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                   <span className="font-semibold text-[#18181B]">
-                    Practice Set Progress: {attemptedIds.length} / {batch.length} attempted
+                    Practice Set: Question {activeIdx + 1} of {batch.length}
                   </span>
                   <span className="text-[#57534E]">
-                    {allQuestionsAttempted
-                      ? 'All questions attempted!'
-                      : 'Generate sketches on command anytime, or submit attempts to auto-generate.'}
+                    Switch between questions to practise different categories.
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   {batch.map((q, i) => {
-                    const done = attemptedIds.includes(q.id);
                     const isActive = i === activeIdx;
                     return (
                       <button
@@ -706,13 +692,10 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
                         onClick={() => setActiveIdx(i)}
                         className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
                           isActive
-                            ? 'bg-[#1E3A5F] text-white border-[#1E3A5F]'
-                            : done
-                              ? 'bg-emerald-50 text-emerald-900 border-emerald-200 hover:bg-emerald-100'
-                              : 'bg-[#FAF9F6] text-[#44403C] border-[#E4E1DA] hover:bg-stone-100'
+                            ? 'bg-[#1E3A5F] text-white border-[#1E3A5F] font-semibold'
+                            : 'bg-[#FAF9F6] text-[#44403C] border-[#E4E1DA] hover:bg-stone-100'
                         }`}
                       >
-                        {done && <CheckCircle2 className="w-3.5 h-3.5" />}
                         <span>
                           Q{i + 1}: {q.category}
                         </span>
@@ -729,8 +712,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
                 question={activeQuestion}
                 questionNumber={activeIdx + 1}
                 totalInBatch={batch.length}
-                initialAttempted={attemptedIds.includes(activeQuestion.id)}
-                onAttemptSaved={handleQuestionAttempted}
                 onRegenerate={handleRegenerateSingle}
                 regenerating={generating}
                 onSaveToggle={(updated) => {

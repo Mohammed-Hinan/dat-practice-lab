@@ -4,7 +4,6 @@ import {
   Bookmark,
   BookmarkCheck,
   Check,
-  CheckCircle2,
   ChevronDown,
   ChevronUp,
   Clock,
@@ -20,14 +19,9 @@ import {
   RotateCcw,
   ShieldAlert,
   Sparkles,
-  X,
 } from 'lucide-react';
 import { api, formatDuration } from '../api';
-import type {
-  AttemptStatus,
-  GeneratedQuestion,
-  SelfDifficulty,
-} from '../types';
+import type { GeneratedQuestion } from '../types';
 
 interface QuestionDisplayProps {
   question: GeneratedQuestion;
@@ -48,10 +42,8 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   questionNumber = 1,
   totalInBatch,
   onSaveToggle,
-  onAttemptSaved,
   onRegenerate,
   regenerating = false,
-  initialAttempted = false,
   examMode = false,
   externalRubricUnlocked = false,
   externalElapsedSeconds,
@@ -62,16 +54,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isSaved, setIsSaved] = useState(question.is_saved);
   const [savingBookmark, setSavingBookmark] = useState(false);
-
-  // Attempt & Rubric reveal state
-  const [showAttemptForm, setShowAttemptForm] = useState(false);
-  const [attemptRecorded, setAttemptRecorded] = useState(initialAttempted);
   const [rubricRevealed, setRubricRevealed] = useState(false);
-  const [attemptStatus, setAttemptStatus] = useState<AttemptStatus>('completed');
-  const [selfDifficulty, setSelfDifficulty] = useState<SelfDifficulty>('Medium');
-  const [attemptNotes, setAttemptNotes] = useState('');
-  const [submittingAttempt, setSubmittingAttempt] = useState(false);
-  const [attemptFeedback, setAttemptFeedback] = useState<string | null>(null);
 
   // Disclosures
   const [showPriorityDetails, setShowPriorityDetails] = useState(false);
@@ -82,16 +65,8 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     setTimerRunning(false);
     setElapsedSeconds(0);
     setIsSaved(question.is_saved);
-    setShowAttemptForm(false);
-    setAttemptRecorded(initialAttempted);
     setRubricRevealed(false);
-    setAttemptNotes('');
-    setAttemptFeedback(null);
   }, [question.id]);
-
-  useEffect(() => {
-    if (initialAttempted) setAttemptRecorded(true);
-  }, [initialAttempted]);
 
   useEffect(() => {
     if (!timerRunning || examMode) return;
@@ -118,9 +93,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     return question.suggested_time_split.length - 1;
   }, [effectiveElapsed, practiceStarted, examMode, question.suggested_time_split]);
 
-  const canRevealRubric = attemptRecorded || externalRubricUnlocked;
-  // Visual Reference Studio & On-Command generation are always accessible without arbitrary locks
-  const canUseSketchStudio = true;
+  const canRevealRubric = !examMode || externalRubricUnlocked;
 
   const handleStartPractice = () => {
     setPracticeStarted(true);
@@ -137,37 +110,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
       // handled quietly
     } finally {
       setSavingBookmark(false);
-    }
-  };
-
-  const handleRecordAttempt = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmittingAttempt(true);
-    setTimerRunning(false);
-    setAttemptFeedback(null);
-    try {
-      await api.createAttempt({
-        question_id: question.id,
-        question_title: question.title,
-        category: question.category,
-        programme_tags: question.programme_tags,
-        exam_paper_id: question.exam_paper_id || null,
-        time_allocated_minutes: question.time_minutes,
-        time_spent_seconds: effectiveElapsed,
-        self_difficulty: selfDifficulty,
-        status: attemptStatus,
-        notes: attemptNotes.trim(),
-        rubric_revealed: true,
-      });
-      setAttemptRecorded(true);
-      setShowAttemptForm(false);
-      setRubricRevealed(true);
-      setAttemptFeedback('Practice session logged! Evaluation rubric unlocked.');
-      onAttemptSaved?.(question.id);
-    } catch (err) {
-      setAttemptFeedback(err instanceof Error ? err.message : 'Failed to log attempt.');
-    } finally {
-      setSubmittingAttempt(false);
     }
   };
 
@@ -321,21 +263,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
               </>
             )}
 
-            <button
-              type="button"
-              onClick={() => {
-                setTimerRunning(false);
-                setShowAttemptForm((s) => !s);
-              }}
-              className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
-                attemptRecorded
-                  ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                  : 'bg-[#FAF9F6] border-[#1E3A5F]/40 text-[#1E3A5F] hover:bg-[#1E3A5F]/5'
-              }`}
-            >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              {attemptRecorded ? 'Attempt Logged' : 'Mark as Attempted'}
-            </button>
 
             <button
               type="button"
@@ -562,83 +489,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
           </div>
         )}
 
-        {/* Inline Attempt Logging Form */}
-        {showAttemptForm && (
-          <form
-            onSubmit={handleRecordAttempt}
-            className="rounded-lg border border-[#1E3A5F]/30 bg-[#F7F9FC] p-4 space-y-3 no-print"
-          >
-            <div className="flex items-center justify-between">
-              <h4 className="text-sm font-semibold text-[#1E3A5F]">Log Practice Attempt</h4>
-              <span className="font-mono-exam text-xs text-[#57534E]">
-                Time recorded: {formatDuration(effectiveElapsed)}
-              </span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-[#44403C] mb-1">Outcome</label>
-                <select
-                  value={attemptStatus}
-                  onChange={(e) => setAttemptStatus(e.target.value as AttemptStatus)}
-                  className="w-full text-sm px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white"
-                >
-                  <option value="completed">Completed</option>
-                  <option value="skipped">Skipped</option>
-                  <option value="in_progress">Partially completed</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-[#44403C] mb-1">Self-assessed Difficulty</label>
-                <select
-                  value={selfDifficulty}
-                  onChange={(e) => setSelfDifficulty(e.target.value as SelfDifficulty)}
-                  className="w-full text-sm px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white"
-                >
-                  <option value="Easy">Easy</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Hard">Hard</option>
-                  <option value="Very Hard">Very Hard</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-[#44403C] mb-1">
-                Reflection Notes (optional — what felt slow, unclear, or strong?)
-              </label>
-              <textarea
-                rows={2}
-                value={attemptNotes}
-                onChange={(e) => setAttemptNotes(e.target.value)}
-                placeholder="e.g., Spent too long on framing; perspective sketch needed cleaner callouts."
-                className="w-full text-sm px-3 py-2 rounded-lg border border-[#D8D4CB] bg-white"
-              />
-            </div>
-            <div className="flex items-center justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => setShowAttemptForm(false)}
-                className="text-xs px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white text-[#57534E] cursor-pointer"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={submittingAttempt}
-                className="text-xs font-semibold px-4 py-1.5 rounded-lg bg-[#1E3A5F] text-white hover:bg-[#162C49] disabled:opacity-50 cursor-pointer"
-              >
-                {submittingAttempt ? 'Saving...' : 'Save Attempt & Unlock Rubric'}
-              </button>
-            </div>
-          </form>
-        )}
-
-        {attemptFeedback && (
-          <div className="text-xs px-3.5 py-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800">
-            {attemptFeedback}
-          </div>
-        )}
-
-        {/* Post-Practice Evaluation Rubric (strictly gated until finished) */}
+        {/* Evaluation Rubric */}
         <section className="border-t border-[#E4E1DA] pt-4 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-[11px] font-semibold uppercase tracking-widest text-[#78716C] flex items-center gap-1.5">
@@ -657,7 +508,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
               </button>
             ) : (
               <span className="text-xs text-[#78716C]">
-                Complete and mark this question as attempted to unlock the evaluation rubric.
+                Evaluation criteria unlock when the examination paper is submitted.
               </span>
             )}
           </div>

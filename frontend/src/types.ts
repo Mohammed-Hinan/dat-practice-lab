@@ -7,10 +7,10 @@ export type AttemptStatus = 'completed' | 'skipped' | 'in_progress';
 export type SelfDifficulty = 'Easy' | 'Medium' | 'Hard' | 'Very Hard';
 
 export type NavSection =
-  | 'dashboard'
   | 'generate'
   | 'simulator'
   | 'bank'
+  | 'dashboard'
   | 'trends'
   | 'history'
   | 'settings';

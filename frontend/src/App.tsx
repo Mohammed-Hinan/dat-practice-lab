@@ -3,21 +3,14 @@ import {
   Archive,
   ClipboardList,
   Compass,
-  History,
-  LayoutDashboard,
   Menu,
   Sparkles,
-  TrendingUp,
   X,
 } from 'lucide-react';
 import { api, API_BASE } from './api';
-import { Dashboard } from './components/Dashboard';
 import { ExamSimulator } from './components/ExamSimulator';
-import { PracticeHistory } from './components/PracticeHistory';
 import { QuestionBank } from './components/QuestionBank';
 import { QuestionGenerator } from './components/QuestionGenerator';
-import { Settings } from './components/Settings';
-import { TrendAnalytics } from './components/TrendAnalytics';
 import type {
   AppSettings,
   GenerationMode,
@@ -27,16 +20,13 @@ import type {
 } from './types';
 
 const NAV_ITEMS: { id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'generate', label: 'Generate Questions', icon: Sparkles },
+  { id: 'generate', label: 'Practice Studio', icon: Sparkles },
   { id: 'simulator', label: 'Exam Simulator', icon: ClipboardList },
   { id: 'bank', label: 'Question Bank', icon: Archive },
-  { id: 'trends', label: 'Trends & Predictions', icon: TrendingUp },
-  { id: 'history', label: 'Practice History', icon: History },
 ];
 
 export default function App() {
-  const [section, setSection] = useState<NavSection>('dashboard');
+  const [section, setSection] = useState<NavSection>('generate');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [taxonomy, setTaxonomy] = useState<TaxonomyData | null>(null);
@@ -327,9 +317,6 @@ export default function App() {
       {/* Main Content Canvas */}
       <main className="flex-1 min-w-0 pt-16 lg:pt-0">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
-          {section === 'dashboard' && (
-            <Dashboard onNavigate={handleNavigate} llmConnected={Boolean(llmStatus?.connected)} />
-          )}
           {section === 'generate' && (
             <QuestionGenerator
               taxonomy={taxonomy}
@@ -346,17 +333,6 @@ export default function App() {
             />
           )}
           {section === 'bank' && <QuestionBank taxonomy={taxonomy} />}
-          {section === 'trends' && <TrendAnalytics onNavigate={handleNavigate} />}
-          {section === 'history' && <PracticeHistory taxonomy={taxonomy} />}
-          {section === 'settings' && (
-            <Settings
-              taxonomy={taxonomy}
-              settings={settings}
-              llmStatus={llmStatus}
-              onSettingsUpdated={setSettings}
-              onStatusUpdated={setLlmStatus}
-            />
-          )}
         </div>
       </main>
     </div>
