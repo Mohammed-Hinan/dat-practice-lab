@@ -1,11 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AlertTriangle,
   Bookmark,
   BookmarkCheck,
   Check,
-  ChevronDown,
-  ChevronUp,
   Clock,
   Copy,
   ExternalLink,
@@ -56,9 +54,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   const [savingBookmark, setSavingBookmark] = useState(false);
   const [rubricRevealed, setRubricRevealed] = useState(false);
 
-  // Disclosures
-  const [showPriorityDetails, setShowPriorityDetails] = useState(false);
-
   // Reset per-question session state when question changes
   useEffect(() => {
     setPracticeStarted(false);
@@ -80,18 +75,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   const remainingSeconds = Math.max(0, allocatedSeconds - effectiveElapsed);
   const isOvertime = effectiveElapsed > allocatedSeconds;
   const progressPct = Math.min(100, (effectiveElapsed / Math.max(1, allocatedSeconds)) * 100);
-
-  // Determine active suggested time-split phase
-  const activePhaseIndex = useMemo(() => {
-    if (!practiceStarted && !examMode) return -1;
-    const elapsedMins = effectiveElapsed / 60;
-    let cumulative = 0;
-    for (let i = 0; i < question.suggested_time_split.length; i++) {
-      cumulative += question.suggested_time_split[i].minutes;
-      if (elapsedMins <= cumulative) return i;
-    }
-    return question.suggested_time_split.length - 1;
-  }, [effectiveElapsed, practiceStarted, examMode, question.suggested_time_split]);
 
   const canRevealRubric = !examMode || externalRubricUnlocked;
 
@@ -142,13 +125,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     setCopiedGeminiPrompt(true);
     setTimeout(() => setCopiedGeminiPrompt(false), 3500);
   };
-
-  const confidenceBadgeStyle =
-    question.prediction_confidence === 'High'
-      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-      : question.prediction_confidence === 'Medium'
-        ? 'bg-sky-50 text-sky-900 border-sky-200'
-        : 'bg-amber-50 text-amber-900 border-amber-200';
 
   const difficultyBadgeStyle =
     question.difficulty === 'Hard'
@@ -297,30 +273,11 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 
       {/* Main Examination Prompt Body */}
       <div className="px-6 sm:px-8 py-6 space-y-6">
-        {/* Title & Tags */}
-        <div className="space-y-3">
+        {/* Title */}
+        <div>
           <h2 className="font-serif-editorial text-2xl sm:text-[26px] font-medium text-[#18181B] leading-snug">
             {question.title}
           </h2>
-
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            {question.programme_tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 rounded bg-[#F2F0EA] text-[#44403C] border border-[#E4E1DA]"
-              >
-                {tag}
-              </span>
-            ))}
-            {question.archetypes.map((arch) => (
-              <span
-                key={arch}
-                className="px-2 py-0.5 rounded bg-[#1E3A5F]/8 text-[#1E3A5F] border border-[#1E3A5F]/15"
-              >
-                {arch}
-              </span>
-            ))}
-          </div>
         </div>
 
         {/* Scenario */}
@@ -408,86 +365,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
             )}
           </div>
         </div>
-
-        {/* Suggested Time Split */}
-        <section className="space-y-2">
-          <h3 className="text-[11px] font-semibold uppercase tracking-widest text-[#78716C]">
-            Suggested Time Split ({question.time_minutes} min)
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {question.suggested_time_split.map((phase, idx) => {
-              const isActive = idx === activePhaseIndex;
-              return (
-                <div
-                  key={idx}
-                  className={`p-2.5 rounded-lg border text-xs transition-colors ${
-                    isActive
-                      ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 text-[#1E3A5F]'
-                      : 'border-[#E4E1DA] bg-[#FAF9F6] text-[#44403C]'
-                  }`}
-                >
-                  <div className="font-mono-exam font-semibold text-sm">{phase.minutes} min</div>
-                  <div className="mt-0.5 leading-snug">{phase.activity}</div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Competencies & Priority Metadata */}
-        <div className="pt-2 border-t border-[#E4E1DA] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <span className="text-[11px] uppercase tracking-wider text-[#78716C] mr-1">Competencies:</span>
-            {question.competencies.map((comp) => (
-              <span key={comp} className="px-2 py-0.5 rounded bg-stone-100 text-stone-700">
-                {comp}
-              </span>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setShowPriorityDetails((v) => !v)}
-            className="inline-flex items-center gap-2 text-xs text-[#44403C] hover:text-[#18181B] cursor-pointer"
-          >
-            <span className="font-mono-exam font-medium">
-              Priority {question.practice_priority}/5 ({question.practice_priority_score.toFixed(0)}/100)
-            </span>
-            <span className={`px-2 py-0.5 rounded border text-[11px] font-medium ${confidenceBadgeStyle}`}>
-              {question.prediction_confidence} confidence
-            </span>
-            {showPriorityDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-          </button>
-        </div>
-
-        {/* Transparent Priority Rationale: Historical Evidence vs Model Interpretation */}
-        {showPriorityDetails && (
-          <div className="rounded-lg border border-[#E4E1DA] bg-[#FAF9F6] p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="space-y-1.5">
-              <div className="font-semibold uppercase tracking-wider text-[#57534E]">
-                Historical Evidence (Observed in Bank)
-              </div>
-              <ul className="list-disc pl-4 space-y-1 text-[#27272A]">
-                {(question.historical_evidence.length > 0
-                  ? question.historical_evidence
-                  : ['No matching historical records imported yet.']
-                ).map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="space-y-1.5">
-              <div className="font-semibold uppercase tracking-wider text-[#57534E]">
-                Model Interpretation & Profile Fit (Not an Exam Guarantee)
-              </div>
-              <p className="text-[#27272A] leading-relaxed">{question.model_interpretation || question.priority_reason}</p>
-              <p className="text-[#78716C]">
-                Generated by local model <span className="font-mono-exam">{question.model_used || 'unknown'}</span> via{' '}
-                <span className="font-mono-exam">{question.provider_used}</span>.
-              </p>
-            </div>
-          </div>
-        )}
 
         {/* Evaluation Rubric */}
         <section className="border-t border-[#E4E1DA] pt-4 space-y-3">
