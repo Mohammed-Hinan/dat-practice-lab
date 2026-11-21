@@ -8,6 +8,12 @@ import type {
   DrawThingsStatus,
   ExamPaperCreateRequest,
   ExamPaperRecord,
+  GATAttemptResult,
+  GATLearningTopic,
+  GATMockTest,
+  GATOverview,
+  GATQuestion,
+  GATVisualGK,
   GeneratedQuestion,
   GenerateQuestionsRequest,
   GenerateQuestionsResponse,
@@ -233,6 +239,84 @@ export const api = {
       active_cities: string[];
       timestamp: number;
     }>('/presence'),
+
+  // GAT API Methods
+  getGATOverview: () => request<GATOverview>('/gat/overview'),
+
+  listGATQuestions: (params?: {
+    section?: string;
+    topic?: string;
+    difficulty?: string;
+    question_type?: string;
+    exam?: string;
+    search?: string;
+    bookmarked_only?: boolean;
+    incorrect_only?: boolean;
+    limit?: number;
+    offset?: number;
+  }) => {
+    const q = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([k, v]) => {
+        if (v !== undefined && v !== null && v !== '') {
+          q.append(k, String(v));
+        }
+      });
+    }
+    const query = q.toString();
+    return request<GATQuestion[]>(`/gat/questions${query ? `?${query}` : ''}`);
+  },
+
+  getGATQuestion: (id: string) => request<GATQuestion>(`/gat/questions/${id}`),
+
+  recordGATAttempt: (
+    id: string,
+    payload: {
+      question_id: string;
+      user_answers: string[];
+      time_spent_seconds: number;
+      mode?: string;
+      test_id?: string;
+    }
+  ) =>
+    request<GATAttemptResult>(`/gat/questions/${id}/attempt`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
+  toggleGATBookmark: (id: string, is_bookmarked: boolean) =>
+    request<{ is_bookmarked: boolean }>(`/gat/questions/${id}/bookmark`, {
+      method: 'POST',
+      body: JSON.stringify({ is_bookmarked }),
+    }),
+
+  listGATLearningTopics: (section?: string) =>
+    request<GATLearningTopic[]>(`/gat/learn/topics${section ? `?section=${section}` : ''}`),
+
+  listGATVisualGK: (subcategory?: string) =>
+    request<GATVisualGK[]>(`/gat/gk/visual-boards${subcategory ? `?subcategory=${subcategory}` : ''}`),
+
+  createGATMockTest: (payload: {
+    title: string;
+    exam?: string;
+    time_limit_minutes?: number;
+    section_filter?: string;
+    num_questions?: number;
+  }) =>
+    request<GATMockTest>('/gat/mock-tests', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
+  listGATMockTests: () => request<GATMockTest[]>('/gat/mock-tests'),
+
+  getGATMockTest: (id: string) => request<GATMockTest>(`/gat/mock-tests/${id}`),
+
+  submitGATMockTest: (id: string, payload: Record<string, string[]>) =>
+    request<GATMockTest>(`/gat/mock-tests/${id}/submit`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
 };
 
 export function formatDuration(totalSeconds: number): string {

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "quant-percentages-ratios",
+    "section": "quantitative_ability",
+    "topic": "Percentages & Ratio Applications",
+    "exam_applicability": ["NIFT", "UCEED", "CEED", "NID"],
+    "summary": "Master percentage changes, successive discounts, profit & loss margins, and proportional division.",
+    "concept_explanation": "Percentages represent parts per 100. When calculating percentage change, always divide the difference by the original base value. In design entrance exams, ratio and percentage problems are frequently framed around production yields, material costs, and workshop budget allocations.",
+    "formulas_and_facts": [
+      "Percentage Change = ((New Value − Old Value) / Old Value) × 100%",
+      "Successive Percentage Changes of a% and b% = (a + b + (a × b)/100)%",
+      "Cost Price (CP) from Selling Price (SP) & Profit%: CP = SP / (1 + Profit%/100)",
+      "Proportional Splitting: If Total T is split in ratio a:b, share A = (a / (a + b)) × T"
+    ],
+    "worked_examples": [
+      {
+        "title": "Equal Savings Division",
+        "problem": "Person A spends 80% and Person B spends 70% of their salaries. Their combined salary is Rs 30,000 and their savings are equal. What is Person A's salary?",
+        "solution": "Savings: A saves 20%, B saves 30%.\n20% × A = 30% × B => A / B = 3 / 2.\nTotal shares = 3 + 2 = 5.\nA's salary = (3/5) × 30,000 = Rs 18,000."
+      }
+    ]
+  },
+  {
+    "id": "quant-geometry-area",
+    "section": "quantitative_ability",
+    "topic": "Geometry, Shaded Areas & Symmetry",
+    "exam_applicability": ["UCEED", "CEED", "NIFT"],
+    "summary": "Calculate shaded regions, inscribed circles, semicircles, and area ratios using symmetry dissection.",
+    "concept_explanation": "In UCEED and CEED, geometry questions test your ability to decompose irregular shapes into symmetrical quadrants rather than grinding through heavy trigonometry. Slicing shapes across axes of symmetry or rotating complementary lenses yields immediate geometric solutions.",
+    "formulas_and_facts": [
+      "Area of Square of side s = s²; Diagonal = s√2",
+      "Area of Circle = πr²; Semicircle = (πr²)/2; Quadrant = (πr²)/4",
+      "L-corner between inscribed circle and square = (s² − πr²)/4 = r²(1 − π/4)",
+      "Lens between overlapping quadrants of radius r in a square of side r = (π/2 − 1)r²"
+    ],
+    "worked_examples": [
+      {
+        "title": "Circle and Semicircle in Square",
+        "problem": "A circle and semicircle of radius r are inscribed in a square of side 2r. What fraction of the square is the blue region cut by the diagonal?",
+        "solution": "Deconstruct by mirror symmetry: The diagonal splits the outer corners in half, summing to one full corner (Square − Circle)/4. The internal segment fills the vacant quadrant (Circle/4). Sum = Square/4 = 0.25."
+      }
+    ]
+  },
+  {
+    "id": "reasoning-spatial-folding",
+    "section": "analytical_reasoning",
+    "topic": "Spatial Reasoning & Orthographic Views",
+    "exam_applicability": ["UCEED", "CEED", "NID"],
+    "summary": "Track 3D wireframes, unfolded dice nets, hidden faces, and multiple isometric viewpoints.",
+    "concept_explanation": "Spatial ability tests how well you mentally rotate three-dimensional volumes. To avoid mental fatigue, pick a unique landmark feature (such as a single colored straw, a distinctive vertex, or an asymmetric notch) and trace its clockwise or counter-clockwise topological sequence.",
+    "formulas_and_facts": [
+      "Opposite faces on a standard unrolled cube net are always separated by exactly one intervening square.",
+      "In any true view of a rigid cyclic structure, the circular permutation order of elements remains invariant.",
+      "Top-down vs bottom-up views reverse apparent rotational chirality (clockwise becomes counter-clockwise)."
+    ],
+    "worked_examples": [
+      {
+        "title": "Coloured Straw Wireframe",
+        "problem": "An 8-straw ring on a star base has 3 Red, 2 Blue, 2 Yellow, 1 Green straw. Which views belong to it?",
+        "solution": "Start from the rarest element (1 Green straw) and trace cyclic order: Green -> Red -> Yellow -> Red -> Yellow -> Blue -> Red -> Blue. Eliminate any view with incorrect count or inverted sequence."
+      }
+    ]
+  },
+  {
+    "id": "reasoning-syllogisms",
+    "section": "analytical_reasoning",
+    "topic": "Logical Syllogisms & Deductions",
+    "exam_applicability": ["UCEED", "NIFT", "NID"],
+    "summary": "Categorical propositions, Euler circles, and strict deductive validity.",
+    "concept_explanation": "In formal logic, only deduce conclusions that MUST follow under 100% of interpretations. 'Some' means 'at least one'. 'All A are B' does NOT imply 'All B are A'. Always verify whether the converse is warranted or a logical fallacy.",
+    "formulas_and_facts": [
+      "'All A are B' + 'All B are C' => 'All A are C'",
+      "'Some A are B' + 'All B are C' => 'Some A are C'",
+      "'Some A are B' is logically equivalent to 'Some B are A'",
+      "Beware the illicit conversion: 'All A are B' does NOT imply 'All B are A'"
+    ],
+    "worked_examples": [
+      {
+        "title": "Greek Alphabet Syllogism",
+        "problem": "Statements: All Greek letters have symbol-to-sound mapping. Some Greek letters are aspirated plosives. All aspirated plosives in Greek are consonants.",
+        "solution": "Let x be the aspirated plosive Greek letter guaranteed by statement 2. x is a consonant (stmt 3) and has symbol-to-sound mapping (stmt 1). Hence: 'Some consonants are aspirated plosives' and 'Some consonants have symbol-to-sound mapping' follow strictly."
+      }
+    ]
+  },
+  {
+    "id": "english-comprehension-flow",
+    "section": "english",
+    "topic": "Sentence Rearrangement & Reading Comprehension",
+    "exam_applicability": ["NIFT", "UCEED"],
+    "summary": "Parajumbles, chronological signaling, pronoun antecedent anchors, and thematic inference.",
+    "concept_explanation": "Parajumbles require spotting noun-to-pronoun references (e.g., 'Doug Engelbart' appears before 'he' or 'those notes'). In reading comprehension, distinguish between the author's stated central thesis versus peripheral supporting examples.",
+    "formulas_and_facts": [
+      "Acronyms and full names precede abbreviations and personal pronouns.",
+      "Chronological transitions ('as a student' -> 'years later' -> 'today') dictate ordering.",
+      "In reading comprehension, answers containing extreme absolutes ('always', 'never', 'irrelevant') are usually distractors."
+    ],
+    "worked_examples": [
+      {
+        "title": "Invention of the Computer Mouse",
+        "problem": "Arrange the 6 scrambled sentences describing Engelbart's invention of the mouse.",
+        "solution": "Identify anchor sentence introducing the protagonist (VI). Track student days (V) to conference notes (III) to prototyping (II) to general adoption (I) and conclusion (IV)."
+      }
+    ]
+  },
+  {
+    "id": "gk-indian-crafts-textiles",
+    "section": "gk_awareness",
+    "topic": "Traditional Indian Crafts & Textiles",
+    "exam_applicability": ["UCEED", "NIFT", "NID", "CEED"],
+    "summary": "Geographical origins, dyeing methods, weaving traditions, and printing techniques across India.",
+    "concept_explanation": "Design entrance examinations place immense weight on indigenous Indian craft traditions. Distinguish clearly between weaving techniques (pit looms, zari), printing techniques (block, resist), dyeing techniques (tie-dye), and embroidery.",
+    "formulas_and_facts": [
+      "Ajrakh: Resist block printing using natural indigo & madder (Kutch, Gujarat & Barmer, Rajasthan).",
+      "Paithani: Handwoven silk sari with intricate oblique gold/zari pallu motifs (Maharashtra).",
+      "Kalamkari: Pen-drawn (kalam) and mordant printed cotton textile (Srikalahasti & Machilipatnam, AP).",
+      "Phulkari: Geometric flower-work silk embroidery on handspun khaddar (Punjab).",
+      "Bandhani & Leheriya: Traditional tie-resist dyeing (Gujarat & Rajasthan).",
+      "Khes: Traditional heavy double-cloth geometric cotton weaving (Punjab)."
+    ],
+    "worked_examples": [
+      {
+        "title": "Categorizing Craft Modalities",
+        "problem": "Which among Ajrakh, Paithani, Kalamkari, Phulkari, Khes and Bandhani are weaving crafts?",
+        "solution": "Paithani (silk tapestry weaving) and Khes (heavy pit-loom geometric weaving) are the two weaving crafts. Ajrakh is block-printing, Kalamkari is pen/block, Phulkari is embroidery, and Bandhani is tie-dye."
+      }
+    ]
+  }
+]
