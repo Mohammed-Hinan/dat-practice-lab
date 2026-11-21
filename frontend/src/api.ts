@@ -22,13 +22,19 @@ import type {
   WeakArea,
 } from './types';
 
-export const API_BASE = import.meta.env.VITE_API_BASE_URL
-  ? `${String(import.meta.env.VITE_API_BASE_URL).replace(/\/$/, '')}/api`
-  : typeof window !== 'undefined' &&
-      window.location.hostname !== 'localhost' &&
-      window.location.hostname !== '127.0.0.1'
-    ? 'https://dat-practice-lab.onrender.com/api'
-    : '/api';
+const rawEnvUrl = String(import.meta.env.VITE_API_BASE_URL || '').trim();
+// Auto-correct any legacy typo where '-lab' was omitted from the Render subdomain
+const cleanUrl =
+  rawEnvUrl.includes('dat-practice-backend.onrender.com') || !rawEnvUrl
+    ? 'https://dat-practice-lab.onrender.com'
+    : rawEnvUrl;
+
+export const API_BASE =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
+  !rawEnvUrl
+    ? '/api'
+    : `${cleanUrl.replace(/\/$/, '')}/api`;
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const resp = await fetch(`${API_BASE}${path}`, {
