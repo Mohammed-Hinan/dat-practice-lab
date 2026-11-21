@@ -170,18 +170,6 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
             {isSaved ? <BookmarkCheck className="w-3.5 h-3.5" /> : <Bookmark className="w-3.5 h-3.5" />}
             {isSaved ? 'Saved' : 'Save Question'}
           </button>
-
-          {onRegenerate && (
-            <button
-              type="button"
-              onClick={onRegenerate}
-              disabled={regenerating}
-              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white text-[#44403C] hover:bg-stone-50 disabled:opacity-50 cursor-pointer"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${regenerating ? 'animate-spin' : ''}`} />
-              {regenerating ? 'Generating...' : 'Different Question'}
-            </button>
-          )}
         </div>
       </div>
 
@@ -240,24 +228,18 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
             )}
 
 
-            <button
-              type="button"
-              onClick={handleCopyGeminiPrompt}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#1E3A5F]/30 bg-[#F7F9FC] text-[#1E3A5F] hover:bg-[#EEF2F8] transition-colors cursor-pointer shadow-xs"
-              title="Copy formatted NID Master Prompt for Google Gemini"
-            >
-              {copiedGeminiPrompt ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-emerald-700 font-semibold">✓ Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Copy for Gemini</span>
-                </>
-              )}
-            </button>
+            {onRegenerate && (
+              <button
+                type="button"
+                onClick={onRegenerate}
+                disabled={regenerating}
+                className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[#D8D4CB] bg-white text-[#44403C] hover:bg-stone-50 disabled:opacity-50 cursor-pointer shadow-xs transition-colors"
+                title="Generate another question for this category"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${regenerating ? 'animate-spin' : ''}`} />
+                {regenerating ? 'Generating...' : 'Different Question'}
+              </button>
+            )}
           </div>
 
           {/* Subtle linear progress indicator */}

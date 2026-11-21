@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AlertCircle,
   AlertTriangle,
-  ArrowRight,
   Bookmark,
   Check,
   Clock,
@@ -10,7 +9,6 @@ import {
   RefreshCw,
   Sparkles,
   Trash2,
-  Zap,
 } from 'lucide-react';
 import { api } from '../api';
 import type {
@@ -57,13 +55,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   const [batch, setBatch] = useState<GeneratedQuestion[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
 
-  // Background pre-generation buffer (for 1-question sets: 0s wait for next question!)
-  const [prefetchedNext, setPrefetchedNext] = useState<GeneratedQuestion | null>(null);
-  const [prefetchStatus, setPrefetchStatus] = useState<'idle' | 'preparing' | 'ready'>('idle');
-  const prefetchAbortRef = useRef<AbortController | null>(null);
-  const prefetchPromiseRef = useRef<Promise<GeneratedQuestion | null> | null>(null);
-  const prefetchTimeoutRef = useRef<number | null>(null);
-  const prefetchKeyRef = useRef<string>('');
   const seenTitlesRef = useRef<string[]>([]);
 
   // Saved library state
@@ -73,44 +64,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   const [viewingSaved, setViewingSaved] = useState<GeneratedQuestion | null>(null);
 
   const allCategoriesSelected = selectedCategories.length === taxonomy.categories.length;
-
-  const configKey = useMemo(
-    () =>
-      JSON.stringify({
-        categories: [...selectedCategories].sort(),
-        difficulty,
-        timeMinutes,
-        count,
-      }),
-    [selectedCategories, difficulty, timeMinutes, count]
-  );
-
-  const cancelPrefetch = () => {
-    if (prefetchTimeoutRef.current) {
-      window.clearTimeout(prefetchTimeoutRef.current);
-      prefetchTimeoutRef.current = null;
-    }
-    if (prefetchAbortRef.current) {
-      prefetchAbortRef.current.abort();
-      prefetchAbortRef.current = null;
-    }
-    prefetchPromiseRef.current = null;
-    prefetchKeyRef.current = '';
-    setPrefetchedNext(null);
-    setPrefetchStatus('idle');
-  };
-
-  useEffect(() => {
-    if (prefetchKeyRef.current && prefetchKeyRef.current !== configKey) {
-      cancelPrefetch();
-    }
-  }, [configKey]);
-
-  useEffect(() => {
-    return () => {
-      cancelPrefetch();
-    };
-  }, []);
 
   useEffect(() => {
     if (!generating) {
@@ -174,54 +127,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
     };
   };
 
-  const startBackgroundPrefetch = (excludeTitles: string[], keyForRun: string) => {
-    if (!llmConnected || count !== 1) return;
-    if (prefetchTimeoutRef.current) {
-      window.clearTimeout(prefetchTimeoutRef.current);
-      prefetchTimeoutRef.current = null;
-    }
-
-    // 2.5s debounce so user has time to read question or regenerate before background prefetch starts
-    prefetchTimeoutRef.current = window.setTimeout(() => {
-      prefetchTimeoutRef.current = null;
-      if (!llmConnected || count !== 1) return;
-
-      const controller = new AbortController();
-      prefetchAbortRef.current = controller;
-      prefetchKeyRef.current = keyForRun;
-      setPrefetchedNext(null);
-      setPrefetchStatus('preparing');
-
-      const promise = api
-        .generateQuestions(buildPayload(1, excludeTitles.slice(-12)), controller.signal)
-        .then((res) => {
-          if (controller.signal.aborted || prefetchKeyRef.current !== keyForRun) return null;
-          const nextQ = res.questions[0] || null;
-          if (nextQ) {
-            setPrefetchedNext(nextQ);
-            setPrefetchStatus('ready');
-          } else {
-            setPrefetchStatus('idle');
-          }
-          return nextQ;
-        })
-        .catch(() => {
-          if (!controller.signal.aborted && prefetchKeyRef.current === keyForRun) {
-            setPrefetchStatus('idle');
-          }
-          return null;
-        })
-        .finally(() => {
-          if (prefetchAbortRef.current === controller) {
-            prefetchAbortRef.current = null;
-            prefetchPromiseRef.current = null;
-          }
-        });
-
-      prefetchPromiseRef.current = promise;
-    }, 2500);
-  };
-
   const resetSetTracking = () => {
     // tracking reset
   };
@@ -229,46 +134,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
   const handleGenerate = async (excludeTitles: string[] = []) => {
     setError(null);
     setWarnings([]);
-
-    // 1. Instant swap if background prefetch is already ready!
-    if (count === 1 && prefetchedNext && prefetchKeyRef.current === configKey) {
-      const nextQ = prefetchedNext;
-      setPrefetchedNext(null);
-      setPrefetchStatus('idle');
-      resetSetTracking();
-      setBatch([nextQ]);
-      setActiveIdx(0);
-      const updatedSeen = [...seenTitlesRef.current, nextQ.title].slice(-12);
-      seenTitlesRef.current = updatedSeen;
-      startBackgroundPrefetch(updatedSeen, configKey);
-      return;
-    }
-
-    // 2. Reuse in-flight matching background prefetch if one is currently preparing
-    if (count === 1 && prefetchPromiseRef.current && prefetchKeyRef.current === configKey) {
-      setGenerating(true);
-      try {
-        const awaited = await prefetchPromiseRef.current;
-        if (awaited) {
-          setPrefetchedNext(null);
-          setPrefetchStatus('idle');
-          resetSetTracking();
-          setBatch([awaited]);
-          setActiveIdx(0);
-          const updatedSeen = [...seenTitlesRef.current, awaited.title].slice(-12);
-          seenTitlesRef.current = updatedSeen;
-          startBackgroundPrefetch(updatedSeen, configKey);
-          return;
-        }
-      } catch {
-        // Fall through to fresh direct generation below
-      } finally {
-        setGenerating(false);
-      }
-    }
-
-    // 3. Fresh direct generation
-    cancelPrefetch();
     setGenerating(true);
     try {
       const mergedExcludes = [...seenTitlesRef.current, ...excludeTitles].slice(-12);
@@ -280,11 +145,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
       const newTitles = res.questions.map((q) => q.title);
       const updatedSeen = [...seenTitlesRef.current, ...newTitles].slice(-12);
       seenTitlesRef.current = updatedSeen;
-
-      // Start quiet background prefetch for the next question if in 1-question practice mode
-      if (count === 1 && res.questions.length === 1) {
-        startBackgroundPrefetch(updatedSeen, configKey);
-      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Question generation failed.');
     } finally {
@@ -297,12 +157,10 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
     if (!current) return;
 
     if (batch.length === 1 && count === 1) {
-      cancelPrefetch();
       await handleGenerate([current.title]);
       return;
     }
 
-    cancelPrefetch();
     setGenerating(true);
     setError(null);
     try {
@@ -324,9 +182,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
         setBatch(next);
         const updatedSeen = [...seenTitlesRef.current, replacement.title].slice(-12);
         seenTitlesRef.current = updatedSeen;
-        if (count === 1) {
-          startBackgroundPrefetch(updatedSeen, configKey);
-        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not replace question.');
@@ -600,11 +455,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
                     <Loader2 className="w-4 h-4 animate-spin" />
                     Drafting {count === 1 ? 'Question' : `${count} Questions`} ({settings.model || 'Local LLM'})… {genElapsedSec}s
                   </>
-                ) : count === 1 && prefetchedNext && prefetchKeyRef.current === configKey ? (
-                  <>
-                    <Zap className="w-4 h-4" />
-                    Next Question (Instant)
-                  </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
@@ -644,32 +494,6 @@ export const QuestionGenerator: React.FC<QuestionGeneratorProps> = ({
               </div>
             )}
 
-            {/* Background Pre-Generation Status (when count === 1) */}
-            {activeQuestion && count === 1 && prefetchStatus !== 'idle' && (
-              <div className="bg-white border border-[#E4E1DA] rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs no-print">
-                {prefetchStatus === 'preparing' ? (
-                  <div className="flex items-center gap-2 text-[#57534E]">
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-[#1E3A5F]" />
-                    <span>Pre-generating your next question in the background while you practise…</span>
-                  </div>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-2 text-emerald-900 font-medium">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                      <span>Next question is ready in background (0s wait)</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleGenerate()}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-lg bg-[#1E3A5F] text-white hover:bg-[#162C49] transition-colors cursor-pointer"
-                    >
-                      Next Question
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
 
             {/* Set Stepper (for multi-question sets) */}
             {batch.length > 1 && (
