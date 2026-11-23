@@ -592,8 +592,11 @@ class QuestionGenerator:
             "cutter", "packaging", "dispenser", "gear", "hardware"
         )
         is_physical_problem = (
-            any(w in payload.scenario.lower() or w in payload.title.lower() for w in physical_keywords)
-            or payload.category in ("Product sketch",)
+            payload.category not in ("Composition", "Logos, Symbols & Signs")
+            and (
+                any(w in payload.scenario.lower() or w in payload.title.lower() for w in physical_keywords)
+                or payload.category in ("Product sketch",)
+            )
         )
         for sq in payload.subquestions:
             if is_physical_problem and any(bad in sq.instruction.lower() for bad in ("promotional poster", "poster", "advertising campaign")):

@@ -82,6 +82,43 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "fast fashion clothing waste piling up in landfills vs traditional artisans struggling to sell slow handlooms",
             ],
         ),
+        (
+            "Multi-point public informational poster: The authorities/organization requires a public visual guide communicating 5 to 7 specific critical tips or guidelines to a first-time, elderly, or multilingual audience. Subquestion A: Sketch a bold, well-structured poster (3:4 vertical ratio) integrating all points using clear visual hierarchy and minimal text. Subquestion B: Write a punchy bilingual tagline under 6 words and explain your layout/focal point strategy.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm", "nid_haryana_creative_leadership"],
+            [
+                "7 ATM safety and transaction rules for rural or first-time digital banking users (hide PIN, press cancel, reject stranger help, count cash, report un-dispensed cash, leave on welcome screen, take card)",
+                "5 escalator and platform boarding etiquette rules at an overcrowded metro junction during monsoon rush",
+                "6 emergency domestic gas cylinder (LPG) leak response protocols for high-density apartment residents",
+                "5 pedestrian and zebra-crossing safety rules for primary school children in bustling market lanes",
+                "6 hygiene, water-purification, and disease-prevention protocols for flood relief temporary shelter camps",
+                "5 responsible disposal and handling rules for domestic medical, sanitary, and sharp waste",
+                "6 extreme heatwave survival, hydration, and shade guidelines for outdoor construction and delivery workers",
+                "5 cyber-safety and OTP fraud prevention habits for senior citizens using smartphones for digital payments",
+            ],
+        ),
+        (
+            "Symbol & Campaign Poster: Subquestion A: Design an original, high-contrast symbol/emblem representing the core theme. Subquestion B: Design a full-page awareness campaign poster deploying the symbol with a powerful tagline under 6 words.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "raising awareness about binary gender inclusivity and neutral public spaces",
+                "anti-bullying, empathy, and mental wellbeing campaign across secondary school campuses",
+                "promoting voluntary organ donation pledges among university students and young professionals",
+                "combating fast-fashion textile waste and celebrating local garment repair and upcycling culture",
+                "mental health decompression and stress relief for competitive entrance examination aspirants",
+                "protecting community stray animal welfare and driver sensitization in residential sectors",
+            ],
+        ),
+        (
+            "Metaphorical literature/poetry poster: Translate the underlying philosophy and emotional resonance of the given quote or couplet into a powerful visual poster with an original tagline.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "Rabindranath Tagore: 'Where the mind is without fear and the head is held high, where knowledge is free...'",
+                "Mahatma Gandhi: 'The earth has enough for everyone's need, but not for everyone's greed'",
+                "Kabir: 'Slowly, slowly O mind, everything in its own time happens; even if the gardener waters with a hundred pots, fruit arrives only in season'",
+                "APJ Abdul Kalam: 'Dreams are not what you see in sleep, dreams are things which do not let you sleep'",
+                "Chief Seattle: 'We do not inherit the earth from our ancestors, we borrow it from our children'",
+            ],
+        ),
     ],
     "Creativity": [
         (
@@ -148,6 +185,42 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "the crushing and rolling of sugarcane in a street press translated into a manual paper compactor",
             ],
         ),
+        (
+            "Form Sensitivity & Product Translation: Study the given three-dimensional geometric or bionic form. Subquestion A: Translate the curvature, rhythm, and parting lines of this form into a single-seater living-room chair or ergonomic desktop lifestyle accessory. Draw a clean 3/4 perspective sketch. Subquestion B: Annotate 4 key functional, material, and ergonomic details demonstrating how form serves function.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "translating an equiangular nautilus shell spiral into a compact modular desktop cable and device organizer",
+                "translating a smooth river pebble with an eroded concave hollow into an ergonomic meditation stool",
+                "translating an origami-folded hyperbolic paraboloid into a flat-pack sheet-metal lounge chair",
+                "translating the segmented protective exoskeleton of a pill-bug (armadillo) into an expandable hard-shell commuter backpack",
+                "translating a continuous twisted moebius strip into a bent-plywood reading bench",
+                "translating the segmented conical architecture of a pinecone into an ambient acoustic desk lamp",
+                "translating an egg-shaped ellipsoid sliced diagonally into a compact dual-chamber food warmer",
+            ],
+        ),
+        (
+            "Literal or Subversive Idiom Visualization: Subquestion A: Choose two common idioms and depict their meaning through a clever, witty visual illustration (visual pun) without relying on text labels. Subquestion B: Explain in 2 sentences how the composition communicates the metaphor.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "'Walking on eggshells' and 'Spilling the beans'",
+                "'Burning the candle at both ends' and 'A bitter pill to swallow'",
+                "'A storm in a teacup' and 'Barking up the wrong tree'",
+                "'Burying your head in the sand' and 'The elephant in the room'",
+                "'Cutting corners' and 'Caught red-handed'",
+                "'Don't put all your eggs in one basket' and 'Bite the bullet'",
+            ],
+        ),
+        (
+            "Lateral thinking & conceptual transformation: Subquestion A: Re-imagine the given common object, situation, or anatomy under an impossible or surreal constraint. Subquestion B: Illustrate 4 distinct everyday interactions resulting from this change.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "if the human head were an exact rigid cube: four everyday human interactions (sleeping, wearing spectacles, eating, wearing a helmet)",
+                "five innovative uses for an ordinary safety helmet, completely unrelated to headgear or protection",
+                "five innovative everyday uses combining an old tyre, a plastic bottle, a cricket bat, and a plastic bucket",
+                "re-imagining an everyday tea flask inspired by an animated character's personality and form",
+                "re-imagining an everyday umbrella if raindrops fell upwards from the ground",
+            ],
+        ),
     ],
     "Drawing": [
         (
@@ -212,6 +285,30 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "an overhead worm's-eye perspective looking up at a kite entangled in overhead electric wires in a narrow lane",
             ],
         ),
+        (
+            "Visual Sensitivity & Typography Extension: You are given the visual styling and construction language of 2 sample letters ('A' and 'B'). Subquestion A: Following the exact same font anatomy, stem weight, terminal style, and optical rhythm, draw the target word in uppercase display lettering. Subquestion B: Sketch a matching geometric monogram or favicon in the same typeface style.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "Style: Ornamental Art-Deco monolinear lettering with stepped serifs. Target word: 'F O R E S T'",
+                "Style: Heritage Gujarati block-print textile stamps with micro-grid cutouts. Target word: 'C R A F T'",
+                "Style: Heavy industrial stencil with angled bridge cuts. Target word: 'K I N E T I C'",
+                "Style: Fluid calligraphic ribbon with dynamic thick-thin contrast. Target word: 'M O N S O O N'",
+                "Style: Minimalist rounded monolinear geometric glyphs. Target word: 'S H E L T E R'",
+                "Style: Indian folk Warli geometry with triangular negative spaces. Target word: 'P U L S E'",
+            ],
+        ),
+        (
+            "Extreme Camera Point-of-View Drawing: Draw the described scene from the specific unconventional optical point of view, using accurate perspective, relative scale, and light-and-shade.",
+            ["general_nid_mdes"],
+            [
+                "a room camera mounted high in the corner of a 12x12 room capturing a tall father taking a vertical selfie with his playful family",
+                "an 8-year-old walking a dog in a park with lamp posts, drawn strictly from the eye-level point of view of the dog looking back at the boy",
+                "a crow perched on a high tree branch looking down at a roadside fresh fruit-juice vendor serving customers",
+                "an auto-rickshaw passenger's first-person POV looking past their own knees and the driver's shoulders onto a rainy city crossroads",
+                "a child crouching under a dining table looking out at adults gathered around during a family dinner",
+                "a security guard's desk-level POV looking past an open register at a late-night visitor entering the lobby",
+            ],
+        ),
     ],
     "Logos, Symbols & Signs": [
         (
@@ -265,6 +362,42 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "civic etiquette pictograms on a crowded state transport bus (yield seat to elderly, fold umbrella, keep bags under seat, speak softly)",
                 "zero-waste community kitchen handling icons (boil water, separate organic scraps, wash steel plates, dry cloth)",
                 "emergency monsoon flood evacuation markers for a low-lying riverbank settlement (high ground, shelter direction, medical boat, clean water)",
+            ],
+        ),
+        (
+            "Institutional Identity & Acronym Emblem: Subquestion A: Create a clean, memorable emblem or wordmark that seamlessly embeds the given acronym and an evocative dual visual metaphor, functioning in pure black and white. Subquestion B: Illustrate the emblem in context on 2 real-world touchpoints (e.g. jersey, official stamp, vehicle, packaging) and explain your visual rationale.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership", "nid_gandhinagar_sdm"],
+            [
+                "Indian Women's Hockey Association ('IWHA') combining sports agility, hockey stick geometry, and national pride",
+                "Tribal Forest Honey Collective ('TFHC') combining wild honeycomb geometry and flora",
+                "Citizen River Action Watch ('CRAW') combining flowing water waves and human guardian hands",
+                "Street Women Artisans Guild ('SWAD') combining spinning charkha threads and clay tools",
+                "Indian Museum of Science ('IMOS') combining atomic orbits and traditional Indian geometric jali patterns",
+                "Senior Assistance & Friendly Escort ('SAFE') combining an elderly walking cane and caring embrace",
+                "Village Agro Network Initiative ('VANI') combining a radio broadcast wave and grain stalk",
+                "Kids Heritage & Educational League ('KHEL') combining traditional wooden spinning tops and open books",
+            ],
+        ),
+        (
+            "Cohesive 4-Icon System: Design a set of 4 uniform, wordless pictograms inside 4 equal square frames with identical line weight and geometric grammar. Subquestion A: Draw the 4 matching icons clearly. Subquestion B: Explain the visual cues used to ensure universal recognition without text.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "4 gallery icons for the Indian Museum of Science: [Astronomy], [Robotics], [Ancient Metallurgy], [Bio-energy]",
+                "4 heritage craft pavilions at a national craft mela: [Handlooms], [Terracotta Pottery], [Dhokra Metal Casting], [Bamboo Joinery]",
+                "4 public transport wayfinding icons: [Quiet Reading Zone], [Tactile Guide Path], [Pram/Luggage Ramp], [Emergency Defibrillator]",
+                "4 climate resilience zones in a civic park: [Rooftop Rain Harvesting], [Solar Gazebo], [Compost Pit], [Butterfly Sanctuary]",
+                "4 universal kitchen-safety warning icons for commercial kitchens: [Grease Fire No Water], [Sharp Blade Guard], [Hot Steam Vent], [Chemical Sanitizer Only]",
+            ],
+        ),
+        (
+            "Safety Symbol & Instructional Guidebook: Subquestion A: Design a high-visibility hazard warning emblem for the given domestic or public utility risk. Subquestion B: Design a 3-step illustrated pocket guide demonstrating safe emergency response without panic.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "domestic LPG gas cylinder leak protocol ('Suraksha') and kitchen ventilation steps",
+                "street-level electrical transformer safety and flooded monsoon road hazard guide",
+                "school laboratory acid splash and chemical burn first-aid protocol",
+                "high-speed escalator emergency stop button and child entrapment prevention",
+                "overcrowded suburban railway platform edge warning and gap awareness",
             ],
         ),
     ],
