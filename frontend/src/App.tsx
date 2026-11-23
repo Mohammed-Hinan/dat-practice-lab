@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Archive,
+  BookOpen,
   ClipboardList,
   Compass,
   Menu,
@@ -12,6 +13,7 @@ import { ExamSimulator } from './components/ExamSimulator';
 import { LiveCommunityPresence } from './components/LiveCommunityPresence';
 import { QuestionBank } from './components/QuestionBank';
 import { QuestionGenerator } from './components/QuestionGenerator';
+import { VisualLibrary } from './components/VisualLibrary';
 import type {
   AppSettings,
   GenerationMode,
@@ -22,6 +24,7 @@ import type {
 
 const NAV_ITEMS: { id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: 'generate', label: 'Practice Studio', icon: Sparkles },
+  { id: 'visual_library', label: 'Visual Library', icon: BookOpen },
   { id: 'simulator', label: 'Exam Simulator', icon: ClipboardList },
   { id: 'bank', label: 'Question Bank', icon: Archive },
 ];
@@ -324,6 +327,14 @@ export default function App() {
               settings={settings}
               llmConnected={Boolean(llmStatus?.connected)}
               initialPreset={genPreset}
+            />
+          )}
+          {section === 'visual_library' && (
+            <VisualLibrary
+              onNavigateToStudio={(sec, preset) => {
+                if (preset) setGenPreset(preset);
+                setSection(sec);
+              }}
             />
           )}
           {section === 'simulator' && (

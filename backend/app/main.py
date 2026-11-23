@@ -50,6 +50,7 @@ from .schemas import (
     StoredGeneratedQuestion,
     VisualDeltaAnalysis,
     VisualLearningRecord,
+    VisualLibraryProgressUpdate,
     WeakAreaCreate,
     WeakAreaRecord,
 )
@@ -542,6 +543,34 @@ def create_app(db_instance: Optional[Database] = None) -> FastAPI:
     @app.post("/api/weak-areas", response_model=WeakAreaRecord)
     def create_weak_area(item: WeakAreaCreate) -> WeakAreaRecord:
         return db.create_weak_area(item)
+
+    # ------------------------------------------------------------------
+    # Visual Library System
+    # ------------------------------------------------------------------
+    @app.get("/api/visual-library/catalogue")
+    def get_visual_library_catalogue() -> Dict[str, Any]:
+        return db.get_visual_library_catalogue()
+
+    @app.post("/api/visual-library/progress")
+    def update_visual_library_progress(req: VisualLibraryProgressUpdate) -> Dict[str, Any]:
+        return db.update_visual_library_progress(
+            subject_name=req.subject_name,
+            category_id=req.category_id,
+            level_1_studied=req.level_1_studied,
+            level_2_reproduced=req.level_2_reproduced,
+            level_3_adapted=req.level_3_adapted,
+            drill_time_seconds=req.drill_time_seconds,
+            notes=req.notes,
+        )
+
+    @app.get("/api/visual-library/daily-workout")
+    def get_visual_library_daily_workout() -> List[Dict[str, Any]]:
+        return db.get_visual_library_daily_workout()
+
+    @app.post("/api/visual-library/reset-progress")
+    def reset_visual_library_progress() -> Dict[str, bool]:
+        ok = db.reset_visual_library_progress()
+        return {"reset": ok}
 
     # ------------------------------------------------------------------
     # Live Community Presence Tracker (Strict Real Live Sessions Only)

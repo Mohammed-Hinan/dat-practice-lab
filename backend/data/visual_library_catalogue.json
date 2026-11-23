@@ -1,0 +1,2343 @@
+{
+  "version": "1.0.0",
+  "total_categories": 13,
+  "total_target_subjects": 288,
+  "methodology": {
+    "level_1": "Recognition: Study visual breakdown, proportions rule, and reference sheet.",
+    "level_2": "Reproduction: 2-minute timed memory sketch without reference (Peek & Hide flashcard mode).",
+    "level_3": "Adaptation: Apply and modify the building block to solve an unexpected NID/CEED exam problem."
+  },
+  "categories": [
+    {
+      "id": "human_figures",
+      "name": "Human Figure Library",
+      "priority": "Highest Priority",
+      "priority_level": 1,
+      "priority_percent": 100,
+      "target_count": 45,
+      "tagline": "Dynamic figures in believable action, daily Indian tasks, and age archetypes",
+      "intro": "NID tests recognisable figures with believable action and weight distribution, not realistic medical anatomy. Master the 7.5-head proportion grid and gesture lines of action.",
+      "slug": "human_figures",
+      "subgroups": [
+        {
+          "group_name": "A. Basic Body Poses",
+          "items": [
+            {
+              "name": "Standing: Front & Side Profiles",
+              "primitives": "Oval head, cylindrical neck, trapezoid ribcage, bucket pelvis, tapered limb cylinders",
+              "proportions": "7.5 heads tall; navel at head 3, crotch at head 4, knee at head 5.5",
+              "level_3_mashup": "Draw a security guard standing at attention beside an automated scanner."
+            },
+            {
+              "name": "Standing: 3/4 Dynamic Angle",
+              "primitives": "S-curve line of action, angled shoulders vs hips (contrapposto)",
+              "proportions": "Near shoulder wider than far shoulder due to foreshortening",
+              "level_3_mashup": "Draw a college student waiting impatiently at a crowded bus stop checking a smartwatch."
+            },
+            {
+              "name": "Sitting on a Standard Chair / Stool",
+              "primitives": "90-degree bend at hips and knees, thighs horizontal cylinders",
+              "proportions": "Thigh length equals lower leg length from knee to ground",
+              "level_3_mashup": "Draw an office worker hunching forward at a poorly designed workstation."
+            },
+            {
+              "name": "Sitting on the Floor (Cross-legged / Sukhasana)",
+              "primitives": "Low triangular pyramid base, interlocking cylindrical calves and thighs",
+              "proportions": "Torso forms upper apex; knees touch or hover near ground level",
+              "level_3_mashup": "Draw an artisan sitting on a jute mat painting intricate patterns on terracotta pots."
+            },
+            {
+              "name": "Sitting on a Public Bench / Curb",
+              "primitives": "Slight forward torso slump, relaxed feet flat or crossed at ankles",
+              "proportions": "Seat height approx 45cm relative to adult 170cm height",
+              "level_3_mashup": "Draw an exhausted street vendor resting on a roadside stone block at dusk."
+            },
+            {
+              "name": "Walking: Mid-stride & Heel-strike",
+              "primitives": "Opposition movement (left arm forward, right leg forward), tilted torso",
+              "proportions": "Front heel strikes ground, back heel lifts onto ball of foot",
+              "level_3_mashup": "Draw a pedestrian briskly navigating a wet, slippery sidewalk during morning drizzle."
+            },
+            {
+              "name": "Running / Jogging Sprint",
+              "primitives": "Acute diagonal line of action, deep knee bends, tucked elbows at 90 deg",
+              "proportions": "Center of mass ahead of front foot; feet off ground in flight phase",
+              "level_3_mashup": "Draw a commuter desperately sprinting to catch a closing suburban train door."
+            },
+            {
+              "name": "Bending & Reaching Down",
+              "primitives": "Hinged hip joint, curved spine parabola, outstretched arms",
+              "proportions": "Weight shifts over feet balls to prevent falling backward",
+              "level_3_mashup": "Draw a sanitary worker using a long-handled grabber to collect plastic bottles from a drain."
+            },
+            {
+              "name": "Stretching & High Overhead Reach",
+              "primitives": "Elongated torso cylinder, extended spine arch, tiptoed feet",
+              "proportions": "Hands reach approx 1.3x standing height",
+              "level_3_mashup": "Draw a library visitor reaching for a top-shelf book using a pull-down step stool."
+            },
+            {
+              "name": "Squatting (Deep Malasana / Indian Squat)",
+              "primitives": "Accordion compression: torso nested between thighs, flat heels, balanced core",
+              "proportions": "Pelvis sits just above ankle level, center of gravity over midfoot",
+              "level_3_mashup": "Draw a farmer squatting in a muddy field examining seed germination trays."
+            },
+            {
+              "name": "Kneeling & Crouching Low",
+              "primitives": "Shin resting flat, 90-degree thigh fold, upright or leaning chest",
+              "proportions": "Total height halved to approx 3.5 heads",
+              "level_3_mashup": "Draw a mechanic crouching beside a lowered electric car chassis to inspect tire alignment."
+            },
+            {
+              "name": "Lifting Heavy Load from Ground",
+              "primitives": "Bent knees, straight back, load hugged tight to chest center",
+              "proportions": "Ergonomic lifting posture: power generated through quadriceps, not lower spine",
+              "level_3_mashup": "Draw a warehouse worker lifting a 20kg relief ration carton using assistive exo-straps."
+            },
+            {
+              "name": "Carrying Object on Shoulder / Head",
+              "primitives": "Counterbalanced neck/spine alignment, one arm bent overhead supporting weight",
+              "proportions": "Vertical force line passes straight through spine down through supporting foot",
+              "level_3_mashup": "Draw a rural woman carrying a dual-chamber water purification vessel across uneven terrain."
+            },
+            {
+              "name": "Pushing Heavy Trolley / Barrier",
+              "primitives": "Forward diagonal thrust line, straightened back leg, bent arms driving load",
+              "proportions": "Chest low, shoulder thrust plane forward",
+              "level_3_mashup": "Draw a hospital nurse pushing an emergency mobile crash cart down a busy corridor."
+            },
+            {
+              "name": "Pulling Cart / Rolling Luggage",
+              "primitives": "Backward diagonal lean, extended pulling arm in tension, trailing wheels",
+              "proportions": "Counterweight balance between body mass and luggage drag",
+              "level_3_mashup": "Draw a traveller navigating a heavy wheeled suitcase across a cobbled heritage railway platform."
+            },
+            {
+              "name": "Climbing Stairs / Steps",
+              "primitives": "Lead leg bent at 90 deg lifting body mass, trailing leg extending",
+              "proportions": "Torso leans slightly forward into ascent angle",
+              "level_3_mashup": "Draw a delivery worker carrying a backpack climbing a narrow, poorly lit apartment staircase."
+            },
+            {
+              "name": "Tripping / Falling & Recovery",
+              "primitives": "Disrupted axis of gravity, splayed protective hands, bracing feet",
+              "proportions": "Dynamic diagonal instability; limbs flailing outward for balance",
+              "level_3_mashup": "Draw a person stumbling over an uneven pavement tile and catching themselves on a grab rail."
+            },
+            {
+              "name": "Holding Umbrella in Wind / Rain",
+              "primitives": "Angled umbrella cone canopy, braced elbows, tilted head ducking rain",
+              "proportions": "Angle of umbrella matches diagonal wind velocity vector",
+              "level_3_mashup": "Draw a schoolchild shielding their bag and classmate with a dual-handle monsoon umbrella."
+            },
+            {
+              "name": "Pushing a Stalled Vehicle / Heavy Gate",
+              "primitives": "Extreme forward diagonal line of action (45 deg), back foot braced on asphalt, locked shoulder elbows",
+              "proportions": "Maximum mechanical force vector aligned through center of body mass",
+              "level_3_mashup": "Draw two pedestrians helping push a delivery auto out of a rain puddle."
+            },
+            {
+              "name": "Carrying a Toddler on Shoulders",
+              "primitives": "Upright spine, hands raised gripping child's small ankles, child seated atop neck",
+              "proportions": "Child head sits at adult head 8.5; playful balance dynamic",
+              "level_3_mashup": "Draw a parent walking through an overcrowded street carnival with child on shoulders."
+            }
+          ]
+        },
+        {
+          "group_name": "B. Everyday Activities",
+          "items": [
+            {
+              "name": "Cooking at Kitchen Counter / Stove",
+              "primitives": "Standing upright with slight neck bend, one hand stirring with spoon, one holding handle",
+              "proportions": "Counter top sits at elbow height (approx 85-90cm from floor)",
+              "level_3_mashup": "Draw an elderly cook using an ergonomically counterbalanced pressure cooker lid."
+            },
+            {
+              "name": "Washing Clothes (Hand scrubbing)",
+              "primitives": "Squatting or bent over tub, forearm muscle tension, soapy water ripples",
+              "proportions": "Upper body weight leveraged downward onto washboard plane",
+              "level_3_mashup": "Draw a person using a foot-pedal mechanical clothes washer in a rural setting."
+            },
+            {
+              "name": "Eating with Hands & Drinking from Glass",
+              "primitives": "Fingers curled inward pinching morsel, head slightly inclined, glass tilted to lips",
+              "proportions": "Hand travels from plate to mouth along 45-degree arc",
+              "level_3_mashup": "Draw a patient with wrist arthritis drinking from a spill-proof adaptive mug."
+            },
+            {
+              "name": "Reading & Writing at Desk",
+              "primitives": "Seated posture, forearm flat on desk surface, tripod grip on pen, tilted paper",
+              "proportions": "Eye-to-paper distance approx 30-35cm; spine slightly curved",
+              "level_3_mashup": "Draw a rural student studying under a concentrated solar study lamp at night."
+            },
+            {
+              "name": "Using Smartphone While Walking / Waiting",
+              "primitives": "Elbows tucked to ribs, both thumbs tapping screen, head bowed (text neck)",
+              "proportions": "Neck bent forward 30-45 degrees; screen held at chest height",
+              "level_3_mashup": "Draw a blind commuter using a tactile haptic edge smartphone cover at a train gate."
+            },
+            {
+              "name": "Cycling: Commuter & Sport Posture",
+              "primitives": "Triangular frame, curved back, hands on grips, alternating pedalling legs",
+              "proportions": "Saddle height aligns with hip when standing beside bicycle",
+              "level_3_mashup": "Draw an urban courier riding a cargo e-bike with a temperature-controlled front box."
+            },
+            {
+              "name": "Driving Auto / Car / Scooter",
+              "primitives": "Hands on steering wheel/handlebar at 9-and-3, feet angled on pedals",
+              "proportions": "Eyeline clear of windscreen dashboard; relaxed lumbar curve",
+              "level_3_mashup": "Draw a woman driver operating an electric three-wheeler taxi with solar rooftop."
+            },
+            {
+              "name": "Gardening & Tending Plants",
+              "primitives": "Kneeling on one knee, soil trowel in hand, fingertips feeling foliage",
+              "proportions": "Proximity to ground level; soil pot placed between knees",
+              "level_3_mashup": "Draw an urban balcony gardener pruning herbs with modular clip-on self-watering pots."
+            },
+            {
+              "name": "Shopping & Inspecting Produce",
+              "primitives": "Holding cloth tote in crook of elbow, fingertips gently pressing fruit",
+              "proportions": "Tote bag strap hangs at hip height",
+              "level_3_mashup": "Draw a shopper comparing two vegetable items at a zero-waste community refill stall."
+            },
+            {
+              "name": "Playing Sports (Badminton / Cricket)",
+              "primitives": "Athletic ready stance: knees spring-loaded, racket/bat raised, eyes tracked on ball",
+              "proportions": "Wide leg base for rapid lateral deceleration",
+              "level_3_mashup": "Draw a wheelchair tennis player serving with an extended dynamic torso twist."
+            },
+            {
+              "name": "Taking Care of a Toddler / Infant",
+              "primitives": "Cradling arms forming protective basket, torso counterbalanced backward",
+              "proportions": "Toddler is 4 heads tall; head rests against adult collarbone",
+              "level_3_mashup": "Draw a father wearing an ergonomic fabric baby wrap while preparing porridge."
+            },
+            {
+              "name": "Helping an Elderly Person Walk",
+              "primitives": "Two figures close together: one offering firm supporting elbow, elderly leaning with cane",
+              "proportions": "Elderly figure slightly stooped with reduced head height",
+              "level_3_mashup": "Draw a youth assisting an elder step across a wide flooded monsoon puddle."
+            },
+            {
+              "name": "Reaching Under Low Bed / Sofa for Lost Object",
+              "primitives": "One cheek flat on ground, one arm extended deep under furniture gap, arched spine",
+              "proportions": "Eye-level completely flush with floor plane",
+              "level_3_mashup": "Draw a grandparent looking for their dropped hearing aid under a wooden cot."
+            }
+          ]
+        },
+        {
+          "group_name": "C. Special Character Types",
+          "items": [
+            {
+              "name": "Child (5 to 8 Years Old)",
+              "primitives": "Large spherical cranium relative to jaw, short limbs, rounded belly",
+              "proportions": "5 heads tall; lively energetic gestures and wide stances",
+              "level_3_mashup": "Draw a 6-year-old inspecting an interactive science museum water vortex exhibit."
+            },
+            {
+              "name": "Elderly Person with Walking Stick",
+              "primitives": "Kyphosis curve (rounded upper back), flexed knees, textured wrinkles",
+              "proportions": "Walking stick handle aligns exactly with wrist crease when standing",
+              "level_3_mashup": "Draw an elderly man using a smart walking cane with integrated laser obstacle projection."
+            },
+            {
+              "name": "Wheelchair User (Self-propelling)",
+              "primitives": "Muscular shoulders and forearms, hands gripping outer push-rims at 10-and-2",
+              "proportions": "Wheel axle directly below shoulder joint for maximum mechanical advantage",
+              "level_3_mashup": "Draw an athlete wheelchair user navigating a steep public library access ramp."
+            },
+            {
+              "name": "Street Vendor / Hawker",
+              "primitives": "Weathered posture, apron or utility cloth, active hand gestures calling buyers",
+              "proportions": "Stands behind wooden cart with fruit pyramid displays at chest height",
+              "level_3_mashup": "Draw a tea stall vendor ('chaiwala') pouring piping hot tea from height into glass cups."
+            },
+            {
+              "name": "Farmer in Field",
+              "primitives": "Lean muscular build, rolled-up trousers, head cloth (gamcha) for sun protection",
+              "proportions": "Firm grounded stance on uneven agricultural terrain",
+              "level_3_mashup": "Draw a farmer calibrating a low-cost drone sprayer for organic pesticide dispersion."
+            },
+            {
+              "name": "Delivery Worker with Heavy Backpack",
+              "primitives": "Large rectangular backpack cube pressing against lumbar, reflective safety stripes",
+              "proportions": "Backpack extends from neck to lower hip, straps cinched tight",
+              "level_3_mashup": "Draw a gig delivery rider locking their e-bike while inspecting delivery app directions."
+            },
+            {
+              "name": "Construction Worker with Helmet",
+              "primitives": "Hard hat dome, fluorescent high-vis vest, heavy steel-toe boots, tool belt",
+              "proportions": "Helmet adds 0.5 head height; boots widen foot footprint",
+              "level_3_mashup": "Draw a construction worker assembling modular prefabricated bamboo scaffolding."
+            },
+            {
+              "name": "Doctor & Patient Consultation",
+              "primitives": "Doctor with stethoscope around neck, seated across table; patient gesturing area of pain",
+              "proportions": "Eye-level professional engagement across 80cm desk depth",
+              "level_3_mashup": "Draw a rural community health worker examining an infant with a solar-powered digital stethoscope."
+            }
+          ]
+        },
+        {
+          "group_name": "D. Human Expressions & Facial Gestures",
+          "items": [
+            {
+              "name": "Happy, Cheerful & Excited",
+              "primitives": "Curved eye crinkles, raised cheek apples, wide upward mouth arc with teeth",
+              "proportions": "Eyes narrow slightly, brows raise at outer edges",
+              "level_3_mashup": "Draw a student opening an acceptance letter with jubilant body language."
+            },
+            {
+              "name": "Worried, Anxious & Confused",
+              "primitives": "Furrowed brow diagonal creases, pinched eyebrows, bitten lower lip or tight mouth line",
+              "proportions": "Inner eyebrows pull upward and together",
+              "level_3_mashup": "Draw an elderly bank customer confused by a complicated ATM touch screen."
+            },
+            {
+              "name": "Tired, Exhausted & Scared",
+              "primitives": "Heavy drooping eyelids, slack jaw, sunken cheeks, tilted downward neck",
+              "proportions": "Head hangs heavy off vertical axis",
+              "level_3_mashup": "Draw an intern resting their forehead on desk papers after an all-night prototype build."
+            },
+            {
+              "name": "Surprised, Shocked & Astonished",
+              "primitives": "Raised eyebrows high on forehead, wide open circular eyes with visible sclera, dropped jaw 'O'",
+              "proportions": "Facial height stretches vertically 15%",
+              "level_3_mashup": "Draw an inventor seeing their paper prototype successfully float for the first time."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "01_human_figures_01.jpg",
+          "local_path": "/visual_library/curated/01_human_figures_01.jpg",
+          "caption": "Day 375：每天速寫連續16天了！",
+          "original_url": "https://images.openai.com/static-rsc-4/WwotqHa6JcHsGI3AmqkDI2cyASdPxvQgCFqCEFzh3FPD93BE4X09ECFSEUR6ROMoCdSI5ZFYEOR2dkfVXzqrrzly1Z2DITlQYiFSaxxgdTyB95APRFsWoxdtIDCE6VXJ2eFK4pMOKoDWRXkutqEOl81eBAt8yPI0yY9pW9rl6HA?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "01_human_figures_02.jpg",
+          "local_path": "/visual_library/curated/01_human_figures_02.jpg",
+          "caption": "Изучаем Искусство: Как Нарисовать Фигуру Человека В 10 Шагах | Рисунки для срисовки",
+          "original_url": "https://images.openai.com/static-rsc-4/OWDk-a9UkQbE-soIc-WE57ZmycuPXYZ_8Ksyqa9hScy8TR0V2QXSIpzHJ_n8N4JRNvodtanFRGkxWMJ-Zcdzvfe6SQkL0PrG2DvQEZCizf_-IsG04GKe1MZyGfBfcjq9lefARZn-JHlI9mXQH2nxmMIF1_6QiRke7tS6TRHs6MY?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "01_human_figures_03.jpg",
+          "local_path": "/visual_library/curated/01_human_figures_03.jpg",
+          "caption": "Curated Visual Sheet 3",
+          "original_url": "https://images.openai.com/static-rsc-4/_XIglcm0v1SaXi65NUL7YDCW5c1sSkDJm8tXWGYdxD8JfwjLRjTIUncagDQn5JIx7SDRPgJmDd0zqF1O0XmIuqeWWf_kSrA2IZZrAAPhtPFF4hjSJwZr2xt3BBV4yG8U4f8lkTcwCcLuBokirRt-o4qkF4RzMoHX0p2B22TQgqo?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "hands_and_interactions",
+      "name": "Hand & Interaction Library",
+      "priority": "Very High Priority",
+      "priority_level": 2,
+      "priority_percent": 95,
+      "target_count": 20,
+      "tagline": "The ultimate test for product design: how hands grasp, squeeze, trigger, and feel tools",
+      "intro": "Every physical product question requires drawing a hand interacting with the device. Understand the palm wedge, thumb saddle joint, and finger knuckle arches.",
+      "slug": "hands_and_interactions",
+      "subgroups": [
+        {
+          "group_name": "Everyday Hand Gestures & Tool Actions",
+          "items": [
+            {
+              "name": "Pointing Index Finger",
+              "primitives": "Curled fist cylinder with extended index rod, thumb resting over middle finger",
+              "proportions": "Index finger length matches palm length; nail faces camera plane",
+              "level_3_mashup": "Draw a passenger pointing at an emergency stop button on an electric bus."
+            },
+            {
+              "name": "Precision Pinch (Thumb & Index Tip)",
+              "primitives": "O-ring circle formed by opposed thumb and index tips, relaxed pinky",
+              "proportions": "Contact point is 2mm pad to pad; delicate muscular tension in thenar eminence",
+              "level_3_mashup": "Draw a watchmaker inserting a micro-battery into an electronic hearing aid."
+            },
+            {
+              "name": "Tripod Grip (Holding a Pen / Stylus)",
+              "primitives": "Pen rested in first webbing, pinched between thumb pad and index, resting on middle finger side",
+              "proportions": "Pen angled at 45 degrees to writing surface",
+              "level_3_mashup": "Draw a designer sketching freehand curves on an interactive digital graphics tablet."
+            },
+            {
+              "name": "Holding a Ceramic Cup / Mug by Handle",
+              "primitives": "Index and middle fingers looped through handle ear, thumb braced against top rim",
+              "proportions": "Handle loop clearance is 20-25mm for comfortable two-finger grip",
+              "level_3_mashup": "Draw a person with shaky hands drinking from an insulated ceramic mug with two stabilization handles."
+            },
+            {
+              "name": "Holding a Water Bottle (Cylindrical Wrap)",
+              "primitives": "Four fingers wrapped circumferentially around cylinder, thumb opposing on front",
+              "proportions": "Bottle diameter 65-75mm allows fingers to wrap 75% around perimeter",
+              "level_3_mashup": "Draw an athlete squeezing an ergonomic silicone hydration flask during a marathon."
+            },
+            {
+              "name": "Gripping a Heavy Tool Handle",
+              "primitives": "Power fist wrapped around rubberized handle, thumb locked over index knuckle",
+              "proportions": "Handle oval cross-section prevents twisting in hand",
+              "level_3_mashup": "Draw a carpenter gripping an ergonomic non-rebound chisel hammer."
+            },
+            {
+              "name": "Turning a Dial / Control Knob",
+              "primitives": "Thumb and index finger pinching circular perimeter, wrist pronated",
+              "proportions": "Knob ribs provide tactile friction against skin ridges",
+              "level_3_mashup": "Draw an anaesthetist delicately adjusting an oxygen flow control valve."
+            },
+            {
+              "name": "Pressing a Heavy Push Button",
+              "primitives": "Thumb pad or flat index finger applying downward perpendicular force",
+              "proportions": "Finger joint slightly flexed to absorb 5-10N spring resistance",
+              "level_3_mashup": "Draw an industrial operator pressing a palm-actuated emergency cutoff mushroom switch."
+            },
+            {
+              "name": "Pulling a Mechanical Lever",
+              "primitives": "Hooked fingers gripping lever ball, forearm pulling toward chest",
+              "proportions": "Lever arm mechanical advantage visible in muscular tension",
+              "level_3_mashup": "Draw a disabled driver operating a hand-control brake lever on an adapted car."
+            },
+            {
+              "name": "Twisting a Tight Screw Lid",
+              "primitives": "Fingers splayed across lid top rim, palm heel pressing down to maximize friction",
+              "proportions": "Counter-torque generated between palm friction and jar counter-grip",
+              "level_3_mashup": "Draw a senior citizen opening a vacuum-sealed pickle jar using a lever-assisted silicone opener."
+            },
+            {
+              "name": "Operating Scissors / Shears",
+              "primitives": "Thumb in upper loop, middle/ring fingers in lower loop, index stabilizing pivot",
+              "proportions": "Pivot bolt acts as fulcrum with finger loops spaced 50mm apart",
+              "level_3_mashup": "Draw a tailor cutting thick felt fabric with spring-assisted ergonomic scissors."
+            },
+            {
+              "name": "Using a Spoon / Fork to Scoop",
+              "primitives": "Modified tripod grip near bowl neck, forearm rotated 30 degrees",
+              "proportions": "Scoop bowl horizontal while hand stays comfortable",
+              "level_3_mashup": "Draw a Parkinson's patient eating soup with an active tremor-cancelling electronic spoon."
+            },
+            {
+              "name": "Holding a Walking Cane Handle",
+              "primitives": "Palm heel resting flat on contoured T-handle top, fingers loosely wrapped around front",
+              "proportions": "Downwards vertical force vector through arm bones into cane shaft",
+              "level_3_mashup": "Draw an elderly person leaning weight into an ergonomic palm-cradle walking stick."
+            }
+          ]
+        },
+        {
+          "group_name": "The 7 Biomechanical Grip Classifications",
+          "items": [
+            {
+              "name": "Precision Pinch Grip",
+              "primitives": "Thumb opposing index pad for delicate handling of miniature components",
+              "proportions": "Contact area under 1 sq cm; used for screws, pins, and needles",
+              "level_3_mashup": "Draw a dental technician inserting a miniature orthodontic bracket."
+            },
+            {
+              "name": "Lateral / Key Pinch Grip",
+              "primitives": "Thumb pad pressing against radial side of flexed index finger middle phalanx",
+              "proportions": "Delivers high torque for flat objects (keys, cards, coins)",
+              "level_3_mashup": "Draw a user turning an ignition key in a stiff motorcycle lock cylinder."
+            },
+            {
+              "name": "Tripod / Dynamic Writing Grip",
+              "primitives": "Thumb, index and middle fingers coordinating fine 3-axis motion",
+              "proportions": "Allows fluid writing and micro-adjustments",
+              "level_3_mashup": "Draw a surgeon holding an ultra-fine scalpel with index finger guiding incision path."
+            },
+            {
+              "name": "Cylindrical Grip",
+              "primitives": "Palm and all 4 fingers fully wrapping a cylinder with thumb opposition",
+              "proportions": "Optimal cylinder diameter: 35-40mm for maximum grasp force",
+              "level_3_mashup": "Draw a commuter holding an overhead stainless steel subway grab pole during emergency braking."
+            },
+            {
+              "name": "Spherical / Ball Grip",
+              "primitives": "All 5 digits spread radially over spherical dome",
+              "proportions": "Fingertips evenly spaced around hemisphere",
+              "level_3_mashup": "Draw an athlete holding a shot-put sphere or a designer manipulating a 3D trackball mouse."
+            },
+            {
+              "name": "Hook Grip",
+              "primitives": "Four fingers curled into hook without thumb opposition",
+              "proportions": "Supports heavy vertical loads (briefcase handle, bucket bail)",
+              "level_3_mashup": "Draw a commuter carrying two heavy grocery bags on a long pedestrian skywalk."
+            },
+            {
+              "name": "Power / Fist Grip",
+              "primitives": "Complete closed fist clamping object firmly against palm muscle",
+              "proportions": "Generates maximum human hand grip strength (up to 400N)",
+              "level_3_mashup": "Draw a mountaineer gripping an ice axe shaft while ascending a frozen ridge."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "02_hands_and_interactions_01.jpg",
+          "local_path": "/visual_library/curated/02_hands_and_interactions_01.jpg",
+          "caption": "#references #poses #handHand poses references | Hand drawing reference, Drawing reference poses, Drawing reference",
+          "original_url": "https://images.openai.com/static-rsc-4/yyNJ5oRuJ1OMFHhEnhMnyvqs5nF9mTIYORgFDOJvDqAOTmmESItsyBR_oDbhqOvDyXSAJhpUJ9MNTvD3wpS2xaWecbO3dkiCE_JJc0zbL3Ava3yrnKKv5tsvagdi9_aM0FK6qaugDYVdc02I-nF1sV112NnYRfuJjFfcYEBSLcg?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "02_hands_and_interactions_02.jpg",
+          "local_path": "/visual_library/curated/02_hands_and_interactions_02.jpg",
+          "caption": "Референсы рук с предметами - Zefirka.club фото и картинки",
+          "original_url": "https://images.openai.com/static-rsc-4/jrV8lP2NRmixq_IsL4_f0nNXncZFpAZsvtOGorswG7J5CB-3Edp4vqbw3qMAAsJ7o5xjgkA5mF_TILIjteoUEZuUaqB-y2ouzCi29h0Lb6VtACjuurwK_UvWcgqXyU7w7fb4CqlvHgPjlzktBq5Gh711CpqOBIozqFqMyRd28B0?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "02_hands_and_interactions_03.jpg",
+          "local_path": "/visual_library/curated/02_hands_and_interactions_03.jpg",
+          "caption": "Enhancing Grip Strength Through Grip Training with Strengtheners | Asian American Medical Society",
+          "original_url": "https://images.openai.com/static-rsc-4/3jdDHCSisA-UScG_rX0nsz1Qy6K4Zv-mvYZBTLyprMlNcL9bnpFkclsnuluoVcEUlKZWi4AdQF_EC4H1Zx50p1_ZRZOJN8TorYiyjFFwJX2vbClvbFDES5mQ-VhYx5CTN2Nl09KnX-4iL4RXcUxFAyGG0ZYZchsCTR7DYYaaCGg?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "everyday_objects",
+      "name": "Everyday Object Library",
+      "priority": "Very High Priority",
+      "priority_level": 3,
+      "priority_percent": 90,
+      "target_count": 40,
+      "tagline": "The building blocks of daily life: kitchenware, furniture, tools, stationery, and safety products",
+      "intro": "Objects you touch every day. Learn to decompose each into basic 3D geometric primitives (cylinders, cuboids, ellipses) and show parting lines, fillets, and joinery.",
+      "slug": "everyday_objects",
+      "subgroups": [
+        {
+          "group_name": "Kitchen & Culinary Products",
+          "items": [
+            {
+              "name": "Electric Kettle with Base",
+              "primitives": "Tapered cylinder body, spout triangle, C-curve handle, disc power base",
+              "proportions": "Height to width ratio 1.5:1; handle clearance 30mm",
+              "level_3_mashup": "Design a solar-powered insulated electric kettle for nomadic shepherds."
+            },
+            {
+              "name": "Frying Pan with Ergonomic Handle",
+              "primitives": "Shallow conical frustum base, flared lip, cantilevered handle rod",
+              "proportions": "Handle length equals pan diameter for balance",
+              "level_3_mashup": "Design a non-spill frying pan for one-handed cooking by amputees."
+            },
+            {
+              "name": "Domestic Pressure Cooker",
+              "primitives": "Stout cylinder, domed lid, interlocking bayonet lugs, safety valve weight, bakelite handle",
+              "proportions": "Lid dome adds 15% height; gasket groove clearly visible in section",
+              "level_3_mashup": "Redesign the pressure cooker whistle indicator to be completely silent with visual steam gauge."
+            },
+            {
+              "name": "Two-Burner Gas Stove",
+              "primitives": "Low wide cuboid chassis, brass burner rings, pan support trivets, front knobs",
+              "proportions": "Chassis height only 10cm; burners spaced 35cm apart",
+              "level_3_mashup": "Design a compact foldable dual-fuel camping stove for flood rescue teams."
+            },
+            {
+              "name": "Mixer-Grinder with Stainless Jar",
+              "primitives": "Tower motor base with ventilation slots, interlocking jar cylinder, clear dome lid",
+              "proportions": "Base wider at bottom for stability; rotary switch at front base",
+              "level_3_mashup": "Design a quiet, hand-cranked geared food processor for areas with frequent power cuts."
+            },
+            {
+              "name": "Chef Knife & Kitchen Utensils",
+              "primitives": "Tapered blade plane, bolster curve, full tang handle with rivets",
+              "proportions": "Blade edge curves upward toward tip for rocking cuts",
+              "level_3_mashup": "Design an adaptive knife with vertical fist-grip for cooks with severe rheumatoid arthritis."
+            },
+            {
+              "name": "Stainless Steel Dinner Plate & Glass",
+              "primitives": "Flat circular disc with rolled safety lip, inverted frustum tumbler",
+              "proportions": "Plate diameter 28cm; tumbler 12cm tall with mirror finish highlights",
+              "level_3_mashup": "Design a stackable mess-kit plate that locks securely onto tumblers for school midday meals."
+            }
+          ]
+        },
+        {
+          "group_name": "Furniture & Spatial Fixtures",
+          "items": [
+            {
+              "name": "Ergonomic Office Task Chair",
+              "primitives": "Curved lumbar backrest, contoured seat waterfall edge, 5-star castor base, gas-lift cylinder",
+              "proportions": "Seat 45cm high, 45cm wide; backrest angle adjustable 90-110 deg",
+              "level_3_mashup": "Design a low-cost ergonomic bamboo task chair for rural homeworkers."
+            },
+            {
+              "name": "Four-Legged Dining Table",
+              "primitives": "Flat rectangular tabletop cuboid, 4 vertical leg cylinders with apron rails",
+              "proportions": "Tabletop 75cm high; leg thickness 5x5cm",
+              "level_3_mashup": "Design a modular flat-pack dining table that expands into a study workbench without tools."
+            },
+            {
+              "name": "Stackable Three-Legged Stool",
+              "primitives": "Circular seat disc, 3 splayed tapered legs with mortise joints",
+              "proportions": "15-degree leg splay angle prevents tipping",
+              "level_3_mashup": "Design a stackable stool made entirely from recycled plastic milk pouches."
+            },
+            {
+              "name": "Modular Bookshelf & Storage Cabinet",
+              "primitives": "Grid of orthogonal rectangular cuboid boxes with adjustable shelf pins",
+              "proportions": "Shelf depth 30cm; vertical clearance 32cm for standard A4 binders",
+              "level_3_mashup": "Design a moisture-proof cardboard bookshelf that floats as a survival raft during floods."
+            },
+            {
+              "name": "Foldable Steel Cot / Bed Frame",
+              "primitives": "Tubular steel rectangular perimeter, center folding hinge, woven nylon webbing",
+              "proportions": "Standard single bed: 190cm x 90cm x 40cm height",
+              "level_3_mashup": "Design a rapid-deploy folding cot for emergency disaster relief shelters."
+            },
+            {
+              "name": "Storage Wardrobe with Sliding Doors",
+              "primitives": "Tall vertical cuboid wardrobe box, top and bottom recessed roller tracks",
+              "proportions": "Height 200cm, width 120cm, depth 60cm",
+              "level_3_mashup": "Design an insect-repellent modular clothes cupboard for humid coastal villages."
+            },
+            {
+              "name": "Three-Blade Electric Ceiling Fan with Regulator",
+              "primitives": "Central motor bell dome, three 120-degree aerodynamically twisted blades, vertical downrod pipe",
+              "proportions": "Sweep diameter 120cm; downrod length 30cm",
+              "level_3_mashup": "Design a low-wattage DC ceiling fan with built-in emergency mosquito repeller."
+            }
+          ]
+        },
+        {
+          "group_name": "Personal Grooming & Daily Wear",
+          "items": [
+            {
+              "name": "Ergonomic Toothbrush",
+              "primitives": "Angled head neck, dual-density bristle clusters, curved thumb-stop rubber grip",
+              "proportions": "Head length 25mm, total handle 19cm",
+              "level_3_mashup": "Design a chewable zero-waste biodegradable toothbrush for long-distance bus commuters."
+            },
+            {
+              "name": "Hair Comb with Varied Tooth Density",
+              "primitives": "Tapered flat spine bar with parallel tooth array (wide teeth transitioning to fine teeth)",
+              "proportions": "Spine length 18cm, tooth length 3cm",
+              "level_3_mashup": "Design an anti-lice comb with integrated medicinal oil dispenser."
+            },
+            {
+              "name": "Manual Safety Razor",
+              "primitives": "Cylindrical knurled handle, pivoting twin-blade cartridge head, lubricating strip",
+              "proportions": "Handle 10cm, head width 4cm",
+              "level_3_mashup": "Design a 100% metal safety razor with toolless blade replacement for blind users."
+            },
+            {
+              "name": "Spectacles / Reading Glasses",
+              "primitives": "Dual oval rim frames, nose bridge arch, nose pads, spring-hinged temples",
+              "proportions": "Lens width 52mm, bridge 18mm, temple length 140mm",
+              "level_3_mashup": "Design universal spectacles with liquid-filled adjustable focus lenses for rural clinics."
+            },
+            {
+              "name": "Analog Wristwatch with Buckle Strap",
+              "primitives": "Circular casing puck, glass crystal dome, winding crown lug, stitched leather strap",
+              "proportions": "Case diameter 40mm, strap width 20mm",
+              "level_3_mashup": "Design a tactile talking watch for visually impaired seniors with braille outer dial."
+            }
+          ]
+        },
+        {
+          "group_name": "Stationery & Desktop Tools",
+          "items": [
+            {
+              "name": "Retractable Ballpoint Pen",
+              "primitives": "Hexagonal or cylindrical barrel, cone nose cone, metal pocket clip, top click plunger",
+              "proportions": "Length 14cm, diameter 9mm",
+              "level_3_mashup": "Design a pen made from compressed tea-waste that sprouts wildflower seeds when discarded."
+            },
+            {
+              "name": "Wood-Cased Hexagonal Pencil & Sharpener",
+              "primitives": "Hexagonal prism with graphite core, clear prism sharpener box with steel angled blade",
+              "proportions": "Pencil length 17.5cm; sharpener 2.5 x 1.5 x 1 cm",
+              "level_3_mashup": "Design a pencil sharpener that compresses shavings into decorative fire-starter pellets."
+            },
+            {
+              "name": "Heavy-Duty Office Stapler",
+              "primitives": "Sprung metal arm, rubberized top cap, anvil plate with dual staple bend slots, base foot",
+              "proportions": "Base length 15cm, height 6cm",
+              "level_3_mashup": "Design a staple-free paper stitcher that punches and folds paper tabs together."
+            },
+            {
+              "name": "Stainless Steel Paper Scissors",
+              "primitives": "Dual shearing blades, center pivot screw, asymmetrical plastic finger bow loops",
+              "proportions": "Overall length 20cm; thumb loop smaller than finger loop",
+              "level_3_mashup": "Design ambidextrous safety scissors for primary school art classrooms."
+            },
+            {
+              "name": "Transparent 30cm Ruler with Millimeter Markings",
+              "primitives": "Thin beveled acrylic strip with printed calibration rules and finger grip groove",
+              "proportions": "Length 31cm, width 3cm, thickness 2mm",
+              "level_3_mashup": "Design a tactile rolling ruler that measures curved 3D objects and reads dimensions aloud."
+            }
+          ]
+        },
+        {
+          "group_name": "Storage & Containers",
+          "items": [
+            {
+              "name": "Plastic Screw-Cap Water Bottle",
+              "primitives": "Cylindrical body with grip ribs, tapered shoulder, threaded neck, ribbed screw cap",
+              "proportions": "Volume 1000ml; diameter 8cm, height 26cm",
+              "level_3_mashup": "Design a collapsible origami silicone water bottle that shrinks to hockey puck size."
+            },
+            {
+              "name": "Corrugated Cardboard Shipping Box",
+              "primitives": "Orthogonal cuboid with interlocking flap seams and taped joints",
+              "proportions": "Visible fluting wave pattern in section views",
+              "level_3_mashup": "Design a courier shipping carton that converts into an educational dollhouse for children."
+            },
+            {
+              "name": "Canvas Tote Bag with Shoulder Straps",
+              "primitives": "Soft-sided rectangular pouch with box gusset bottom, two sewn webbing strap loops",
+              "proportions": "Bag 38x42cm; strap drop length 28cm",
+              "level_3_mashup": "Design a market shopping bag with integrated compartments preventing tomatoes from being crushed."
+            },
+            {
+              "name": "Airtight Kitchen Glass Jar with Metal Clamp",
+              "primitives": "Thick glass cylinder, orange rubber gasket ring, steel wire toggle clamp",
+              "proportions": "Jar wall thickness 4mm; wire latch provides vertical sealing compression",
+              "level_3_mashup": "Design an airtight grain storage container that indicates humidity level using color-change beads."
+            },
+            {
+              "name": "Stackable Food Storage Container (Tiffin)",
+              "primitives": "Tiered stainless steel cylindrical containers clamped by side latches and overhead carry handle",
+              "proportions": "3 tiers stacked: 22cm total height, 14cm diameter",
+              "level_3_mashup": "Design a self-heating tiffin box powered by a phase-change chemical reaction pack."
+            }
+          ]
+        },
+        {
+          "group_name": "Consumer Electronics & Gadgets",
+          "items": [
+            {
+              "name": "Touchscreen Smartphone with Camera Bump",
+              "primitives": "Rounded rectangular slab, edge bevels, glass display screen, multi-lens camera island puck",
+              "proportions": "Screen ratio 19.5:9, thickness 8mm",
+              "level_3_mashup": "Design a repairable smartphone case with modular slide-in solar battery modules."
+            },
+            {
+              "name": "Laptop Computer (Open 110-Degree Clamshell)",
+              "primitives": "Lower keyboard base slab with trackpad, upper display screen lid, friction hinge",
+              "proportions": "Display lid 4mm thin; keyboard angled 3 degrees",
+              "level_3_mashup": "Design a ruggedized waterproof laptop for marine field scientists."
+            },
+            {
+              "name": "Over-Ear Wireless Headphones",
+              "primitives": "Cushioned headband arch, telescoping yokes, tiltable earcups with memory foam cushions",
+              "proportions": "Earcups 9x7cm oval enclosing ear completely",
+              "level_3_mashup": "Design bone-conduction headphones integrated into a bicycle safety helmet."
+            },
+            {
+              "name": "TV / AC Infrared Remote Control",
+              "primitives": "Elongated handheld cuboid with contoured back, rubber button matrix, front IR LED window",
+              "proportions": "Length 18cm, width 5cm; navigation d-pad at thumb rest point",
+              "level_3_mashup": "Design a universal remote for elderly users with only 4 giant backlit tactile buttons."
+            },
+            {
+              "name": "Portable Bluetooth Speaker",
+              "primitives": "Cylindrical or pill shape, wrap-around fabric mesh grille, silicone button strip, carry loop",
+              "proportions": "Diameter 7cm, length 18cm; dual passive radiator ends",
+              "level_3_mashup": "Design a floating waterproof speaker that acts as an emergency beacon during night boating."
+            }
+          ]
+        },
+        {
+          "group_name": "Cleaning, Travel, Safety & Accessibility",
+          "items": [
+            {
+              "name": "Broom & Plastic Dustpan Set",
+              "primitives": "Tapered bristle flare with collar clamp, dustpan scoop wedge with rubber floor lip",
+              "proportions": "Dustpan floor lip flush to 0.5mm to sweep fine dust",
+              "level_3_mashup": "Design a street sweeper broom with magnetic wheel attachment to gather iron nails from roads."
+            },
+            {
+              "name": "Floor Mop & Wringer Bucket",
+              "primitives": "Telescopic aluminum mop handle, microfiber head, oval bucket with foot pedal spinner",
+              "proportions": "Bucket volume 12L; handle extends 130cm",
+              "level_3_mashup": "Design a water-recycling mop bucket that filters wash water through sand and charcoal."
+            },
+            {
+              "name": "Hard-Shell Wheeled Suitcase",
+              "primitives": "Molded polycarbonate clamshell box, telescopic pull handle, 4 spinner wheels, TSA lock",
+              "proportions": "Carry-on dimensions: 55x40x20cm",
+              "level_3_mashup": "Design a suitcase with stair-climbing tri-star wheels for old walk-up buildings."
+            },
+            {
+              "name": "Motorcycle Full-Face Safety Helmet",
+              "primitives": "Aerodynamic sphere/teardrop shell, clear pivoting visor shield, chin air vents, EPS foam liner",
+              "proportions": "Visor opening provides 180-degree peripheral vision",
+              "level_3_mashup": "Design a helmet with integrated heads-up rearview blind-spot mirrors."
+            },
+            {
+              "name": "ABC Dry Powder Fire Extinguisher",
+              "primitives": "Red painted pressure cylinder, squeeze discharge handle, pressure gauge dial, rubber hose nozzle",
+              "proportions": "Cylinder diameter 15cm, height 45cm",
+              "level_3_mashup": "Design an intuitive household fire extinguishing ball that activates automatically on heat contact."
+            },
+            {
+              "name": "Emergency Handheld Torch / Flashlight",
+              "primitives": "Cylindrical aluminum barrel, knurled grip, flared reflector bezel, push button tail-cap",
+              "proportions": "Bezel diameter 45mm, length 14cm",
+              "level_3_mashup": "Design a dynamo hand-crank rescue torch with integrated FM radio and siren for disaster kits."
+            },
+            {
+              "name": "Comprehensive First-Aid Kit Box",
+              "primitives": "Bright red or white latching case with embossed cross symbol, fold-out cantilevered organizer trays",
+              "proportions": "Case 30x20x15cm with transparent internal lid compartments",
+              "level_3_mashup": "Design an emergency trauma kit with step-by-step illuminated audio instructions for bystanders."
+            },
+            {
+              "name": "Manual Folding Wheelchair",
+              "primitives": "X-cross folding tube frame, 24-inch rear push wheels with hand-rims, small front castors, fabric sling seat",
+              "proportions": "Seat width 45cm, push-rim diameter 53cm",
+              "level_3_mashup": "Design a low-cost wheelchair attachment that converts it into a hand-pedalled tricycle for rough rural roads."
+            },
+            {
+              "name": "Brass Padlock & Shackle with Double Keys",
+              "primitives": "Solid brass rectangular body, U-shaped curved hardened steel shackle, keyhole cylinder",
+              "proportions": "Shackle thickness 8mm; key barrel length 4cm",
+              "level_3_mashup": "Design an elderly-friendly digital smart padlock that unlocks via fingerprint or emergency code."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "03_everyday_objects_01.jpg",
+          "local_path": "/visual_library/curated/03_everyday_objects_01.jpg",
+          "caption": "Sketchbook by Joey Zeledón at Coroflot.com",
+          "original_url": "https://images.openai.com/static-rsc-4/bcrqhz2K5LbWRFhW4zqWGXFiRwmbYKCIg7NMmYSe_ABZiADgwS_v1ckKCJANR8S80dv2P-lX5x6_HeqoV90_h-xJzvixwr8pjJIlcwJ7DxDqOl-0GpIxKrBpr1XC_HBnNimBfqNAFN4lSIhSt83rg_-uDb8RHNvw55JDV6M41wg?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "03_everyday_objects_02.jpg",
+          "local_path": "/visual_library/curated/03_everyday_objects_02.jpg",
+          "caption": "Kitchen Goods Illustration Set",
+          "original_url": "https://images.openai.com/static-rsc-4/Jvy3ozw6k48lQ5D3rrS3ZmJKXs4YyZFbeMQtRgXAcpaoHuiw2NQ_0d1AjsEWxmcCiqJQHHzZbYQmyO71JbCHBQOK2w37KoebGxN0FA0S_zugbWe1VxZayWc6wW93azW4THTcHv_lyfnYyJUMsjgodLYXXaoArKkXJ46XZLez7ShyOAQxuUVEedrgyrJKNX27?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "03_everyday_objects_03.jpg",
+          "local_path": "/visual_library/curated/03_everyday_objects_03.jpg",
+          "caption": "ART AND DESIGN STUDENT: Lots of Object Sketches",
+          "original_url": "https://images.openai.com/static-rsc-4/XWtvSaRX6-d3uX68nYBiRDCkkfWkkl-b2Y6j96-n5FXiUYrjggPzOETeRCPdUes5QGYezRgVq22ZLvNWoj5n0i9LJWZyH_NBdsIycTkSiWDH-_dCs29gzAFiheiI3ytZ6aykWkVdkBU9mcBOtl0x5x_aErj7llD_S-Z5zzCA2Nw?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "mechanisms_and_components",
+      "name": "Product Mechanisms & Components",
+      "priority": "Very High Priority",
+      "priority_level": 4,
+      "priority_percent": 95,
+      "target_count": 25,
+      "tagline": "How things move, lock, pivot, and spring: the functional engineering heart of DAT design solutions",
+      "intro": "This is where your drawings transform from abstract art into functional industrial design solutions. Learn hinges, linkages, springs, ratchets, exploded views, and assembly callouts.",
+      "slug": "mechanisms_and_components",
+      "subgroups": [
+        {
+          "group_name": "Mechanical Motion & Joinery",
+          "items": [
+            {
+              "name": "Piano & Butt Hinges",
+              "primitives": "Interlocking cylindrical knuckles, central pivot pin, flat screw mounting leaves",
+              "proportions": "180-degree rotation arc; equal alternating knuckle segments",
+              "level_3_mashup": "Design a foldable disaster relief solar panel array using weather-sealed interlocking hinges."
+            },
+            {
+              "name": "Living Hinge (Polypropylene)",
+              "primitives": "Continuous molded plastic bridge with thin flexible web (0.3-0.5mm)",
+              "proportions": "Molecules orient along bend axis during initial flexion",
+              "level_3_mashup": "Design a single-piece injection molded ketchup cap with an integrated anti-drip living hinge."
+            },
+            {
+              "name": "Helical Compression Spring",
+              "primitives": "Coiled wire helix in cylinder bounding box, ground flat end coils",
+              "proportions": "Coil pitch and wire diameter define spring rate k",
+              "level_3_mashup": "Design a vibration-dampening bicycle seat post using dual-rate compression springs."
+            },
+            {
+              "name": "Tension & Torsion Springs",
+              "primitives": "Tension spring with looped end hooks; torsion spring with tangential projecting arms",
+              "proportions": "Torsion spring wound around internal stabilizing mandrel",
+              "level_3_mashup": "Design a self-closing screen door mechanism for rural health sub-centers."
+            },
+            {
+              "name": "Class 1, 2, and 3 Mechanical Levers",
+              "primitives": "Rigid beam bar, fulcrum triangle pivot, input effort arrow, output resistance load",
+              "proportions": "Mechanical advantage = effort arm length / load arm length",
+              "level_3_mashup": "Design a high-leverage coconut de-husking tool operated by a foot pedal."
+            },
+            {
+              "name": "Single & Double Pulley Systems",
+              "primitives": "Grooved wheel sheave, axle bearing, perimeter wire rope, overhead hanging hook",
+              "proportions": "Movable pulley doubles mechanical advantage to 2:1",
+              "level_3_mashup": "Design a manual well-water extraction rig with anti-fall rope arrestor for elderly villagers."
+            },
+            {
+              "name": "Spur & Bevel Gears",
+              "primitives": "Cylindrical tooth wheel discs with involute teeth profiles; bevel gears intersect at 90 deg",
+              "proportions": "Gear ratio = number of driven teeth / driver teeth",
+              "level_3_mashup": "Design a hand-cranked grain mill with dual bevel gears for fast flour milling."
+            },
+            {
+              "name": "Wheel, Hub & Axle Bearing",
+              "primitives": "Outer rubber tire ring, wheel rim disc, center hub with ball bearing raceways, fixed axle rod",
+              "proportions": "Axle fits tightly in inner race; outer race spins freely with wheel",
+              "level_3_mashup": "Design a puncture-proof wheelbarrow wheel with internal honeycomb rubber suspension."
+            },
+            {
+              "name": "Linear Ball Bearing Slider / Drawer Slide",
+              "primitives": "Three nested C-channel metal rails with steel ball bearing cages between tracks",
+              "proportions": "Full extension allows 100% drawer travel beyond cabinet face",
+              "level_3_mashup": "Design a slide-out emergency stretcher mechanism for rural ambulance vans."
+            },
+            {
+              "name": "Threaded Bolt, Nut & Screw Mechanism",
+              "primitives": "Cylinder shaft with helical ridge thread, hexagonal drive head, internal threaded nut",
+              "proportions": "Standard pitch; lead angle visible in exploded view",
+              "level_3_mashup": "Design an adjustable height examination stool with quick-action acme thread screw column."
+            },
+            {
+              "name": "Cam & Follower Linkage",
+              "primitives": "Egg-shaped eccentric rotating lobe disc driving reciprocating vertical pushrod follower",
+              "proportions": "Converts continuous rotary motion into custom intermittent reciprocating strokes",
+              "level_3_mashup": "Design an automated seed-planting dispensing mechanism for hand-pushed farming carts."
+            },
+            {
+              "name": "Ratchet & Pawl Mechanism",
+              "primitives": "Sawtooth gear wheel with asymmetric teeth engaged by spring-loaded pivoting pawl finger",
+              "proportions": "Permits smooth rotation in one direction while locking reverse rotation instantly",
+              "level_3_mashup": "Design a heavy cargo tie-down strap tensioner with quick-release safety catch."
+            },
+            {
+              "name": "Telescopic Extending Tubes with Snap Buttons",
+              "primitives": "Concentric sliding aluminum tube cylinders with spring-loaded brass ball detent buttons",
+              "proportions": "Outer tube has row of drilled holes spaced 25mm apart",
+              "level_3_mashup": "Design an adjustable crutch for growing children that extends across 3 height settings."
+            },
+            {
+              "name": "Cantilever Snap-Fit Joint",
+              "primitives": "Flexible plastic arm beam with wedge-shaped retention hook latching into undercut slot",
+              "proportions": "Arm strain kept below 1.5% during assembly to prevent plastic fatigue",
+              "level_3_mashup": "Design a battery compartment cover that clicks securely shut without requiring screws."
+            },
+            {
+              "name": "Magnetic Alignment & Charging Dock",
+              "primitives": "Neodymium rare-earth magnet rings with concentric spring-loaded pogo pin contacts",
+              "proportions": "Magnetic polarity self-aligns device correctly within 10mm range",
+              "level_3_mashup": "Design an assistive kitchen blender jar that snaps effortlessly onto motor base using ring magnets."
+            }
+          ]
+        },
+        {
+          "group_name": "Product Diagrams & Assembly Views",
+          "items": [
+            {
+              "name": "Exploded Assembly View (Parts along Axis)",
+              "primitives": "Components floating along dashed center projection lines in assembly sequence",
+              "proportions": "Equal spacing between parts; callout numbered balloons",
+              "level_3_mashup": "Draw an exploded assembly view of an easy-clean reusable domestic water filter cartridge."
+            },
+            {
+              "name": "Quarter Cutaway Section View",
+              "primitives": "90-degree pie slice removed from product to reveal internal gears, seals, and fluid paths",
+              "proportions": "45-degree cross-hatching on cut solid metal walls; no hatching on shafts",
+              "level_3_mashup": "Draw a quarter cutaway view of an eco-friendly pump spray bottle showing valve chambers."
+            },
+            {
+              "name": "Gasket & O-Ring Fluid Seal",
+              "primitives": "Elastomer donut ring squeezed into machined rectangular groove (20% compression)",
+              "proportions": "Groove cross-section clearly depicted in zoomed detail circle",
+              "level_3_mashup": "Design a waterproof casing for emergency fishermen GPS beacons."
+            },
+            {
+              "name": "Toggle Clamp & Latch",
+              "primitives": "Over-center four-bar linkage mechanism generating intense clamping pressure",
+              "proportions": "Passes over center point into self-locking detent position",
+              "level_3_mashup": "Design a quick-release mounting bracket for attaching cargo boxes to bicycle racks."
+            },
+            {
+              "name": "Cable Tensioner / Turnbuckle",
+              "primitives": "Central metal sleeve with left-hand and right-hand threaded eye-bolts at opposite ends",
+              "proportions": "Rotating central sleeve tightens or loosens both cables simultaneously",
+              "level_3_mashup": "Design a rapid-tensioning guy-line system for emergency flood disaster tents."
+            },
+            {
+              "name": "Ball and Socket 3-Axis Joint",
+              "primitives": "Spherical ball stud enclosed in hemispherical socket cup with tension collar clamp",
+              "proportions": "Provides 360-degree rotation and 60-degree conical tilt range",
+              "level_3_mashup": "Design an adjustable rear-view mirror for delivery scooters that stays rigid against road bumps."
+            },
+            {
+              "name": "Peristaltic Pump Mechanism",
+              "primitives": "Rotating rotor with three rollers squeezing flexible silicone tube against circular casing wall",
+              "proportions": "Fluid stays completely sterile inside tube without contacting pump hardware",
+              "level_3_mashup": "Design a portable manual baby feeding pump for premature infants in rural areas."
+            },
+            {
+              "name": "Centrifugal Impeller & Volute Casing",
+              "primitives": "Curved backward-swept impeller vanes inside expanding spiral snail-shell casing",
+              "proportions": "Fluid drawn in axial center and discharged radially at high pressure",
+              "level_3_mashup": "Design a foot-cranked bilge pump for small wooden fishing boats."
+            },
+            {
+              "name": "Scissor Lift Mechanism",
+              "primitives": "Criss-cross pantograph linked strut beams folding like an accordion",
+              "proportions": "Horizontal screw actuator pushes scissor bases together to multiply vertical lift",
+              "level_3_mashup": "Design an adjustable height hospital examination bed for rural mobile clinics."
+            },
+            {
+              "name": "Bicycle Bowden Brake Cable System",
+              "primitives": "Flexible wound steel outer spiral housing sleeve guiding inner sliding stranded steel wire core",
+              "proportions": "Transmits pull force around tight corners without friction binding",
+              "level_3_mashup": "Design a cable-actuated mechanical grabber for picking ripe mangoes from high branches."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "04_mechanisms_and_components_01.jpg",
+          "local_path": "/visual_library/curated/04_mechanisms_and_components_01.jpg",
+          "caption": "Fed Rios - Skillshare",
+          "original_url": "https://images.openai.com/static-rsc-4/4BJgwsjP-dUKJBRqpG_SbJq5BMtje2cT3irJbY8WcnQyOEX4rFxPurs5lCSXPN9bBJgEfMOq-ESZo5tjTf1sasTvP1GOuAqZPV26kT9lY-5FLi0O7OEUHfUmjNOmcb8gZ2QxXIAS5V0PT0y3oJ35_SVccZDMJrnPgBP48hjlCEQ?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "04_mechanisms_and_components_02.jpg",
+          "local_path": "/visual_library/curated/04_mechanisms_and_components_02.jpg",
+          "caption": "exploded view | Exploded view, Designs to draw, Industrial design sketch",
+          "original_url": "https://images.openai.com/static-rsc-4/qHRvgj-4bF40Z25BX0tM_bMsh8PvvEG2adfaMAD1MAj_xdC-vcLXj-H5pO8-1ACFD1TU8QNA8HgZMMsdax7sabA4O8580XK_71-V8OxuHgT-dTu5HQoGTjjUDit8ZEef_Ow8LnFf02mdYxroogWWlCRTPPvuGFGRTBNVpl1guB4?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "04_mechanisms_and_components_03.jpg",
+          "local_path": "/visual_library/curated/04_mechanisms_and_components_03.jpg",
+          "caption": "Force Unit Converter – Newton, lbf, kgf, dyne, kip & More",
+          "original_url": "https://images.openai.com/static-rsc-4/uCqDA305IJmPIZJ12RwwtHDK2COmgwLvcbe6xw3JVTBqN9kQwqaSQzELsxENtq9sGb6RW0GqOk9wJ5olpgAJ6HgTiEiUNf4lkSgHyGwqaK01SQu5TCNajU-s0G78KNVmALhUBd7jS84E0LKnfEx5NGHKw8NZK45l5zfZiD73gr4?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "transportation_and_mobility",
+      "name": "Transportation & Mobility",
+      "priority": "High Priority",
+      "priority_level": 5,
+      "priority_percent": 85,
+      "target_count": 15,
+      "tagline": "Vehicles, wheels, public transit, and emergency mobility systems in accurate perspective",
+      "intro": "Vehicles test multi-point perspective, wheel ellipses on ground planes, ergonomics, and structural packaging. Master Indian transport archetypes from autos to rescue boats.",
+      "slug": "transportation_and_mobility",
+      "subgroups": [
+        {
+          "group_name": "Urban, Rural & Emergency Mobility",
+          "items": [
+            {
+              "name": "Bicycle (Commuter & Cargo)",
+              "primitives": "Diamond tubular frame, two 26-inch wheel ellipses, handlebar T-bar, chainring sprocket",
+              "proportions": "Wheelbase equals approx 3.5 wheel radii; saddle at hip level",
+              "level_3_mashup": "Design a heavy-duty electric cargo trike with front insulated cooler box for milk vendors."
+            },
+            {
+              "name": "Motorcycle & Step-Through Scooter",
+              "primitives": "Engine block cuboid, fuel tank teardrop, front telescopic fork tubes, swingarm pivot",
+              "proportions": "17-inch wheels; ground clearance 16cm; comfortable step-through floorboard",
+              "level_3_mashup": "Design an all-weather folding windscreen and canopy for daily scooter commuters."
+            },
+            {
+              "name": "Auto Rickshaw (Three-Wheeler)",
+              "primitives": "Single front wheel fork, rear axle cuboid passenger cabin, curved windshield hood canopy",
+              "proportions": "Height 175cm, width 130cm, length 260cm; distinctive raked windscreen",
+              "level_3_mashup": "Design an electric auto-rickshaw interior with wheelchair ramp and luggage bay."
+            },
+            {
+              "name": "Passenger Hatchback Car",
+              "primitives": "Two-box aerodynamic silhouette: hood box + cabin box, four wheel arch cutouts",
+              "proportions": "Wheelbase approx 2.5m; wheel diameter equals 1/3 car total height",
+              "level_3_mashup": "Design a compact solar micro-car for shared urban commuting in congested cities."
+            },
+            {
+              "name": "Public Transit City Bus",
+              "primitives": "Large rectangular cuboid volume, panoramic front windscreen, wide double passenger doors, roof AC pod",
+              "proportions": "Length 12m, width 2.5m, height 3.2m; low-floor entry at 35cm from road",
+              "level_3_mashup": "Design an inclusive bus interior with dedicated priority bays for guide dogs and prams."
+            },
+            {
+              "name": "Suburban Electric Train Coach",
+              "primitives": "Extruded corrugated stainless steel carriage, pantograph on roof, multiple wide sliding doors",
+              "proportions": "Coach length 21m; platform edge gap minimal at 75mm",
+              "level_3_mashup": "Design an active air circulation and crowd-distribution indicator for rush-hour local trains."
+            },
+            {
+              "name": "Wooden Country Boat & Passenger Ferry",
+              "primitives": "Curved hull bow, flat stern transom, rib frames, outboard motor propeller clamp",
+              "proportions": "Waterline marker; flare angle sheds waves away from deck",
+              "level_3_mashup": "Design an amphibious rescue catamaran boat with solar roof for flooded coastal hamlets."
+            },
+            {
+              "name": "Commercial Passenger Aircraft",
+              "primitives": "Cylindrical fuselage fuselage tube, swept wings at 30 deg, dual turbofan jet nacelles, T-tail fin",
+              "proportions": "Wingspan roughly equals fuselage length; landing gear tricycle geometry",
+              "level_3_mashup": "Design an accessible aircraft boarding chair that fits through narrow 18-inch airplane aisles."
+            },
+            {
+              "name": "Manual Everyday Wheelchair",
+              "primitives": "Dual large 24-inch spoke wheels, small front 5-inch caster forks, cross-brace folding tubing",
+              "proportions": "Push rims slightly smaller than wheel rims; seat back at scapula height",
+              "level_3_mashup": "Design an all-terrain lever-drive wheelchair with fat knobby tires for sandy village roads."
+            },
+            {
+              "name": "Electric Power Wheelchair with Joystick",
+              "primitives": "Heavy base housing dual lead-acid/lithium batteries and hub motors, contoured captain seat",
+              "proportions": "Center of gravity kept extremely low between main drive wheels",
+              "level_3_mashup": "Design a stair-climbing electric wheelchair using dual rotating track modules."
+            },
+            {
+              "name": "Industrial Hand Trolley / Sack Truck",
+              "primitives": "L-shaped tubular steel frame, two pneumatic wheels, bottom toe plate scoop, curved axle handles",
+              "proportions": "Toe plate slides under 50kg crates; handles provide 4:1 tilt leverage",
+              "level_3_mashup": "Design a foldable sack trolley that transforms into a flat 4-wheel platform cart."
+            },
+            {
+              "name": "Supermarket Shopping Cart",
+              "primitives": "Tapered wire mesh basket (nests into other carts), tubular steel chassis, 4 swivel castors",
+              "proportions": "Basket floor slopes downward toward back; child seat folding flap at handle",
+              "level_3_mashup": "Design a smart shopping cart with integrated scale scanner and self-checkout screen."
+            },
+            {
+              "name": "Medical Emergency Stretcher Trolley",
+              "primitives": "Hydraulic X-frame scissor base, retractable fold-down side safety rails, IV pole, oversized quiet wheels",
+              "proportions": "Standard bed size 200x65cm; adjustable from 50cm to 90cm height",
+              "level_3_mashup": "Design a lightweight carbon-fiber mountain rescue stretcher that converts into a backpack harness."
+            },
+            {
+              "name": "Three-Wheeled Cargo Cycle (Rickshaw Van)",
+              "primitives": "Heavy bicycle front half joined to wide rear axle carrying large flat wooden freight deck",
+              "proportions": "Deck size 120x90cm; heavy leaf springs supporting 300kg payload",
+              "level_3_mashup": "Design an aerodynamic pedal-assist cargo delivery trike with secure digital parcel lockers."
+            },
+            {
+              "name": "Disaster Amphibious Rescue Vehicle",
+              "primitives": "Deep V-hull chassis with 6 oversized paddle-tread flotation wheels and roof searchlight rack",
+              "proportions": "High ground clearance (45cm); snorkel air intake mounted high on roof",
+              "level_3_mashup": "Design a rapid-deployment flood rescue craft that carries 10 passengers and emergency dry rations."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "05_transportation_and_mobility_01.jpg",
+          "local_path": "/visual_library/curated/05_transportation_and_mobility_01.jpg",
+          "caption": "How to Draw Vehicles: Step by Step Tutorial",
+          "original_url": "https://images.openai.com/static-rsc-4/O2p6WehogBGoNBXMz6C5V7fuKE_1jAaeUcG8X9HmhTy-tgomP7KSMTNyLvAPrWsf6RWsWZl6dshYG6KBVrkGHJi9BBhB6QJfVzzimtlF_lNEHD_AZZG8nsBGQTh8YJmJxg6kAF8s1DgqPnRhmduDLZ2uAl_8INkgvkQAgFQC7Zc?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "05_transportation_and_mobility_02.jpg",
+          "local_path": "/visual_library/curated/05_transportation_and_mobility_02.jpg",
+          "caption": "SITRA-Independent Mobility :: Behance",
+          "original_url": "https://images.openai.com/static-rsc-4/C4114ZEY5nPk3c7aLADpPAD9Dtc1InPA05VTfqymFP2N15Bz6m-nxH4mgRezJoEf3b-gkKmwVVLmLfxjktaD35_z3kxvpaouMSE3Jqi4U-zsvwcnDSQEm_nrYh93DFF_yiSa4pjBvMUXvqEFMe_IxsnSjYVCnt5AQSuM-MsHHs0?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "05_transportation_and_mobility_03.jpg",
+          "local_path": "/visual_library/curated/05_transportation_and_mobility_03.jpg",
+          "caption": "Curated Visual Sheet 3",
+          "original_url": "https://images.openai.com/static-rsc-4/9E-GUm3dP6hoi8f2io_6J_TcsQbXu1FzJGbfLMeer05OuKgcIo1V9Up73Wsbfdm_ziyZZJYwgGXBW1sWKcusOJHeQDz7-v4sCCg7Ct1YNMi9jpAEXzMtiD6lWXWv2dDK2ICQUQY7tmA2wShUCfzDdLb-6Rl6bNsotZuHa6ZRo-E?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "nature_and_biomimicry",
+      "name": "Nature, Animals & Biomimicry",
+      "priority": "High Priority",
+      "priority_level": 6,
+      "priority_percent": 88,
+      "target_count": 25,
+      "tagline": "Bio-inspired design: functional lessons from flora, fauna, microscopic structures, and natural morphology",
+      "intro": "Nature is Earth's 3.8-billion-year design laboratory. Exam questions frequently demand deriving structural or mechanical solutions from natural organisms to solve human crises.",
+      "slug": "nature_and_biomimicry",
+      "subgroups": [
+        {
+          "group_name": "Botanical Forms & Organic Structures",
+          "items": [
+            {
+              "name": "Deciduous Leaves & Venation Patterns",
+              "primitives": "Curved teardrop blade, central midrib vein, branching capillary network",
+              "proportions": "Fractal branching distribution delivers nutrients with minimum material",
+              "level_3_mashup": "Design an urban stormwater gutter network inspired by leaf venation patterns."
+            },
+            {
+              "name": "Flowers & Radial Petal Symmetry",
+              "primitives": "Center pistil/stamen dome, radiating overlapping petal ellipses in Fibonacci counts",
+              "proportions": "Petals curl outwards to channel pollinators towards reproductive center",
+              "level_3_mashup": "Design a deployable solar umbrella that blossoms open in sunlight and folds in storms."
+            },
+            {
+              "name": "Seeds & Aerodynamic Dispersal (Sycamore / Dandelion)",
+              "primitives": "Sycamore: weighted seed pod with asymmetric curved airfoil wing; Dandelion: parachute filament umbrella",
+              "proportions": "Center of gravity offset causes auto-rotational autorotation spin",
+              "level_3_mashup": "Design an aerial reforestation seed capsule that glides gently to soil when dropped from planes."
+            },
+            {
+              "name": "Tree Root Systems & Soil Anchorage",
+              "primitives": "Thick vertical taproot branching into interlocking lateral root web filaments",
+              "proportions": "Spread matches or exceeds tree canopy diameter to resist wind shear",
+              "level_3_mashup": "Design foundation footings for portable emergency cyclone shelters inspired by mangrove roots."
+            },
+            {
+              "name": "Tree Trunks & Branch Bark Joinery",
+              "primitives": "Tapered cylinder trunk with thickened branch collar flare at intersections",
+              "proportions": "Natural filleted junctions eliminate structural stress concentrations",
+              "level_3_mashup": "Design lightweight 3D-printed titanium bicycle frame junctions based on tree branch collars."
+            },
+            {
+              "name": "Sea Shells & Logarithmic Spirals (Nautilus)",
+              "primitives": "Equiangular expanding spiral chambers separated by curved cross-septa walls",
+              "proportions": "Golden ratio phi expansion rate (1:1.618 per quadrant)",
+              "level_3_mashup": "Design a compact modular desktop stationery organizer based on nautilus chambers."
+            },
+            {
+              "name": "Hexagonal Honeycomb Matrix",
+              "primitives": "Tessellated regular 120-degree hexagonal prisms sharing common thin walls",
+              "proportions": "Provides highest strength-to-weight ratio and maximum volume with least wax perimeter",
+              "level_3_mashup": "Design a lightweight crash-absorption bumper for electric delivery vehicles using honeycomb cores."
+            },
+            {
+              "name": "Orb Spider Web & Tensile Radii",
+              "primitives": "Radial anchor structural spokes connected by sticky concentric spiral threads",
+              "proportions": "Pre-tensioned catenary curves distribute shock impacts across entire web",
+              "level_3_mashup": "Design a flexible pedestrian suspension footbridge for landslide-prone mountain trails."
+            },
+            {
+              "name": "Ocean Waves & Dynamic Swell Profiles",
+              "primitives": "Trochoidal curve rising into curling crest with foaming break lip",
+              "proportions": "Crest steepens when water depth becomes shallower than half wavelength",
+              "level_3_mashup": "Design an acoustic sound-baffle wall for noisy train stations inspired by breaking ocean waves."
+            },
+            {
+              "name": "Cumulus Clouds & Fluffy Atmospheric Volumes",
+              "primitives": "Flat horizontal cloud base with cauliflower billow hemispherical clumps on top",
+              "proportions": "Soft ambient light gradient with subtle underside core shadows",
+              "level_3_mashup": "Design a sound-absorbing acoustic pendant light fixture for open-plan libraries."
+            },
+            {
+              "name": "Mountain Peaks & Geological Ridges",
+              "primitives": "Angular pyramidal facets separated by sharp knife-edge arêtes and ridgelines",
+              "proportions": "Steep talus slopes angle at natural angle of repose (approx 35 degrees)",
+              "level_3_mashup": "Design a faceted geometric backpack exterior that deflects heavy luggage impacts."
+            },
+            {
+              "name": "Water Droplets & Fluid Surface Tension",
+              "primitives": "Spherical drop flattening into meniscus dome on contact with solid plane",
+              "proportions": "Contact angle determines hydrophobicity (>90 deg = water repellent)",
+              "level_3_mashup": "Design a self-cleaning architectural glass facade utilizing water droplet roll-off action."
+            }
+          ]
+        },
+        {
+          "group_name": "Animal Kingdom & Biomimetic Pairings",
+          "items": [
+            {
+              "name": "Kingfisher Beak & Streamlined High-Speed Rail",
+              "primitives": "Elongated diamond-wedge cone beak entering water with zero splash shockwave",
+              "proportions": "Slender cross-section gradual area expansion prevents pressure wave compression",
+              "level_3_mashup": "Design an aerodynamic front nose cone for a supersonic evacuation train."
+            },
+            {
+              "name": "Lotus Leaf & Self-Cleaning Superhydrophobic Surfaces",
+              "primitives": "Microscopic waxy papillae bumps forcing water droplets into spheres that wash away dirt",
+              "proportions": "High contact angle (150 degrees) causes droplets to roll rather than slide",
+              "level_3_mashup": "Design a dust-shedding solar panel coating for arid desert solar farms."
+            },
+            {
+              "name": "Gecko Foot & Dry Adhesion Nanofibers",
+              "primitives": "Millions of microscopic keratin setae branching into spatula tips exploiting van der Waals forces",
+              "proportions": "Directional adhesion: sticks when sheared parallel, releases when peeled at angle",
+              "level_3_mashup": "Design reusable adhesive wall mounting hooks for hospitals without chemical glues."
+            },
+            {
+              "name": "Pine Cone & Hygroscopic Responsive Materials",
+              "primitives": "Bilayer scales with different cellular moisture expansion rates opening in dry air and closing in rain",
+              "proportions": "Purely passive actuation without any electrical motors or sensors",
+              "level_3_mashup": "Design passive climate-responsive roof ventilation tiles that open when dry and seal when raining."
+            },
+            {
+              "name": "Owl Feathers & Silent Flight Noise Reduction",
+              "primitives": "Serrated comb on wing leading edge, soft down velvet upper surface, fringed trailing edge",
+              "proportions": "Breaks large noisy vortex turbulence into micro-eddies below audible frequency",
+              "level_3_mashup": "Design ultra-quiet ceiling fan blades for newborn hospital nurseries inspired by owl wings."
+            },
+            {
+              "name": "Turtle Shell & Impact-Resistant Armor",
+              "primitives": "Rigid convex bone carapace covered by keratin scutes with flexible suture seams",
+              "proportions": "Arch structure transmits top loads laterally down into circumferential bridge rim",
+              "level_3_mashup": "Design an ergonomic hard hat helmet for construction miners resistant to falling boulders."
+            },
+            {
+              "name": "Elephant Trunk & Flexible Multi-Axis Bionic Arms",
+              "primitives": "Boneless muscular hydrostat cylinder with 40,000 interlocking muscle fascicles and two-finger tip",
+              "proportions": "Infinite degrees of freedom; can wrap around heavy logs or delicately pick up single peanuts",
+              "level_3_mashup": "Design a soft robotic rescue arm for extracting survivors trapped in collapsed rubble."
+            },
+            {
+              "name": "Bird Anatomy (Sparrow / Eagle in Flight)",
+              "primitives": "Cambered wing airfoil cross-section, streamlined fuselage breast, fanned tail rudder feathers",
+              "proportions": "Wingspan to body ratio determines gliding efficiency (aspect ratio)",
+              "level_3_mashup": "Design an autonomous parcel delivery glider with articulated wingtips for windy cities."
+            },
+            {
+              "name": "Fish Anatomy (Shark / Trout Fluid Dynamics)",
+              "primitives": "Fusiform torpedo profile, dorsal stabilizing fin, bilateral pectoral fins, caudal propulsion tail",
+              "proportions": "Maximum thickness located at 35% of total body length from nose",
+              "level_3_mashup": "Design an energy-efficient human underwater propulsion scooter for coral reef researchers."
+            },
+            {
+              "name": "Butterfly & Insect Metamorphosis Wings",
+              "primitives": "Thorax cylinder, four flat membrane wings overlapping in figure-8 flight flap, antenna sensors",
+              "proportions": "Structural vein struts support ultra-thin chitin membranes with iridescent scales",
+              "level_3_mashup": "Design a deployable emergency tent with micro-rib origami frame inspired by butterfly wings."
+            },
+            {
+              "name": "Snail Shell & Protective Spiral Shelters",
+              "primitives": "Right-handed helicoid cone coil with reinforced outer lip aperture and slimy sealing operculum",
+              "proportions": "Center of mass keeps shell balanced over crawling muscular foot",
+              "level_3_mashup": "Design a portable insulated one-person sleeping capsule for homeless night workers."
+            },
+            {
+              "name": "Chameleon Skin & Adaptive Camouflage Coloration",
+              "primitives": "Dermal layers containing lattice of guanine nanocrystals that shift spacing under muscle tension",
+              "proportions": "Shifts light reflectance across visible spectrum according to ambient mood and temperature",
+              "level_3_mashup": "Design temperature-indicating patient wristbands that shift color when fever develops."
+            },
+            {
+              "name": "Ant Mandibles & High-Force Micro-Grippers",
+              "primitives": "Curved serrated pincer jaws driven by powerful internal head muscles generating 1000x body weight force",
+              "proportions": "Interlocking micro-teeth ensure zero slippage on smooth insect cuticle",
+              "level_3_mashup": "Design micro-surgical tissue clamps inspired by ant mandibles for arterial suturing."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "06_nature_and_biomimicry_01.jpg",
+          "local_path": "/visual_library/curated/06_nature_and_biomimicry_01.jpg",
+          "caption": "About — Linda Mannion",
+          "original_url": "https://images.openai.com/static-rsc-4/2vgz44lxLg8vQJNCj6gAf6FhEptYmnWgBWoNxDG3WcrKC4Z0J64HFcQ3dxDAwG2BmP-LaG49tVGGQ0RxcM8B1Oo0dfKE0YkMhfN1874cKFaCXV_Y2ZJUjkxNsGcKm7SmqwtOJpGCYgGY4ADJk1pOAGUNiNEDswFAdx3oDRNv_CQ?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "06_nature_and_biomimicry_02.jpg",
+          "local_path": "/visual_library/curated/06_nature_and_biomimicry_02.jpg",
+          "caption": "Industrial Design Portfolio :: Behance",
+          "original_url": "https://images.openai.com/static-rsc-4/FnrcosnkQ5yYCpkuWWrhn4vVMFGF3J56T8Z3VmZP01IpE1PpTYLhvaoIBxHoi68tkHd2bWFayqMMkpzLV5YZGNFbUA59UT06iAyJ1zSVrprFKso9cCZAQJeBV5iYZxVFF0PBohcnI7Rx5jIaEP16jTNPQLxME4aZD_HTccT9xJM?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "06_nature_and_biomimicry_03.jpg",
+          "local_path": "/visual_library/curated/06_nature_and_biomimicry_03.jpg",
+          "caption": "Бионические формы в дизайне (72 фото) - красивые картинки и HD фото",
+          "original_url": "https://images.openai.com/static-rsc-4/eTIz1hbd6cqkcf57IbqeFrJJcb5CU7z35qTOI360o16rvJArIqcIaAd8JGndO0ecz0nMORIszyd--uwq5QWVhRSqkv3Oi7ZeeWMjPLEj0PW0YPL0zTgF7dLLPi69TVzxYfPwUqwWZiQIYybAlx8Wk-dUBXoLSsn2ffhXQa5FtiQ?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "environment_and_architecture",
+      "name": "Environment & Architecture",
+      "priority": "Very High Priority",
+      "priority_level": 7,
+      "priority_percent": 92,
+      "target_count": 25,
+      "tagline": "Setting the scene: 1-point and 2-point perspective spaces, urban streetscapes, interiors, and disaster zones",
+      "intro": "A product or story needs a believable physical world. Master vanishing points on the eye-level horizon line, human scale figures in depth, and architectural clutter.",
+      "slug": "environment_and_architecture",
+      "subgroups": [
+        {
+          "group_name": "Urban & Civic Environments",
+          "items": [
+            {
+              "name": "Busy Indian City Street & Crossroad",
+              "primitives": "Two-point perspective street grid, overhead chaotic power cables, street lamps, shopfront signs",
+              "proportions": "Horizon line at 1.5m eye level; shop signage above 2.5m clearance",
+              "level_3_mashup": "Draw an urban scene showing an elderly wheelchair user trying to cross a street with broken curb ramps."
+            },
+            {
+              "name": "Paved Pedestrian Footpath & Curb Ramp",
+              "primitives": "Textured paving stones, tactile yellow blister pavers for visually impaired, concrete curb curbstone",
+              "proportions": "Footpath width minimum 1.8m to allow two people to pass comfortably",
+              "level_3_mashup": "Design a tactile wayfinding system integrated into high-traffic city pavements."
+            },
+            {
+              "name": "Overcrowded Bus Stop Shelter",
+              "primitives": "Cantilevered curved corrugated roof canopy, steel advertising bench, route map panel, waiting crowd",
+              "proportions": "Shelter roof height 2.4m, bench height 45cm",
+              "level_3_mashup": "Design an all-weather climate-resilient bus stop with rainwater mist cooling for intense heatwaves."
+            },
+            {
+              "name": "Railway Station Platform & Tracks",
+              "primitives": "Long linear perspective converging tracks, raised concrete platform edge, yellow tactile safety line, train car",
+              "proportions": "Platform height 76cm above rail head; platform roof truss structures",
+              "level_3_mashup": "Draw a platform scene showing a parent safely guiding children across an overcrowded foot-overbridge."
+            },
+            {
+              "name": "Traditional Wholesale Vegetable Market",
+              "primitives": "Canopy tarpaulins tied with ropes, wooden crates, bamboo baskets, hanging single incandescent bulbs",
+              "proportions": "Narrow walking aisle (1m wide) packed with shoppers and porters",
+              "level_3_mashup": "Design a modular display cart for vegetable sellers that prevents produce spoilage in direct sun."
+            },
+            {
+              "name": "Modern Shopping Mall Atrium",
+              "primitives": "Multi-tier glass railing balconies, central diagonal glass escalators, soaring skylight glass dome",
+              "proportions": "Vertical atrium height across 4 floors (approx 16 meters)",
+              "level_3_mashup": "Draw an emergency evacuation drill inside a shopping mall with clear signage guidance."
+            },
+            {
+              "name": "Multi-Story Apartment Exterior & Balconies",
+              "primitives": "Grid of recessed balcony boxes, AC outdoor units, clothes drying racks, potted plants",
+              "proportions": "Floor-to-floor height 3 meters; balcony railing 1 meter high for safety",
+              "level_3_mashup": "Design a modular vertical balcony farming kit with integrated graywater drip irrigation."
+            },
+            {
+              "name": "Public Underground Parking Garage",
+              "primitives": "Low concrete ceiling with heavy painted pillars, overhead ventilation ducts, parking bay stripes",
+              "proportions": "Ceiling height 2.4m; driving lane 6m wide with directional painted arrows",
+              "level_3_mashup": "Design an intuitive color-coded wayfinding pillar system for a multi-level subterranean car park."
+            }
+          ]
+        },
+        {
+          "group_name": "Rural, Natural & Interior Spaces",
+          "items": [
+            {
+              "name": "Village Thatched House & Courtyard (Aangan)",
+              "primitives": "Mud-plastered walls, pitched thatch or terracotta tiled roof, raised mud porch (otla), drying charpoy",
+              "proportions": "Overhanging eaves provide shaded verandah space 1.5m deep",
+              "level_3_mashup": "Design a natural passive cooling clay-pot wall system for rural houses in hot desert regions."
+            },
+            {
+              "name": "Agricultural Paddy Field with Irrigation Canals",
+              "primitives": "Stepped terrace contour bunds, water-filled mud paddies reflecting sky, raised dirt access paths",
+              "proportions": "Bunds 30cm high keeping 10cm standing water in fields",
+              "level_3_mashup": "Draw a farmer deploying a solar-powered water pump beside a muddy canal."
+            },
+            {
+              "name": "Village Well with Pulley & Paved Stone Apron",
+              "primitives": "Circular stone masonry parapet wall, timber cross-beam gantry, iron pulley wheel, water pots",
+              "proportions": "Parapet wall 90cm high to prevent accidental falls",
+              "level_3_mashup": "Design a child-safe mechanical well-covering hatch that opens only when drawing water."
+            },
+            {
+              "name": "Riverbank Ghat with Steps Leading to Water",
+              "primitives": "Steep descending stone tiers (ghats), mooring bollards, anchored wooden rowboats, banyan tree canopy",
+              "proportions": "Steps 20cm high, 40cm deep for easy sitting and washing",
+              "level_3_mashup": "Design a floating modular plastic jetty system for seasonal monsoon river crossings."
+            },
+            {
+              "name": "Domestic Modular Kitchen Interior (1-Point Perspective)",
+              "primitives": "L-shaped granite countertop, overhead laminate cabinets, stainless steel sink, gas cooktop, tile backsplash",
+              "proportions": "Counter depth 60cm; upper cabinets 35cm deep hanging 50cm above counter",
+              "level_3_mashup": "Draw an ergonomic kitchen scene showing a cook preparing dinner with optimized work triangle."
+            },
+            {
+              "name": "School Classroom with Blackboard & Desks",
+              "primitives": "Rows of twin student wooden desks, teacher table on low dais, front green chalkboard, open windows",
+              "proportions": "Desks spaced 80cm front-to-back; eye-level sightline clear to chalkboard",
+              "level_3_mashup": "Design transformable classroom furniture that flips from study desks into emergency earthquake pods."
+            },
+            {
+              "name": "Hospital General Ward Interior",
+              "primitives": "Parallel row of wheeled metal hospital beds, privacy curtain ceiling tracks, bedside drip stands and lockers",
+              "proportions": "Bed clearance 1.2m on each side for nurse and stretcher access",
+              "level_3_mashup": "Design an ergonomic bedside patient assistance tray with one-touch nurse call and water dispenser."
+            },
+            {
+              "name": "Public Accessible Restroom",
+              "primitives": "Wall-hung toilet bowl, bilateral stainless grab bars (one fixed, one drop-down), low sink basin with lever tap",
+              "proportions": "Wheelchair turning circle diameter 1500mm completely unobstructed",
+              "level_3_mashup": "Design a hygienic, touchless universal public toilet interior that self-sanitizes after every user."
+            },
+            {
+              "name": "Coastal Coconut Grove & Sandy Footpath",
+              "primitives": "Curving sandy double-track path, leaning coconut palm trunks with frond crowns, distant sea horizon",
+              "proportions": "Trunks angle against prevailing coastal sea breezes",
+              "level_3_mashup": "Design an eco-tourism coastal nature trail walkway that prevents sand dune erosion."
+            },
+            {
+              "name": "Community Water ATM & Solar Refill Kiosk",
+              "primitives": "Prefabricated metal kiosk cuboid, overhead solar PV panels, coin/card slot, twin water dispensing taps",
+              "proportions": "Tap height 1m above ground with recessed drain grating",
+              "level_3_mashup": "Design an intuitive user interface for a rural automated water purification dispensary."
+            },
+            {
+              "name": "Hospital Outpatient Triage & Reception Desk",
+              "primitives": "Curved semi-circular reception counter, queue token ticket dispenser, public seating rows, overhead display screens",
+              "proportions": "Counter height 1.1m with lowered wheelchair section at 75cm",
+              "level_3_mashup": "Design an inclusive hospital reception area that calms anxious pediatric patients."
+            }
+          ]
+        },
+        {
+          "group_name": "Disaster, Crisis & Resilience Scenarios",
+          "items": [
+            {
+              "name": "Flooded Urban Street with Wading Civilians",
+              "primitives": "Murky water plane halfway up shop shutters and car wheels, floating debris, rescue dinghy",
+              "proportions": "Water depth 70cm reaching adult thighs; reflections broken by ripple wakes",
+              "level_3_mashup": "Draw a flood rescue scene where community volunteers guide an inflatable boat carrying infants."
+            },
+            {
+              "name": "Landslide Road Block in Mountain Valley",
+              "primitives": "Broken asphalt road sheared off into gorge, pile of mud boulders and splintered pine trees, rescue excavator",
+              "proportions": "Dramatic diagonal cliff perspective showing sheer depth and instability",
+              "level_3_mashup": "Design a rapid emergency bridge kit that spans 10-meter road fissures after landslides."
+            },
+            {
+              "name": "Arid Drought Landscape & Cracked Mud Soil",
+              "primitives": "Tessellated polygonal dry mud cracks, desiccated bare tree skeletons, blazing sun disc overhead",
+              "proportions": "Mud cracks 5-10cm deep with curled dry edges",
+              "level_3_mashup": "Design a dew-harvesting atmospheric water condenser for drought-affected pastoralists."
+            },
+            {
+              "name": "Earthquake-Damaged Masonry Building",
+              "primitives": "Exposed cracked brickwork, sheared concrete beams with bent rebar wire, fallen rubble piles",
+              "proportions": "X-pattern shear cracks across load-bearing masonry walls",
+              "level_3_mashup": "Draw search-and-rescue dogs and handlers navigating concrete slabs in search of survivors."
+            },
+            {
+              "name": "Cyclone Relief Camp & Temporary Shelter Tents",
+              "primitives": "Grid of modular canvas and tarp tents, centralized water purification tanker, food distribution queue",
+              "proportions": "Tents 3x3m anchored with heavy ground pegs and guy lines",
+              "level_3_mashup": "Design a privacy-preserving modular partition system for crowded community relief halls."
+            },
+            {
+              "name": "Temporary Field Hospital Medical Tent",
+              "primitives": "Inflatable rib arch tunnel tent, hanging fluorescent LED strips, oxygen manifold lines, sterile cot rows",
+              "proportions": "Tent width 6m, height 3m; rapid pneumatic deployment",
+              "level_3_mashup": "Draw doctors and nurses triaging flood survivors inside a high-speed emergency relief shelter."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "07_environment_and_architecture_01.jpg",
+          "local_path": "/visual_library/curated/07_environment_and_architecture_01.jpg",
+          "caption": "Architecture Internships & Advice for Students",
+          "original_url": "https://images.openai.com/static-rsc-4/g3qggaBVfoXSxKoap39SsiPCkQVIXUKoOW9ZFTzGO1Oa6YKRh2Mrj-NH6yPsmeRJJr7fL-ONDQO-JuWySmAyuyQbwE2qkeouxzb9hZgSbYEF49Kmj_Va_XwR-v3woxqYw3-ItTCzI4vkx0vFlhcE04I0HZq-Adn3K4NFjbBzDOs?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "07_environment_and_architecture_02.jpg",
+          "local_path": "/visual_library/curated/07_environment_and_architecture_02.jpg",
+          "caption": "Art District พี่อิง สถาปัตย์จุฬาฯ - ติวสถาปัตย์ (@ArtDistrict3) on X",
+          "original_url": "https://images.openai.com/static-rsc-4/z05xUc6WlUiMwwnLDULYQ9LIPsD7n-mSyPUfJGyK24PFjGA4-OzFN2X_yf8FCXnbBdnBtpmcFVdZLO39EXw-eYOJMyKrAHEgOI1G0K52nV_Y8cnPdg0GPv62y0uJoZIqw3bXK-U9LYxztz2IM9K0LCGyQcDenvv6gMvPugbycH0?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "07_environment_and_architecture_03.jpg",
+          "local_path": "/visual_library/curated/07_environment_and_architecture_03.jpg",
+          "caption": "How to Draw a Kitchen in Perspective: Step-by-Step Mastery Guide - Purekitchenstyle",
+          "original_url": "https://images.openai.com/static-rsc-4/-15oJuRKyNMhRKr_lFBYXdeNgrWmdGx8AThO5xO5EhMQoA2YPYzVBZENjsvE4n4EaGjTvpJ6VfbSFnsYkpz4k5-gNY4DrxlLrrYgS0myq8q3Mvm3O51ZhSOsdTjxSBWYkppayjkBdKpmRRb-okfAnRI_lbSgOc8M4vX5zmYnAVE?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "food_and_cooking",
+      "name": "Food, Cooking & Daily Life",
+      "priority": "High Priority",
+      "priority_level": 8,
+      "priority_percent": 82,
+      "target_count": 15,
+      "tagline": "Indian culinary traditions, food textures, preparation tools, packaging, and eating rituals",
+      "intro": "Food questions probe cultural empathy, sensory visualization, and everyday Indian domestic realities. Know how to draw chapatis puffing on a tawa, street food stalls, and food storage.",
+      "slug": "food_and_cooking",
+      "subgroups": [
+        {
+          "group_name": "Culinary Items, Preparation & Food Systems",
+          "items": [
+            {
+              "name": "Indian Breads: Roti, Chapati, Dosa & Idli",
+              "primitives": "Puffed spherical chapati dome with brown blister spots; circular crisp golden dosa rolled into cylinder; steamed idli pucks",
+              "proportions": "Idli diameter 7cm, 2.5cm thick; dosa roll 35cm long with crispy porous texture",
+              "level_3_mashup": "Design an automated, low-smoke roti maker for community kitchens feeding 500 people daily."
+            },
+            {
+              "name": "Indian Fruits: Banana, Coconut, Mango, Apple",
+              "primitives": "Banana: curved faceted cylinder cluster; Coconut: fibrous brown husk sphere with 3 eyes; Mango: asymmetric kidney drop",
+              "proportions": "Distinctive cross-sections (coconut shell thickness 5mm; white copra flesh)",
+              "level_3_mashup": "Design an all-in-one tender coconut cutting, piercing, and straw-insertion tool for street vendors."
+            },
+            {
+              "name": "Fresh Vegetables & Cutting Board Prep",
+              "primitives": "Cross-cut onions showing concentric rings, diced potatoes, green chilies, wooden butcher block board",
+              "proportions": "Cutting board 30x20cm, thickness 3cm; knife resting beside chopped ingredients",
+              "level_3_mashup": "Design a safe vegetable mandoline slicer that prevents accidental finger cuts completely."
+            },
+            {
+              "name": "Fish, Poultry & Egg Display",
+              "primitives": "Elliptical egg curves, scaled whole fish with gills and tail, poultry cuts on ice beds",
+              "proportions": "Egg oval has one blunt end and one pointed apex; fish body tapered at both ends",
+              "level_3_mashup": "Design an insulated, solar-chilled display crate for coastal fishermen selling fresh catch on beaches."
+            },
+            {
+              "name": "Traditional Chulha & Mud Hearth Stove",
+              "primitives": "U-shaped clay hearth with two pot openings, glowing fire wood embers inside cavity, chimney flue",
+              "proportions": "Hearth height 25cm; accommodates standard spherical earthenware pots",
+              "level_3_mashup": "Design a smokeless biomass cookstove that burns agricultural briquettes with 80% less soot."
+            },
+            {
+              "name": "Rolling Pin & Board (Belan & Chakla)",
+              "primitives": "Circular marble/wood chakla disc on three stub feet, tapered wooden belan cylinder with turned handle knobs",
+              "proportions": "Chakla diameter 25cm; belan length 35cm with smooth polished finish",
+              "level_3_mashup": "Design an adaptive rolling pin with thickness rings ensuring uniform dough thickness for novice cooks."
+            },
+            {
+              "name": "Cooking Pots & Stainless Kadhai with Handles",
+              "primitives": "Deep hemispherical kadhai wok with two riveted wire loop handles, domed lid with center knob",
+              "proportions": "Kadhai diameter 30cm; handle clearance 35mm from hot metal rim",
+              "level_3_mashup": "Design an insulated silicone handle cover that clips onto hot kadhais to prevent burn injuries."
+            },
+            {
+              "name": "Domestic LPG Gas Cylinder",
+              "primitives": "Red painted steel cylinder with welded center seam, top foot ring collar with 3 stay bars, bottom base ring",
+              "proportions": "Height 60cm, diameter 31cm, weight 14.2kg gas net",
+              "level_3_mashup": "Design an ergonomic wheeled trolley that clamps onto LPG cylinders for effortless domestic transport."
+            },
+            {
+              "name": "Traditional Street Food Stall (Pani Puri / Chaat)",
+              "primitives": "Large spherical glass jar filled with water, aluminum counter tray, stacked crispy puris, cloth canopy",
+              "proportions": "Jar mouth wide enough for vendor's hand to dip puri smoothly",
+              "level_3_mashup": "Design a hygienic, pedal-operated automated flavored water dispenser for street pani-puri vendors."
+            },
+            {
+              "name": "Traditional Tea Stall ('Chai Tapri')",
+              "primitives": "Simmering brass tea kettle on kerosene burner, small clear glass tumblers in wire mesh carrier caddy",
+              "proportions": "Wire carrier holds 6 glasses with center carry handle loop",
+              "level_3_mashup": "Design a reusable, thermal-insulating carrying carrier for serving tea across busy office markets."
+            },
+            {
+              "name": "Modern Food Delivery Bag & Insulated Compartments",
+              "primitives": "Heavy thermal insulated cubic backpack, reflective high-visibility bands, internal Velcro dividers",
+              "proportions": "Backpack 45x45x45cm; separate compartments for hot food containers and cold beverages",
+              "level_3_mashup": "Design a gyroscopic leveling insert for delivery bags that prevents soup containers from spilling on bumps."
+            },
+            {
+              "name": "Traditional Grain Storage Silo (Kuthla / Morai)",
+              "primitives": "Tall cylindrical woven bamboo bin plastered with cow dung and clay, conical thatched cap roof",
+              "proportions": "Elevated on stone stilts 30cm above ground to prevent rodent and moisture entry",
+              "level_3_mashup": "Design a modular hermetic grain storage silo made of recycled plastic that keeps insects out without chemicals."
+            },
+            {
+              "name": "Traditional Clay Water Pot (Matka / Surahi) with Brass Tap",
+              "primitives": "Spherical terracotta belly, narrow neck cylinder, flared rim lip, low brass quarter-turn tap spigot",
+              "proportions": "Matka diameter 30cm; porous clay evaporative cooling effect",
+              "level_3_mashup": "Design a modern earthenware water cooler that filters microbes through silver-impregnated ceramic."
+            },
+            {
+              "name": "Stone Mortar and Pestle (Sil Batta / Imam Dasta)",
+              "primitives": "Heavy cast iron or rough granite cylinder bowl with tapered cylindrical pestle pounder",
+              "proportions": "Mortar bowl wall thickness 25mm to absorb heavy vertical impact shocks",
+              "level_3_mashup": "Design an ergonomic hand grinder for crushing Ayurvedic herbs without wrist fatigue."
+            },
+            {
+              "name": "Tiered Stainless Steel Tiffin Box Stack",
+              "primitives": "Three interlocking cylindrical containers held together by twin spring-loaded side clamp latches and overhead wire arch handle",
+              "proportions": "Overall height 24cm, diameter 14cm",
+              "level_3_mashup": "Design an insulated modular lunch container with integrated vacuum soup flask."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "08_food_and_cooking_01.jpg",
+          "local_path": "/visual_library/curated/08_food_and_cooking_01.jpg",
+          "caption": "Vegetables and fruits sketch big set, hand drawn illustration on white background. Harvesting, vegetarianism.",
+          "original_url": "https://images.openai.com/static-rsc-4/IVN3WBqTQQOR72iHnLm-gczl94k1mFXrt3O2AfR2thOztodrvegLIxkvTfFRIUs-Q7IqsyPGEzuHhKYFUZDy_2TqbPmd1rleZwemc2SfMrEk8YuvNCI6Ej8UgQT9I0lOkMa-QK36W2gnFjb8ZZw94VwKiX6QV2XIJWU2JAs4lJ1DXIsDhwyFVYvdJCoAlahB?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "08_food_and_cooking_02.jpg",
+          "local_path": "/visual_library/curated/08_food_and_cooking_02.jpg",
+          "caption": "Pin by Hupponen on Toimintaa | Family coloring pages, Family sketch, Free kids coloring pages",
+          "original_url": "https://images.openai.com/static-rsc-4/tcQ6-3K2Eql0WLQCZ5PO9xPj8e2sFhVTu03O_YlXC_1Qbbbn2e4QUQmLiX6d5A8r8n2zLqoefJefE6sZA-Hr_Nyg7f6zx9Q1VHjvak48ZWc7E2BJZYp0p3owNIfcuTmIEeFKjkaO8nrCEyJwbt8Ksw-xCzJvimAHCu5859zxPlY?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "08_food_and_cooking_03.jpg",
+          "local_path": "/visual_library/curated/08_food_and_cooking_03.jpg",
+          "caption": "TKC- The Kitchen Collective | women-led restaurant | 134, Chogm Road, Sangolda, Goa, India",
+          "original_url": "https://images.openai.com/static-rsc-4/AwUkAD4S2kJ2zS4H3xWEDwfmPiyImzpZ-v_cG9VOX-rappHXKcRxl1phP0K_ci2bTdAMipi5amMG9GdKpRXh_ZsDL98faehz8vK-UmFwo2Ur3Bwdir9pjP27zA7gpE7UOZoEKssRhmBP5Ri1Fu0f316muoEjuxEHNxba8pHEQAg?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "symbols_and_signage",
+      "name": "Symbols, Signage & Visual Communication",
+      "priority": "Very High Priority",
+      "priority_level": 9,
+      "priority_percent": 94,
+      "target_count": 25,
+      "tagline": "Pictograms, wayfinding symbols, safety warnings, and public instructional graphics",
+      "intro": "Graphic simplicity tests your ability to abstract complex messages into universally understood visual icons with identical stroke weights and geometric restraint.",
+      "slug": "symbols_and_signage",
+      "subgroups": [
+        {
+          "group_name": "Public Wayfinding, Safety & Universal Icons",
+          "items": [
+            {
+              "name": "Hospital & Emergency Medical Cross",
+              "primitives": "Greek cross with 4 equal rectangular arms in high-contrast circle or rounded square",
+              "proportions": "Arm width equals 1/3 of total cross diameter; instantly legible from 50m",
+              "level_3_mashup": "Design a cohesive 4-icon medical wayfinding suite for a field hospital."
+            },
+            {
+              "name": "Pharmacy / First Aid Green Emblem",
+              "primitives": "Green square frame enclosing bold white cross and bowl of Hygieia serpent motif",
+              "proportions": "High contrast ratio against dark or illuminated backgrounds",
+              "level_3_mashup": "Design an illuminated emergency first aid post beacon visible during thick smoke."
+            },
+            {
+              "name": "Fire Hazard & Flammable Warning",
+              "primitives": "Equilateral triangle with black border, dynamic flame silhouette with three licking tongues",
+              "proportions": "Yellow hazard background; flame apex centered in upper triangle",
+              "level_3_mashup": "Design an instructional safety placard for domestic gas leak evacuation."
+            },
+            {
+              "name": "High Voltage Electrical Danger Symbol",
+              "primitives": "Jagged downward zigzag lightning bolt terminating in arrow within yellow warning triangle",
+              "proportions": "Sharp acute angles convey acute immediate physical danger",
+              "level_3_mashup": "Design a flooded monsoon street hazard marker warning pedestrians of submerged transformers."
+            },
+            {
+              "name": "Universal Slippery Floor Warning",
+              "primitives": "Diagonal stick figure falling backwards with legs flying upward above rippled floor lines",
+              "proportions": "Body tilted at 45 degrees conveys sudden violent loss of traction",
+              "level_3_mashup": "Design a deployable cone marker that illuminates automatically when floor sensors detect water."
+            },
+            {
+              "name": "Universal Wheelchair Accessibility Icon",
+              "primitives": "Dynamic forward-leaning wheelchair figure with curved wheel and active arm drive",
+              "proportions": "Active posture replacing old static hospital wheelchair symbol",
+              "level_3_mashup": "Design a public transport ramp entrance symbol incorporating tactile raised braille maps."
+            },
+            {
+              "name": "Public Restroom Gender & Inclusive Icons",
+              "primitives": "Minimalist geometric torso figures: trousers, skirt, and combined gender-neutral forms",
+              "proportions": "Circular heads separated by 3mm gap from shoulder line",
+              "level_3_mashup": "Design an all-gender inclusive restroom signage plaque for university campuses."
+            },
+            {
+              "name": "No Smoking & Prohibition Ring-and-Slash",
+              "primitives": "Red circular border with 45-degree diagonal slash crossing out smoking cigarette cylinder",
+              "proportions": "Slash passes from top-left to bottom-right behind/over forbidden subject",
+              "level_3_mashup": "Design an anti-vaping awareness graphic for secondary school common rooms."
+            },
+            {
+              "name": "Emergency Exit Running Figure & Door",
+              "primitives": "Green rectangular frame showing dynamic white running figure leaping through rectangular doorway",
+              "proportions": "Running figure angled forward 20 degrees; arrow indicating direction of egress",
+              "level_3_mashup": "Design a photoluminescent floor-level fire escape track that glows without electricity."
+            },
+            {
+              "name": "Drinking Water & Potable Tap Icon",
+              "primitives": "Clear water droplet falling from horizontal faucet spout into open tumbler glass",
+              "proportions": "Blue circle background indicating certified safe potable drinking supply",
+              "level_3_mashup": "Design a clean water source badge for public park refill fountains."
+            },
+            {
+              "name": "Pedestrian Zebra Crossing Sign",
+              "primitives": "Blue square or diamond showing pedestrian figure walking horizontally across parallel white zebra stripes",
+              "proportions": "Stripes laid out in forced 3D perspective across road plane",
+              "level_3_mashup": "Design an intelligent roadside sign that flashes warning beacons when pedestrians step onto the crossing."
+            },
+            {
+              "name": "Recycling Triangle (Mobius Loop)",
+              "primitives": "Three chasing folded ribbon arrows forming an equilateral triangle with 120-degree symmetry",
+              "proportions": "Each ribbon has a 180-degree half-twist mimicking a continuous Mobius strip",
+              "level_3_mashup": "Design a 4-color waste segregation bin graphic system for wet, dry, plastic, and e-waste."
+            },
+            {
+              "name": "Biohazard Warning Symbol",
+              "primitives": "Central ring enclosed by three overlapping crescent lobes with sharp claw tips",
+              "proportions": "Strict geometric symmetry constructed from overlapping compass circles",
+              "level_3_mashup": "Design a safe medical waste disposal packaging emblem for domestic syringes."
+            },
+            {
+              "name": "Fragile Handle-with-Care Broken Wineglass",
+              "primitives": "Silhouette of stemmed wineglass goblet with distinct jagged vertical crack across bowl",
+              "proportions": "Black graphic on white label indicating delicate breakable package contents",
+              "level_3_mashup": "Design an instructional courier label showing 'Do Not Stack' and 'Keep Dry' icons."
+            },
+            {
+              "name": "This Way Up Dual Arrows",
+              "primitives": "Two identical vertical parallel arrows pointing upward above a horizontal ground bar line",
+              "proportions": "Arrows spaced equally; indicates orientation for shipping containers",
+              "level_3_mashup": "Design an intuitive packaging orientation visual guide for fragile medical refrigeration units."
+            },
+            {
+              "name": "Overhead Metro & Rapid Rail Wayfinding Icon",
+              "primitives": "Front silhouette of aerodynamic train carriage on twin rails inside colored circle",
+              "proportions": "High-contrast clean geometry visible from 30 meters",
+              "level_3_mashup": "Design a wayfinding signage system for an underground metro interchange platform."
+            },
+            {
+              "name": "Tactile Braille Information Guide Sign",
+              "primitives": "Raised embossed raised dots array in standardized 6-dot cell matrix with tactile human silhouette",
+              "proportions": "Dot height 0.6mm; base of sign positioned at 120cm from floor level",
+              "level_3_mashup": "Design an interactive talking tactile campus map board for visually impaired university students."
+            },
+            {
+              "name": "Mobile Phone Silence Zone Sign",
+              "primitives": "Vertical smartphone outline with crossed speaker sound waves inside blue circle",
+              "proportions": "Clean universal pictogram recognized across languages",
+              "level_3_mashup": "Design a sound-dampening phone booth icon for quiet library reading halls."
+            },
+            {
+              "name": "Luggage Ramp & Stroller Access Marker",
+              "primitives": "Diagonal inclined ramp plane with figure pushing wheeled stroller/pram",
+              "proportions": "Ramp slope indicated at 1:12 accessible grade",
+              "level_3_mashup": "Design an exterior signage trail directing families with prams away from broken stairs."
+            },
+            {
+              "name": "Automated External Defibrillator (AED) Green Cross & Heart",
+              "primitives": "Green square frame enclosing white heart outline with zigzag lightning bolt and small medical cross",
+              "proportions": "Universal emergency medical rescue marker recognized globally",
+              "level_3_mashup": "Design an emergency AED station with one-touch audio instructions in 5 regional languages."
+            },
+            {
+              "name": "Potable Drinking Water Refill Station Icon",
+              "primitives": "Water bottle filling from curved fountain jet inside crisp circular badge",
+              "proportions": "Contrasts with non-potable washing water icons",
+              "level_3_mashup": "Design a signage plaque for public parks encouraging reusable bottle refills."
+            },
+            {
+              "name": "Organic Compostable Food Waste Bin Symbol",
+              "primitives": "Apple core silhouette and leaf inside green circular recycling arrows",
+              "proportions": "Green color-coded waste classification according to civic municipal standards",
+              "level_3_mashup": "Design an intuitive 4-bin school cafeteria waste sorting station graphic."
+            },
+            {
+              "name": "Hazardous Electronic E-Waste Disposal Icon",
+              "primitives": "Crossed-out wheeled dustbin with heavy solid horizontal bar underneath indicating special battery collection",
+              "proportions": "Mandatory international WEEE compliance symbol",
+              "level_3_mashup": "Design a neighbourhood battery and electronic component drop-off locker signage."
+            },
+            {
+              "name": "Emergency Public Assembly Point Marker",
+              "primitives": "Green square with four white corner arrows converging towards a central cluster of three human figures",
+              "proportions": "Conveys collective safety gathering location during fire or earthquake",
+              "level_3_mashup": "Design an illuminated emergency muster point beacon for a chemical factory."
+            },
+            {
+              "name": "Caution: Slippery Wet Steps Warning Sign",
+              "primitives": "Yellow warning triangle with stair silhouette and stick figure losing footing on wet tread",
+              "proportions": "Exclamation hazard indicator with bold diagonal hazard borders",
+              "level_3_mashup": "Design an outdoor step marker for monsoon waterlogging near foot-overbridges."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "09_symbols_and_signage_01.jpg",
+          "local_path": "/visual_library/curated/09_symbols_and_signage_01.jpg",
+          "caption": "Čitelná Praha. Český tým porazil mezinárodní konkurenci v soutěži na komplexní systém chytré městské navigace - CZECHDESIGN",
+          "original_url": "https://images.openai.com/static-rsc-4/W2ZRt8qISzuRI9BfEaO-Cgz0GyMi4aR6NW28XLl__NkiuAZWNU2BTN81qBI1qyET4TwhFzML9WjKp8ZT9B6pXUdmf2AQc-OiHTyI-mcTy9bVrz3eAm5ROEnOSlkdt37CCvKtVeLLut1xg7TVyWDpT3DUpcBXu0nX7ZAIUj3rSd0?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "09_symbols_and_signage_02.jpg",
+          "local_path": "/visual_library/curated/09_symbols_and_signage_02.jpg",
+          "caption": "Hospital Wayfinding Sign Icon Set Flat Collection",
+          "original_url": "https://images.openai.com/static-rsc-4/lnXruWpe4XDAC4fAQlmTaGcR8G0MV-r-4hdQs5n7WBqYbCJRMmB33tJW1fyDOg2qehzrRoEBwyvZtf43r8fJ2HUbEhS4jsRutrIGlgxYMqzAvBELqjQ-rFwawaAZ1vv-0-t3cSbM8Xn6rf_YCG5ifuGNFtCzykJs_RhgpkFeRdJ7C_WTfTCko-S2YE-WUIiP?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "09_symbols_and_signage_03.jpg",
+          "local_path": "/visual_library/curated/09_symbols_and_signage_03.jpg",
+          "caption": "Création de logo avec l’IA : outils gratuits et astuces de…",
+          "original_url": "https://images.openai.com/static-rsc-4/Nepza71M5in5PqQ78mSAh8YMkH7fYLv8GjYE9hSCfu4ZHEALUAVQ-qOBcKAdb9hXvpDPQ6roRY-i67jw-6gaWOZh1m9lAR2cVOUWUy9g56bGYTMq5ixCU1MaY-PkI-qayOxMHDJ-wsf-SylrsW0J9kBzcTbKUjPwH5OUSA8Cw68?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "sports_and_recreation",
+      "name": "Sports, Recreation & Play",
+      "priority": "Medium Priority",
+      "priority_level": 10,
+      "priority_percent": 75,
+      "target_count": 10,
+      "tagline": "Dynamic athletic motion, sporting equipment, playground play, and recreational gear",
+      "intro": "Sports scenes test extreme dynamic human foreshortening, kinetic balance, and specialized performance equipment interaction.",
+      "slug": "sports_and_recreation",
+      "subgroups": [
+        {
+          "group_name": "Athletics, Equipment & Play",
+          "items": [
+            {
+              "name": "Cricket: Batsman Stance & Willow Bat",
+              "primitives": "Cane handle wrapped with rubber grip, flat willow blade with curved spine swell, crouched batsman posture",
+              "proportions": "Bat length 85cm; batsman eyes locked over front shoulder on incoming ball",
+              "level_3_mashup": "Design a smart cricket batting sensor that fits flush inside the handle knob."
+            },
+            {
+              "name": "Football / Soccer: Volley Kick & Ball Hexagons",
+              "primitives": "Dynamic mid-air kick posture, truncated icosahedron ball sphere with black pentagons and white hexagons",
+              "proportions": "Kicking leg fully extended; plant foot firmly grounded with knee flexed",
+              "level_3_mashup": "Design a self-inflating soccer ball for underprivileged community sports programs."
+            },
+            {
+              "name": "Badminton: Overhead Smash & Feather Shuttlecock",
+              "primitives": "Arched spine torso, extended racket arm high overhead, cork base cone with 16 goose feathers",
+              "proportions": "Shuttlecock skirt flares at 25 degrees; racket head oval string bed",
+              "level_3_mashup": "Design an adaptive badminton wheelchair with rapid 360-degree pivot castors."
+            },
+            {
+              "name": "Basketball: Jump Shot & Rim Net",
+              "primitives": "Vertical mid-air suspension, ball resting on shooting fingertips, backboard rectangle, orange hoop rim with net",
+              "proportions": "Shooting elbow bent 90 degrees forming pure vertical release lever",
+              "level_3_mashup": "Design an inclusive adjustable height playground basketball hoop accessible to wheelchair children."
+            },
+            {
+              "name": "Swimmer Diving & Streamline Stroke",
+              "primitives": "Horizontal torpedo alignment, arms locked past ears in prayer streamline, swimming goggles pucks",
+              "proportions": "Head tucked low; body rides high on water surface tension",
+              "level_3_mashup": "Design a swimming safety buoy that auto-inflates if swimmer remains submerged past 30 seconds."
+            },
+            {
+              "name": "Yoga: Warrior II & Tree Pose (Vrikshasana)",
+              "primitives": "Deep lunge with hips square to side, arms extended horizontally in calm balance; Tree: one foot pressed against inner thigh",
+              "proportions": "Straight horizontal arm plane; spine perfectly vertical over pelvis",
+              "level_3_mashup": "Design a tactile guided yoga mat with raised geometric alignment ribs for blind practitioners."
+            },
+            {
+              "name": "Skateboard & Kickflip Stance",
+              "primitives": "Seven-ply maple deck with concave curve and upturned kicktails, two aluminum trucks, four polyurethane wheels",
+              "proportions": "Deck length 80cm, width 20cm; rider crouched low over truck bolts",
+              "level_3_mashup": "Design an electric commuter skateboard with regenerative braking and headlights."
+            },
+            {
+              "name": "Children's Playground Swing",
+              "primitives": "A-frame triangular steel tube posts, overhead crossbar pipe, two hanging link chains, rubber cradle seat",
+              "proportions": "Swing seat 40cm above ground; chains 2.5m long providing smooth pendulum swing",
+              "level_3_mashup": "Design an inclusive swing with safety harness and wheelchair transfer platform."
+            },
+            {
+              "name": "Playground Slide & Ladder",
+              "primitives": "Steep 60-degree ladder steps, platform safety cage bar, curved stainless chute trough, gentle exit deceleration zone",
+              "proportions": "Slide angle approx 30 degrees; chute walls 15cm high to prevent falls",
+              "level_3_mashup": "Design a modular sensory playground slide with textured sound-producing side ridges."
+            },
+            {
+              "name": "Traditional Seesaw (Teeter-Totter)",
+              "primitives": "Central pivot fulcrum pedestal, long balancing wooden beam, two molded plastic end seats with handlebars, rubber tire ground bumpers",
+              "proportions": "Beam length 3m; pivot height 60cm with counterbalanced spring dampening",
+              "level_3_mashup": "Design a water-pumping seesaw that pumps clean drinking water into school storage tanks as children play."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "10_sports_and_recreation_01.jpg",
+          "local_path": "/visual_library/curated/10_sports_and_recreation_01.jpg",
+          "caption": "30 Days Gestures Challenge :: Behance",
+          "original_url": "https://images.openai.com/static-rsc-4/msJkwsibgHH1gC9-TI72DGqbnG8ZWUJTWZaNPE4BdALLqj9t--ayIwhxi-U_q8fS444BvVixAujEiuajv168GqlFBkvY2gwBdm1ByydLmCP4kelgb_UbcHUFj-g7wGFkl6MGxaQR240_RDm3Pk3L--4LwkB3TDidUjSkVUUERrA?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "10_sports_and_recreation_02.jpg",
+          "local_path": "/visual_library/curated/10_sports_and_recreation_02.jpg",
+          "caption": "Draw Sports Balls by Diana-Huang on DeviantArt",
+          "original_url": "https://images.openai.com/static-rsc-4/gm-a65WIygQSgqxcrAmRD8KU4EAUra8eTUZLovpqUYlFhLW79lCLKYj6VlLcIUPQKRWpoJAJZv3u5GVhcCZxp7nLwhFN9u1VWWtNrDha-isKJwIDRj2oclTgarQ7mXxiR5Jk8KEjfuaOqDCsqbuTYiWG_HVwmIaeumpyMYAhfEU?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "10_sports_and_recreation_03.jpg",
+          "local_path": "/visual_library/curated/10_sports_and_recreation_03.jpg",
+          "caption": "Vector set of sketch illustration of children. Girl in wheelchair active ball game with the boy, the child catches a butterfly net, launches a kite. Jumping rope and playing in the sandbox",
+          "original_url": "https://images.openai.com/static-rsc-4/D3JOkqlpls7QHoNTQRPVsZ2_5UvhEw2rzsvhFozqIZLuPlLAH_NjIz-aTt2DQJCcLql-4S-30kc6fTb2QRMCYWc7ManJoBvZRo_lHIGNmxkfwIQukHCDYe5myoPiXDLfrBr8Ppn4XJODLJdZpXAnsqCcbtiDdwzA1LY_jBU7Nlc-rTd00_6I7Ac0mjZxW-iA?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "materials_and_textures",
+      "name": "Materials, Textures & Rendering",
+      "priority": "High Priority",
+      "priority_level": 11,
+      "priority_percent": 84,
+      "target_count": 10,
+      "tagline": "How to render plastic, metal, wood, glass, rubber, fabric, and stone with simple line weight and marker shading",
+      "intro": "You do not need slow photorealism in NID DAT. You need fast, confident visual shorthand that unmistakably telegraphs what material the object is made from.",
+      "slug": "materials_and_textures",
+      "subgroups": [
+        {
+          "group_name": "Material Shorthand & Tactile Cues",
+          "items": [
+            {
+              "name": "Injection-Molded Plastic (Matte & Gloss)",
+              "primitives": "Smooth continuous highlight band, soft transitional core shadow, visible 0.5mm parting lines and corner fillets",
+              "proportions": "Highlights are broad and soft compared to mirror-sharp metal reflections",
+              "level_3_mashup": "Render a handheld power drill showing rugged two-tone ABS plastic housing with overmolded grips."
+            },
+            {
+              "name": "Polished & Brushed Metal (Steel / Chrome)",
+              "primitives": "Ultra-sharp high-contrast horizon reflection line, stark white glare highlights beside deep black shadow tones",
+              "proportions": "Brushed metal has fine parallel linear grain lines perpendicular to light source",
+              "level_3_mashup": "Render a stainless steel thermos flask reflecting a studio window grid across its curved body."
+            },
+            {
+              "name": "Natural Wood Grain & End-Grain Joinery",
+              "primitives": "Flowing concentric parabolic grain lines curving around knots; end grain shows growth ring arcs",
+              "proportions": "Grain lines tighten near edge and widen on flat tangential faces",
+              "level_3_mashup": "Render a handmade wooden stool showing exposed dovetail joints and rich teak grain patterns."
+            },
+            {
+              "name": "Transparent & Frosted Glass",
+              "primitives": "Ghosted outline of internal components visible through wall, sharp twin white rim highlight reflection bars",
+              "proportions": "Refraction offset distorts straight lines seen through thick glass walls",
+              "level_3_mashup": "Render a double-walled glass French press coffee maker filled with hot brewing coffee."
+            },
+            {
+              "name": "Rubber & Matte Elastomer",
+              "primitives": "Deep absorbent dark tones, zero sharp specular highlights, high-friction knurled or diamond tread textures",
+              "proportions": "Soft ambient light gradient with subtle underside core shadows",
+              "level_3_mashup": "Render an all-weather rugged walkie-talkie with ribbed rubber corner shock bumpers."
+            },
+            {
+              "name": "Woven Fabric, Canvas & Wrinkle Folds",
+              "primitives": "Pipe folds, diaper folds, zig-zag tension creases connecting stress points; cross-hatched weave texture",
+              "proportions": "Folds radiate out from buttons, seams, and bent joints",
+              "level_3_mashup": "Render an ergonomic hiking backpack showing heavy cordura canvas seams and breathable back mesh."
+            },
+            {
+              "name": "Rough Concrete & Masonry Stone",
+              "primitives": "Chipped edges, pitted stippling dots, hairline curing cracks, uneven granular surface shadow breakup",
+              "proportions": "Matte finish with no reflections; strong directional shadow in gouges",
+              "level_3_mashup": "Render a civic outdoor concrete bench with integrated recessed planter box and timber seat slats."
+            },
+            {
+              "name": "Corrugated Cardboard & Paper Edge Folds",
+              "primitives": "Crisp knife-edge crease folds, slight surface bowing, exposed wavy sinusoidal flute layer in torn section",
+              "proportions": "Paper folds have zero fillet radius; crisp planar lighting transitions",
+              "level_3_mashup": "Render an origami emergency stool folded from a single sheet of heavy kraft paper."
+            },
+            {
+              "name": "Water Drops, Puddles & Fluid Transparency",
+              "primitives": "Crescent shadow inside drop with bright white specular pinpoint highlight on opposite sun-facing rim",
+              "proportions": "Drop casts tiny shadow on ground surface beneath its clear dome",
+              "level_3_mashup": "Render an outdoor weather station sensor dome covered in fresh morning dew drops."
+            },
+            {
+              "name": "Stitched Leather & Natural Creases",
+              "primitives": "Subtle organic pebble texture, raised stitched seams with visible thread loops, gentle tension patina pull creases",
+              "proportions": "Thread holes spaced 4mm apart with slight indentations around stitches",
+              "level_3_mashup": "Render a classic leather tool roll bag unrolled on a workbench showing assorted chisels."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "11_materials_and_textures_01.jpg",
+          "local_path": "/visual_library/curated/11_materials_and_textures_01.jpg",
+          "caption": "PRODUCT DESIGN TEACHING MATERIALS :: Behance",
+          "original_url": "https://images.openai.com/static-rsc-4/TlgSIb_-7-D9B2zXVEcfCwzgnEN-0Vbvck6J6My7pD8Aiv8nItST4bmBmvVGYfeifXX84slyA9BoTzUOgKH-mMBQGm4efRj_qzOU7U21pScVRfIS93vG6Zu6HSMaRjfVvI2gZn4r7X3EG6UVbcr5EfyHsZuttMK-I467z4zjXUk?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "11_materials_and_textures_02.jpg",
+          "local_path": "/visual_library/curated/11_materials_and_textures_02.jpg",
+          "caption": "Sketch上色技巧(麥克筆) - 易禧創意 部落格",
+          "original_url": "https://images.openai.com/static-rsc-4/KIYey4fbncW-7UVA3sQamrPVRDiH3d2TiyplHO3pKHJ5ktbLbz8IlW913FbmqEq7Khtycx--VKeptMFYeYwArD98WHr13CFCYYP0n2Q1AMs3qHbJGilJmvMI8w-yM86agAfXgbyJevRHrPwkPStVlnDsc-uWzn6lvovsrxoDxqw?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "11_materials_and_textures_03.jpg",
+          "local_path": "/visual_library/curated/11_materials_and_textures_03.jpg",
+          "caption": "产品手绘干货技巧，工业设计产品手绘之木纹材质的马克笔表现方法-优概念",
+          "original_url": "https://images.openai.com/static-rsc-4/JlVkInG5NCDEenKipdi10Uad_SbS6_FJDW6JyO2n-WEfCqeBZ9oq7qzq83h8rKVggnG2uhgzWpxa3J48XDln5a5T31B0TpVAmmSoHB4yMJAPj3Uw0v_PYmpKTqdXYlKFedzHv-1FA_zQnHNyoHgI-WZbA8t4SuqfN6gR2do6cKg?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "storytelling_and_scenarios",
+      "name": "Storytelling & Scenarios",
+      "priority": "Very High Priority",
+      "priority_level": 12,
+      "priority_percent": 96,
+      "target_count": 15,
+      "tagline": "Sequential comic frames, problem-to-solution narrative arcs, and user journey storyboarding",
+      "intro": "NID cares deeply about empathy: can you depict a real person facing a real obstacle, struggling, discovering an intervention, and reaching resolution in 3 or 4 clear sequential panels?",
+      "slug": "storytelling_and_scenarios",
+      "subgroups": [
+        {
+          "group_name": "Narrative Arcs & 4-Panel Sequences",
+          "items": [
+            {
+              "name": "Everyday Struggle & Functional Resolution",
+              "primitives": "Panel 1: Wide shot establishing user and context; Panel 2: Medium shot struggle; Panel 3: Close-up hands on fix; Panel 4: Wide happy resolution",
+              "proportions": "Varying camera angles (Wide -> Medium -> Close-up -> Extreme Wide) prevent monotonous reading",
+              "level_3_mashup": "Draw a 4-panel comic of a rural student struggling to study in power cuts until using a solar book-clamp lamp."
+            },
+            {
+              "name": "Elderly Person Overcoming a Physical Barrier",
+              "primitives": "Panel 1: Elder facing steep staircase; Panel 2: Hesitation and knee pain; Panel 3: Deploying stair-assist handle; Panel 4: Confident safe arrival",
+              "proportions": "Focus on facial expressions and biomechanical support gestures",
+              "level_3_mashup": "Draw a 4-panel storyboard of an elderly grandfather learning to use a voice-activated medication reminder."
+            },
+            {
+              "name": "Child Discovering Nature & Sparking Curiosity",
+              "primitives": "Panel 1: Child looking bored indoors; Panel 2: Noticing an ant trail on balcony; Panel 3: Eye-level close-up examining ant carrying leaf; Panel 4: Sketching it in notebook",
+              "proportions": "Low child camera angle throughout sequence to capture world from child's perspective",
+              "level_3_mashup": "Draw a 4-frame comic showing a curious child designing a cardboard periscope to observe garden birds."
+            },
+            {
+              "name": "Monsoon Flood Crisis & Community Rescue",
+              "primitives": "Panel 1: Rising water encroaching village porch; Panel 2: Family gathering essentials in dry drum; Panel 3: Loading grandmother onto rescue raft; Panel 4: Reaching high-ground relief shelter",
+              "proportions": "High contrast rain hatching and deep water reflections heighten dramatic urgency",
+              "level_3_mashup": "Draw a 4-panel storyboard illustrating community solidarity during a sudden flash flood evacuation."
+            },
+            {
+              "name": "Commuter Missing Bus & Finding Alternative Route",
+              "primitives": "Panel 1: Commuter sprinting down road; Panel 2: Bus pulling away puffing exhaust; Panel 3: Frustration transitioning to checking bike-share app; Panel 4: Joyfully pedaling along river shortcut",
+              "proportions": "Dynamic diagonal motion lines in sprint transition into peaceful horizontal composition in final frame",
+              "level_3_mashup": "Draw a 3-panel storyboard showing an urban commuter adapting when their regular transit line is suspended."
+            },
+            {
+              "name": "Street Vendor's Morning Setup & Busy Market Rush",
+              "primitives": "Panel 1: Dark dawn unloading fresh flowers from truck; Panel 2: Weaving fragrant garlands by oil lamp; Panel 3: Jostling morning customers buying puja flowers; Panel 4: Counting day's earnings with satisfied smile",
+              "proportions": "Lighting shifts from high-contrast early dawn shadows to bright noon overhead sun",
+              "level_3_mashup": "Draw a 4-frame narrative capturing a day in the life of a traditional flower market artisan."
+            },
+            {
+              "name": "First-Time User Navigating a Complex Interface",
+              "primitives": "Panel 1: Confused user staring at ticket kiosk; Panel 2: Close-up index finger hesitating over confusing options; Panel 3: Friendly stranger tapping universal visual icon; Panel 4: Dispensing ticket with mutual grateful nod",
+              "proportions": "Over-the-shoulder POV for screens followed by two-shot portrait",
+              "level_3_mashup": "Draw a 4-frame story showing an illiterate farmer successfully using a voice-and-symbol grain trading app."
+            },
+            {
+              "name": "Responsible Domestic Waste Segregation",
+              "primitives": "Panel 1: Kitchen meal prep with vegetable peels and plastic wrap; Panel 2: Deliberate separation into green and blue bins; Panel 3: Handing sorted bin to sanitation collector; Panel 4: Rich compost nourishing rooftop tomato plants",
+              "proportions": "Circular lifecycle narrative connecting waste source to regenerative garden output",
+              "level_3_mashup": "Draw a 4-panel sequence promoting community composting in an urban apartment society."
+            },
+            {
+              "name": "Two Strangers Collaborating to Solve a Crisis",
+              "primitives": "Panel 1: Car tire stuck in muddy roadside ditch; Panel 2: Passing tractor driver stopping to assess; Panel 3: Working together to wedge wooden plank under spinning tire; Panel 4: Car emerging onto dry asphalt with cheerful handshake",
+              "proportions": "Shared physical exertion: both figures leaning in harmony with lever tools",
+              "level_3_mashup": "Draw a 4-frame story illustrating mutual aid between rural villagers and city travellers."
+            },
+            {
+              "name": "Product Breakdown & Field Repair",
+              "primitives": "Panel 1: Bicycle chain snapping mid-journey; Panel 2: Cyclist kneeling beside rear wheel inspecting sheared link; Panel 3: Using multi-tool chain breaker to remove damaged pin; Panel 4: Smooth riding resumed down country lane",
+              "proportions": "Technical close-up detail of hands and mechanism in central panels",
+              "level_3_mashup": "Draw a 4-panel guide showing how a farmer quickly fixes a clogged drip irrigation emitter without tools."
+            },
+            {
+              "name": "Preparing for Design Exam Under Pressure",
+              "primitives": "Panel 1: Clock ticking at 8:30 AM with blank paper; Panel 2: Rapid thumbnail sketching with focused brow; Panel 3: Bold marker strokes rendering perspective details; Panel 4: Confidently laying down pen as timer dings",
+              "proportions": "Tension built through increasing frame tightness culminating in wide triumph shot",
+              "level_3_mashup": "Draw a 4-frame humorous comic of a design student mastering their 2-minute visual library drills."
+            },
+            {
+              "name": "Celebration of Harvest & Traditional Festival",
+              "primitives": "Panel 1: Stacking freshly harvested wheat sheaves; Panel 2: Decorating cattle horns with bright paint and bells; Panel 3: Women singing around boiling sweet pongal pot; Panel 4: Village feast with shared banana leaves",
+              "proportions": "Warm organic compositions rich in decorative patterns and traditional textiles",
+              "level_3_mashup": "Draw a 4-panel festive narrative depicting how design preserves age-old cultural harvest rituals."
+            },
+            {
+              "name": "Overnight Monsoon Interstate Bus Journey",
+              "primitives": "Panel 1: Boarding mud-splattered government bus at midnight; Panel 2: Wiper blades rhythmically clearing streaming rain from windshield; Panel 3: Passengers dozing as bus navigates misty hairpin turn; Panel 4: Golden dawn breaking over lush wet tea plantations",
+              "proportions": "Atmospheric lighting: dashboard glow, passing truck headlight beams, and misty morning horizon",
+              "level_3_mashup": "Draw a 4-frame visual journey capturing the sensory atmosphere of a rainy long-distance road trip."
+            },
+            {
+              "name": "Emergency Medical Evacuation in Remote Terrain",
+              "primitives": "Panel 1: Village health worker radioing for emergency help; Panel 2: Improvising bamboo stretcher with blanket; Panel 3: Carrying patient across swollen mountain stream; Panel 4: Meeting helicopter landing on cleared school ground",
+              "proportions": "Urgent kinetic movement and heroic physical scale against rugged mountains",
+              "level_3_mashup": "Draw a 4-panel comic showing how community ingenuity saves a life before formal ambulance arrival."
+            },
+            {
+              "name": "Transforming Waste Plastic into Functional Furniture",
+              "primitives": "Panel 1: Piles of discarded single-use plastic bottles on riverbank; Panel 2: Shredding plastic into colorful pellets with manual grinder; Panel 3: Compression molding pellets into sturdy interlocking bench bricks; Panel 4: Children playing happily on finished community park bench",
+              "proportions": "Dramatic before-and-after visual contrast between pollution and civic pride",
+              "level_3_mashup": "Draw a 4-frame narrative documenting a community circular design workshop."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "12_storytelling_and_scenarios_01.jpg",
+          "local_path": "/visual_library/curated/12_storytelling_and_scenarios_01.jpg",
+          "caption": "Essential Guide: What Do Storyboard Artists Do?",
+          "original_url": "https://images.openai.com/static-rsc-4/R_wNYuaT3wdTOxaivdXEsYFLzRC8dXW3JUfh8kn51jj-6NnW5JYd8kfFF0XgvClUt2pHFeZ-qnt-zsYWmRuja5n1hyqNAQhPrs8tysvF3vwFPTxoNhaugFCfrTAIp9-E4G4tjmBaWvbkPJ2XBH5gqNxyU2E8QH_Jl568E5BpAag?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "12_storytelling_and_scenarios_02.jpg",
+          "local_path": "/visual_library/curated/12_storytelling_and_scenarios_02.jpg",
+          "caption": "Portfolio - Streamlining the animation process, saving time and resources through storyboarding, wireframes and mockups .",
+          "original_url": "https://images.openai.com/static-rsc-4/_SNoK4QdrEOyp_PXUtTHQAPtrYTqeBPFqJJQl7BG9XsuCC4zaFOhHeq9eNw5RsPdetWeJUPOlSULBFhoICbxRbfJXROfBrB2LKmqN7U9T3STgLcrD81MkBVb9zEDKMDNwGxUh1oLCRa5Khm-GW4Ei7HhqiSSvXMK0Dtp3bGYS28?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "12_storytelling_and_scenarios_03.jpg",
+          "local_path": "/visual_library/curated/12_storytelling_and_scenarios_03.jpg",
+          "caption": "Storyboard & User Stories | GEBIRAH",
+          "original_url": "https://images.openai.com/static-rsc-4/IT2wPuDwOkg1Rp9Ji0RRQyX0B_ZtmpH7GqsPGAidBac28xsl3K6fJjVTAdOX4VTebl5anzVt8GjPRugLKcj4RqjD2SRPAhOrU70q90oJpeTz0ru-Y6hq9jSicQdU3GAskSRY0t58-Pkl26p6PF8uUaxzJ2ZZa3s-PqhjRfDoEC0?purpose=inline"
+        }
+      ]
+    },
+    {
+      "id": "basic_shapes_and_perspective",
+      "name": "Basic Shapes & Perspective Foundation",
+      "priority": "Foundation Priority",
+      "priority_level": 13,
+      "priority_percent": 90,
+      "target_count": 15,
+      "tagline": "The geometric DNA of all physical design: boxes, cylinders, ellipses, cross-contours, and perspective grids",
+      "intro": "Every object in the universe is a modified cube, cylinder, cone, or sphere. If you can rotate a box in 2-point perspective and draw clean symmetric ellipses, you can draw anything.",
+      "slug": "basic_shapes_and_perspective",
+      "subgroups": [
+        {
+          "group_name": "Geometric Primitives & Perspective Mastery",
+          "items": [
+            {
+              "name": "Cube & Orthogonal Grid Construction",
+              "primitives": "Six equal square faces meeting at 90-degree orthogonal corners with visible internal wireframe bones",
+              "proportions": "All parallel edges converge to shared vanishing points on horizon",
+              "level_3_mashup": "Draw three identical cubes stacked in 2-point perspective rotated 30 degrees to each other."
+            },
+            {
+              "name": "Cuboid / Rectangular Prism Box",
+              "primitives": "Box with unequal length, width, and height dimensions; foundation of cars, buildings, and furniture",
+              "proportions": "True vanishing lines test foreshortening without barrel distortion",
+              "level_3_mashup": "Carve an ergonomic handheld radio out of a solid perspective cuboid using subtractive sketching."
+            },
+            {
+              "name": "Cylinder with Accurate Ellipse Minor Axes",
+              "primitives": "Two parallel circular face ellipses joined by tangent contour lines; minor axis always aligns with cylinder centerline",
+              "proportions": "Ellipse becomes rounder (greater degree) the further it moves from eye level",
+              "level_3_mashup": "Draw a complex water bottle with varying cylindrical diameters along one shared centerline axis."
+            },
+            {
+              "name": "Cone & Conical Frustums",
+              "primitives": "Circular base ellipse tapering to single apex vertex point; truncated cone forms frustum bucket",
+              "proportions": "Base ellipse minor axis aligns collinear with height centerline",
+              "level_3_mashup": "Draw a stack of three traffic safety cones showing interlocking frustum geometry."
+            },
+            {
+              "name": "Sphere & True Shading Terminators",
+              "primitives": "Perfect circular boundary circle with internal elliptical great circles, core shadow terminator band, and bounce light",
+              "proportions": "Highlight opposite to light source; soft core shadow line perpendicular to light vector",
+              "level_3_mashup": "Render a translucent glass marble resting on a reflective chrome sphere."
+            },
+            {
+              "name": "Square & Triangular Pyramids",
+              "primitives": "Polygonal ground base with triangular planar facets converging to apex point",
+              "proportions": "Apex drops a perpendicular centerline plumb-line straight to base geometric center",
+              "level_3_mashup": "Design an emergency pop-up solar beacon shaped like an inverted geometric pyramid."
+            },
+            {
+              "name": "Torus / Donut Ring Geometry",
+              "primitives": "Circular cross-section swept along circular revolution path (tires, seals, handle loops)",
+              "proportions": "Inner hole ellipse and outer perimeter ellipse share concentric center in perspective",
+              "level_3_mashup": "Draw an inflatable life-preserver ring thrown into foaming turbulent water."
+            },
+            {
+              "name": "Hemisphere & Domestic Bowls",
+              "primitives": "Half-sphere dome with flat circular opening rim ellipse",
+              "proportions": "Wall thickness offset concentric to outer rim ellipse",
+              "level_3_mashup": "Draw a ceramic soup bowl resting inside an insulated thermal silicone outer shell."
+            },
+            {
+              "name": "Rounded Rectangles (Pills & Fillets)",
+              "primitives": "Orthogonal cuboids with corners filleted by quarter-cylinder tangent transitions",
+              "proportions": "Eliminates sharp edges; standard for consumer electronics and smartphone bodies",
+              "level_3_mashup": "Draw a sleek modern internet router with chamfered venting slots and rounded corners."
+            },
+            {
+              "name": "Organic Blob & Continuous Spline Forms",
+              "primitives": "Non-orthogonal curved volumes defined by flowing cross-contour rings wrapping the 3D surface",
+              "proportions": "Cross-contour lines communicate surface topology and thickness",
+              "level_3_mashup": "Design an ergonomic computer mouse molded to the natural resting anatomy of human palm."
+            },
+            {
+              "name": "One-Point Interior Perspective Grid",
+              "primitives": "Single central vanishing point on horizon; front walls stay orthogonal while side walls recede",
+              "proportions": "Floor tile grid squares compress realistically as they recede into distance",
+              "level_3_mashup": "Draw an interior view down a long train coach showing rows of seats receding to vanishing point."
+            },
+            {
+              "name": "Two-Point Exterior Perspective Grid",
+              "primitives": "Two vanishing points (VP Left and VP Right) spread wide apart on horizon line; vertical edges stay plumb",
+              "proportions": "Corner of building forms closest foreground edge to camera",
+              "level_3_mashup": "Draw a corner street view of a lively neighbourhood tea stall and bakery."
+            },
+            {
+              "name": "Three-Point Dramatic Worm's Eye / Bird's Eye Grid",
+              "primitives": "Two horizon vanishing points plus third vertical vanishing point (zenith or nadir) capturing extreme verticality",
+              "proportions": "Vertical lines tilt sharply towards sky or ground to exaggerate towering scale",
+              "level_3_mashup": "Draw a dramatic bird's-eye view looking down from a high balcony at pedestrians with umbrellas."
+            },
+            {
+              "name": "Compound Primitive Combinations (Bottle / Lamp / Drill)",
+              "primitives": "Cylinder + Sphere = Bottle; Cuboid + Cylinder = Power Appliance; Cylinder + Cone = Torch",
+              "proportions": "Seamless blend fillets transition between intersecting geometric solids",
+              "level_3_mashup": "Construct an electric handheld drill from a main horizontal cylinder, vertical grip cuboid, and cone chuck."
+            },
+            {
+              "name": "Subtractive & Additive Form Carving",
+              "primitives": "Starting from a raw bounding block and carving out scoops, holes, chamfers, and bevels",
+              "proportions": "Maintains structural alignment and proportions while generating complex organic design forms",
+              "level_3_mashup": "Carve an ergonomic game controller out of a single rectangular perspective foam block."
+            }
+          ]
+        }
+      ],
+      "curated_sheets": [
+        {
+          "index": 1,
+          "filename": "13_basic_shapes_and_perspective_01.jpg",
+          "local_path": "/visual_library/curated/13_basic_shapes_and_perspective_01.jpg",
+          "caption": "Curated Visual Sheet 1",
+          "original_url": "https://images.openai.com/static-rsc-4/n23Qd9SRfXaG8aabOT0yNTR_3ZBUqu9YLC2QkXtiYqEJX8lkrrK51xk_NklEh9bNGG8ciMbm_yvtJ-uOsrVCax8m4epfo8gec_l_uOgqFZzvfd5BbGyG5Mq-MrJIZzNryoZbbRPw-IECRm-grnH0Ch23k-JQO7cpAu4Sjy9spkA?purpose=inline"
+        },
+        {
+          "index": 2,
+          "filename": "13_basic_shapes_and_perspective_02.jpg",
+          "local_path": "/visual_library/curated/13_basic_shapes_and_perspective_02.jpg",
+          "caption": "250 Cylinder Challenge - Imgur | Geometric shapes drawing, Perspective drawing lessons, Practice drawing shapes",
+          "original_url": "https://images.openai.com/static-rsc-4/hfhsghwiHsZDmhzpJs0tE_U4TUyI21AaZQzj1_k2EbPXrwWlDonHwuI-2kHXNXWj5nwl90CnLq5BhwS3rMozOj3An7lBYR1r4ul-MRzU4x7sPj06LI92_2ZzxRqFw0O5YWY9pGn_MkoNgAWhMAt4oQxNsDXRRy3Lq6OjNNRldHo?purpose=inline"
+        },
+        {
+          "index": 3,
+          "filename": "13_basic_shapes_and_perspective_03.jpg",
+          "local_path": "/visual_library/curated/13_basic_shapes_and_perspective_03.jpg",
+          "caption": "产品手绘基础教程，如何画好手绘中的线和体-优概念",
+          "original_url": "https://images.openai.com/static-rsc-4/t0BgqhaQk_P_GG50__TPXT1dROl4pqFDv_tT4v3EZTiu9ytXgLN82aE7XgKiYV44HcBAPD9bjkyrBu9WWms8hcho3BWJ7dgIZgBcTahE2UyEZw4rJQTJpYdd_z89qG8LwK7zob3vz-eZ_2o7eWhc0hmceTPYycMt-ktozgDghiY?purpose=inline"
+        }
+      ]
+    }
+  ]
+}

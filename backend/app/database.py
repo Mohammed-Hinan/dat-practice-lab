@@ -204,6 +204,18 @@ class Database:
                     created_at TEXT NOT NULL
                 );
                 CREATE INDEX IF NOT EXISTS idx_visual_learning_cat ON visual_learning_memory(category);
+
+                CREATE TABLE IF NOT EXISTS visual_library_progress (
+                    subject_name TEXT PRIMARY KEY,
+                    category_id TEXT NOT NULL,
+                    level_1_studied INTEGER NOT NULL DEFAULT 0,
+                    level_2_reproduced INTEGER NOT NULL DEFAULT 0,
+                    level_3_adapted INTEGER NOT NULL DEFAULT 0,
+                    drill_time_seconds INTEGER NOT NULL DEFAULT 0,
+                    notes TEXT NOT NULL DEFAULT '',
+                    last_practiced_at TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_visual_lib_cat ON visual_library_progress(category_id);
                 """
             )
             # Safe additive migration for existing SQLite databases
@@ -899,3 +911,185 @@ class Database:
         with self.connect() as conn:
             cur = conn.execute("DELETE FROM visual_learning_memory WHERE id = ?", (record_id,))
             return cur.rowcount > 0
+
+    # ------------------------------------------------------------------
+    # Visual Library Progression & Catalogue Operations
+    # ------------------------------------------------------------------
+
+    def get_visual_library_progress(self) -> Dict[str, Dict[str, Any]]:
+        with self.connect() as conn:
+            rows = conn.execute("SELECT * FROM visual_library_progress").fetchall()
+        return {
+            r["subject_name"]: {
+                "subject_name": r["subject_name"],
+                "category_id": r["category_id"],
+                "level_1_studied": bool(r["level_1_studied"]),
+                "level_2_reproduced": bool(r["level_2_reproduced"]),
+                "level_3_adapted": bool(r["level_3_adapted"]),
+                "drill_time_seconds": r["drill_time_seconds"],
+                "notes": r["notes"],
+                "last_practiced_at": r["last_practiced_at"],
+            }
+            for r in rows
+        }
+
+    def update_visual_library_progress(
+        self,
+        subject_name: str,
+        category_id: str,
+        level_1_studied: Optional[bool] = None,
+        level_2_reproduced: Optional[bool] = None,
+        level_3_adapted: Optional[bool] = None,
+        drill_time_seconds: Optional[int] = None,
+        notes: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        now = utc_now_iso()
+        with self.connect() as conn:
+            existing = conn.execute(
+                "SELECT * FROM visual_library_progress WHERE subject_name = ?",
+                (subject_name,),
+            ).fetchone()
+
+            l1 = int(level_1_studied) if level_1_studied is not None else (existing["level_1_studied"] if existing else 0)
+            l2 = int(level_2_reproduced) if level_2_reproduced is not None else (existing["level_2_reproduced"] if existing else 0)
+            l3 = int(level_3_adapted) if level_3_adapted is not None else (existing["level_3_adapted"] if existing else 0)
+            drill_time = drill_time_seconds if drill_time_seconds is not None else (existing["drill_time_seconds"] if existing else 0)
+            n = notes if notes is not None else (existing["notes"] if existing else "")
+
+            conn.execute(
+                """
+                INSERT INTO visual_library_progress (
+                    subject_name, category_id, level_1_studied, level_2_reproduced, level_3_adapted, drill_time_seconds, notes, last_practiced_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(subject_name) DO UPDATE SET
+                    level_1_studied = excluded.level_1_studied,
+                    level_2_reproduced = excluded.level_2_reproduced,
+                    level_3_adapted = excluded.level_3_adapted,
+                    drill_time_seconds = excluded.drill_time_seconds,
+                    notes = excluded.notes,
+                    last_practiced_at = excluded.last_practiced_at
+                """,
+                (subject_name, category_id, l1, l2, l3, drill_time, n, now),
+            )
+
+        return {
+            "subject_name": subject_name,
+            "category_id": category_id,
+            "level_1_studied": bool(l1),
+            "level_2_reproduced": bool(l2),
+            "level_3_adapted": bool(l3),
+            "drill_time_seconds": drill_time,
+            "notes": n,
+            "last_practiced_at": now,
+        }
+
+    def get_visual_library_catalogue(self) -> Dict[str, Any]:
+        """Loads catalogue with user progress merged in and calculated mastery stats."""
+        catalogue_path = Path(__file__).resolve().parents[1] / "data" / "visual_library_catalogue.json"
+        if not catalogue_path.exists():
+            catalogue_path = Path(__file__).resolve().parents[2] / "data" / "visual_library_catalogue.json"
+
+        if not catalogue_path.exists():
+            return {"error": "Visual library catalogue not found", "categories": []}
+
+        with open(catalogue_path, "r", encoding="utf-8") as f:
+            catalogue = json.load(f)
+
+        progress = self.get_visual_library_progress()
+
+        total_subjects = 0
+        total_l1 = 0
+        total_l2 = 0
+        total_l3 = 0
+
+        for cat in catalogue.get("categories", []):
+            cat_subjects = 0
+            cat_l1 = 0
+            cat_l2 = 0
+            cat_l3 = 0
+            for group in cat.get("subgroups", []):
+                for item in group.get("items", []):
+                    cat_subjects += 1
+                    s_name = item.get("name", "")
+                    user_prog = progress.get(s_name, {
+                        "level_1_studied": False,
+                        "level_2_reproduced": False,
+                        "level_3_adapted": False,
+                        "drill_time_seconds": 0,
+                        "notes": "",
+                    })
+                    item["user_progress"] = user_prog
+                    if user_prog["level_1_studied"]:
+                        cat_l1 += 1
+                    if user_prog["level_2_reproduced"]:
+                        cat_l2 += 1
+                    if user_prog["level_3_adapted"]:
+                        cat_l3 += 1
+
+            cat["stats"] = {
+                "total_items": cat_subjects,
+                "l1_count": cat_l1,
+                "l2_count": cat_l2,
+                "l3_count": cat_l3,
+                "mastery_percent": round((cat_l1 * 0.2 + cat_l2 * 0.4 + cat_l3 * 0.4) / max(1, cat_subjects) * 100, 1),
+            }
+            total_subjects += cat_subjects
+            total_l1 += cat_l1
+            total_l2 += cat_l2
+            total_l3 += cat_l3
+
+        catalogue["global_stats"] = {
+            "total_subjects": total_subjects,
+            "studied_recognition": total_l1,
+            "reproduced_memory": total_l2,
+            "adapted_exam": total_l3,
+            "overall_mastery_percent": round((total_l1 * 0.2 + total_l2 * 0.4 + total_l3 * 0.4) / max(1, total_subjects) * 100, 1),
+        }
+
+        return catalogue
+
+    def get_visual_library_daily_workout(self) -> List[Dict[str, Any]]:
+        """Returns 3 curated items across categories prioritizing unpracticed subjects."""
+        catalogue_data = self.get_visual_library_catalogue()
+        categories = catalogue_data.get("categories", [])
+        if not categories:
+            return []
+
+        import random
+
+        # Target 3 distinct tiers:
+        # 1: Human figures or hands (high priority character/gesture)
+        # 2: Everyday objects or mechanisms or transport
+        # 3: Scenarios, environments, or biomimicry
+        tier_1_cats = [c for c in categories if c["id"] in ("human_figures", "hands_and_interactions")]
+        tier_2_cats = [c for c in categories if c["id"] in ("everyday_objects", "mechanisms_and_components", "transportation_and_mobility")]
+        tier_3_cats = [c for c in categories if c["id"] in ("storytelling_and_scenarios", "environment_and_architecture", "nature_and_biomimicry")]
+
+        workout = []
+        for tier_pool in [tier_1_cats, tier_2_cats, tier_3_cats]:
+            if not tier_pool:
+                tier_pool = categories
+            selected_cat = random.choice(tier_pool)
+            all_items = []
+            for g in selected_cat.get("subgroups", []):
+                for it in g.get("items", []):
+                    all_items.append((it, selected_cat))
+
+            # Prioritize uncompleted Level 2
+            unpracticed = [x for x in all_items if not x[0].get("user_progress", {}).get("level_2_reproduced")]
+            chosen, cat_ref = random.choice(unpracticed) if unpracticed else random.choice(all_items)
+
+            workout.append({
+                "subject": chosen,
+                "category_id": cat_ref["id"],
+                "category_name": cat_ref["name"],
+                "curated_sheets": cat_ref.get("curated_sheets", []),
+            })
+
+        return workout
+
+    def reset_visual_library_progress(self) -> bool:
+        with self.connect() as conn:
+            conn.execute("DELETE FROM visual_library_progress")
+        return True
+

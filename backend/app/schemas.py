@@ -559,3 +559,14 @@ class AnalyticsOverviewResponse(BaseModel):
     scoring_weights: PredictionWeights
     active_profiles: List[str]
     dnerd_reference_note: Dict[str, Any]
+
+
+class VisualLibraryProgressUpdate(BaseModel):
+    subject_name: str
+    category_id: str
+    level_1_studied: Optional[bool] = None
+    level_2_reproduced: Optional[bool] = None
+    level_3_adapted: Optional[bool] = None
+    drill_time_seconds: Optional[int] = None
+    notes: Optional[str] = None
+

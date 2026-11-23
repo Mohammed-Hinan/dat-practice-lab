@@ -630,3 +630,55 @@ def test_drawthings_http_sketch_generation_and_serving(tmp_path: Path):
         assert "learned from" in nc_data["applied_rules"][0]
     finally:
         srv.shutdown()
+
+
+def test_visual_library_endpoints(tmp_path: Path) -> None:
+    """Verifies the Visual Library catalogue retrieval, progression tracking, and workout generation."""
+    db = Database(tmp_path / "test.db")
+    client = TestClient(create_app(db_instance=db))
+    cat_res = client.get("/api/visual-library/catalogue")
+    assert cat_res.status_code == 200
+    cat_data = cat_res.json()
+    assert cat_data["total_categories"] == 13
+    assert cat_data["global_stats"]["total_subjects"] >= 285
+    assert len(cat_data["categories"]) == 13
+
+    # Check a specific category and its curated sheets
+    hf = next(c for c in cat_data["categories"] if c["id"] == "human_figures")
+    assert len(hf["curated_sheets"]) == 3
+    assert hf["curated_sheets"][0]["local_path"].startswith("/visual_library/curated/")
+
+    # Update progress for an item
+    prog_res = client.post(
+        "/api/visual-library/progress",
+        json={
+            "subject_name": "Standing: Front & Side Profiles",
+            "category_id": "human_figures",
+            "level_1_studied": True,
+            "level_2_reproduced": True,
+            "drill_time_seconds": 120,
+            "notes": "Practiced 2-min gesture without reference",
+        },
+    )
+    assert prog_res.status_code == 200
+    prog_data = prog_res.json()
+    assert prog_data["level_1_studied"] is True
+    assert prog_data["level_2_reproduced"] is True
+    assert prog_data["drill_time_seconds"] == 120
+
+    # Verify updated stats in catalogue
+    cat_res_after = client.get("/api/visual-library/catalogue")
+    cat_after_data = cat_res_after.json()
+    assert cat_after_data["global_stats"]["studied_recognition"] >= 1
+    assert cat_after_data["global_stats"]["reproduced_memory"] >= 1
+
+    # Verify daily workout generator returns 3 items
+    workout_res = client.get("/api/visual-library/daily-workout")
+    assert workout_res.status_code == 200
+    workout_items = workout_res.json()
+    assert len(workout_items) == 3
+    for w in workout_items:
+        assert "subject" in w
+        assert "category_id" in w
+        assert "curated_sheets" in w
+

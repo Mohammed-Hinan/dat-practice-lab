@@ -19,6 +19,9 @@ import type {
   SketchStylePreset,
   TaxonomyData,
   VisualLearningRecord,
+  VisualLibraryCatalogue,
+  VisualLibraryItemProgress,
+  DailyWorkoutItem,
   WeakArea,
 } from './types';
 
@@ -31,9 +34,8 @@ const cleanUrl =
 
 export const API_BASE =
   typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
-  !rawEnvUrl
-    ? '/api'
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://127.0.0.1:8000/api'
     : `${cleanUrl.replace(/\/$/, '')}/api`;
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
@@ -213,6 +215,24 @@ export const api = {
     request<WeakArea>('/weak-areas', { method: 'POST', body: JSON.stringify(payload) }),
   deleteWeakArea: (id: string) =>
     request<{ deleted: boolean }>(`/weak-areas/${id}`, { method: 'DELETE' }),
+
+  getVisualLibraryCatalogue: () => request<VisualLibraryCatalogue>('/visual-library/catalogue'),
+  updateVisualLibraryProgress: (payload: {
+    subject_name: string;
+    category_id: string;
+    level_1_studied?: boolean;
+    level_2_reproduced?: boolean;
+    level_3_adapted?: boolean;
+    drill_time_seconds?: number;
+    notes?: string;
+  }) =>
+    request<VisualLibraryItemProgress>('/visual-library/progress', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  getVisualLibraryDailyWorkout: () => request<DailyWorkoutItem[]>('/visual-library/daily-workout'),
+  resetVisualLibraryProgress: () =>
+    request<{ reset: boolean }>('/visual-library/reset-progress', { method: 'POST' }),
 
   pingPresence: (clientId?: string) =>
     request<{

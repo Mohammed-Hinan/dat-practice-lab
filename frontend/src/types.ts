@@ -16,6 +16,7 @@ export interface PresenceData {
 
 export type NavSection =
   | 'generate'
+  | 'visual_library'
   | 'simulator'
   | 'bank'
   | 'dashboard'
@@ -467,3 +468,83 @@ export interface DashboardData {
     reason: string;
   };
 }
+
+export interface VisualLibraryItemProgress {
+  subject_name: string;
+  category_id: string;
+  level_1_studied: boolean;
+  level_2_reproduced: boolean;
+  level_3_adapted: boolean;
+  drill_time_seconds: number;
+  notes: string;
+  last_practiced_at?: string;
+}
+
+export interface VisualLibraryItem {
+  name: string;
+  primitives: string;
+  proportions: string;
+  level_3_mashup: string;
+  user_progress?: VisualLibraryItemProgress;
+}
+
+export interface VisualLibrarySubgroup {
+  group_name: string;
+  items: VisualLibraryItem[];
+}
+
+export interface CuratedSheet {
+  index: number;
+  filename: string;
+  local_path: string;
+  caption: string;
+  original_url?: string;
+}
+
+export interface VisualLibraryCategory {
+  id: string;
+  name: string;
+  priority: string;
+  priority_level: number;
+  priority_percent: number;
+  target_count: number;
+  tagline: string;
+  intro: string;
+  slug: string;
+  curated_sheets: CuratedSheet[];
+  subgroups: VisualLibrarySubgroup[];
+  stats?: {
+    total_items: number;
+    l1_count: number;
+    l2_count: number;
+    l3_count: number;
+    mastery_percent: number;
+  };
+}
+
+export interface VisualLibraryCatalogue {
+  version: string;
+  total_categories: number;
+  total_target_subjects: number;
+  methodology: {
+    level_1: string;
+    level_2: string;
+    level_3: string;
+  };
+  categories: VisualLibraryCategory[];
+  global_stats: {
+    total_subjects: number;
+    studied_recognition: number;
+    reproduced_memory: number;
+    adapted_exam: number;
+    overall_mastery_percent: number;
+  };
+}
+
+export interface DailyWorkoutItem {
+  subject: VisualLibraryItem;
+  category_id: string;
+  category_name: string;
+  curated_sheets: CuratedSheet[];
+}
+
