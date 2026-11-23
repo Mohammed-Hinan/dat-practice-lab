@@ -485,6 +485,10 @@ export interface VisualLibraryItem {
   primitives: string;
   proportions: string;
   level_3_mashup: string;
+  reference_sheet_url?: string;
+  reference_title?: string;
+  reference_tag?: string;
+  sketching_tips?: string[];
   user_progress?: VisualLibraryItemProgress;
 }
 
@@ -499,6 +503,9 @@ export interface CuratedSheet {
   local_path: string;
   caption: string;
   original_url?: string;
+  tag?: string;
+  year?: string;
+  source?: string;
 }
 
 export interface VisualLibraryCategory {

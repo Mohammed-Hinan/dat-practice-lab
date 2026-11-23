@@ -46,6 +46,7 @@ export const VisualLibrary: React.FC<VisualLibraryProps> = ({ onNavigateToStudio
   const [selectedCatId, setSelectedCatId] = useState<string>('human_figures');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filterLevel, setFilterLevel] = useState<'all' | 'unpracticed' | 'level1' | 'level2' | 'level3'>('all');
+  const [atlasTab, setAtlasTab] = useState<'all' | 'core' | 'exam' | 'blueprint'>('all');
 
   // Modal states
   const [activeSheetModal, setActiveSheetModal] = useState<CuratedSheet | null>(null);
@@ -365,6 +366,7 @@ export const VisualLibrary: React.FC<VisualLibraryProps> = ({ onNavigateToStudio
                   key={cat.id}
                   onClick={() => {
                     setSelectedCatId(cat.id);
+                    setAtlasTab('all');
                     setSearchQuery('');
                   }}
                   className={`w-full text-left p-3 rounded-xl border transition flex items-center justify-between ${
@@ -457,46 +459,184 @@ export const VisualLibrary: React.FC<VisualLibraryProps> = ({ onNavigateToStudio
               <strong className="text-stone-800 font-medium">DAT Strategy:</strong> {activeCategory.intro}
             </p>
 
-            {/* Curated Visual Atlas (3 Reference Sheets) */}
-            <div className="pt-2">
-              <div className="flex items-center justify-between mb-3">
+            {/* Curated Visual Atlas */}
+            <div className="pt-2 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-stone-600" />
                   <span className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                    Curated Visual Atlas (3 Local Reference Sheets)
+                    Curated Visual Atlas ({activeCategory.curated_sheets.length} Verified Sheets)
                   </span>
                 </div>
-                <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 self-start sm:self-auto">
                   ✓ Hosted Locally • 100% Offline Ready
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {activeCategory.curated_sheets.map((sheet, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => setActiveSheetModal(sheet)}
-                    className="group relative cursor-pointer overflow-hidden rounded-xl border border-[#E4E1DA] bg-stone-100 hover:border-stone-400 transition shadow-sm"
+              {/* Atlas Filter Tabs if multiple sheet types exist */}
+              {activeCategory.curated_sheets.length > 3 && (
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+                  <button
+                    onClick={() => setAtlasTab('all')}
+                    className={`px-2.5 py-1 rounded-lg font-medium transition text-[11px] flex items-center gap-1.5 ${
+                      atlasTab === 'all'
+                        ? 'bg-stone-900 text-white font-semibold'
+                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                    }`}
                   >
-                    <div className="aspect-[4/3] w-full overflow-hidden bg-stone-200">
-                      <img
-                        src={sheet.local_path}
-                        alt={sheet.caption}
-                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-2.5 bg-white space-y-0.5">
-                      <div className="text-xs font-semibold text-stone-800 truncate">
-                        Sheet {sheet.index}: {sheet.caption || 'Reference Guide'}
+                    <span>All Sheets</span>
+                    <span className="px-1 py-0.2 rounded-full text-[10px] bg-white/20">
+                      {activeCategory.curated_sheets.length}
+                    </span>
+                  </button>
+
+                  {activeCategory.curated_sheets.some(
+                    (s) =>
+                      (s.tag || '').toLowerCase().includes('core') ||
+                      (s.tag || '').toLowerCase().includes('atlas')
+                  ) && (
+                    <button
+                      onClick={() => setAtlasTab('core')}
+                      className={`px-2.5 py-1 rounded-lg font-medium transition text-[11px] flex items-center gap-1.5 ${
+                        atlasTab === 'core'
+                          ? 'bg-emerald-700 text-white font-semibold'
+                          : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
+                      }`}
+                    >
+                      <span>Core Atlas</span>
+                      <span className="px-1 py-0.2 rounded-full text-[10px] bg-emerald-200/50">
+                        {
+                          activeCategory.curated_sheets.filter(
+                            (s) =>
+                              (s.tag || '').toLowerCase().includes('core') ||
+                              (s.tag || '').toLowerCase().includes('atlas')
+                          ).length
+                        }
+                      </span>
+                    </button>
+                  )}
+
+                  {activeCategory.curated_sheets.some(
+                    (s) =>
+                      (s.tag || '').toLowerCase().includes('exam') ||
+                      (s.tag || '').toLowerCase().includes('prompt')
+                  ) && (
+                    <button
+                      onClick={() => setAtlasTab('exam')}
+                      className={`px-2.5 py-1 rounded-lg font-medium transition text-[11px] flex items-center gap-1.5 ${
+                        atlasTab === 'exam'
+                          ? 'bg-amber-700 text-white font-semibold'
+                          : 'bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100'
+                      }`}
+                    >
+                      <span>Exam Prompts & Solutions</span>
+                      <span className="px-1 py-0.2 rounded-full text-[10px] bg-amber-200/50">
+                        {
+                          activeCategory.curated_sheets.filter(
+                            (s) =>
+                              (s.tag || '').toLowerCase().includes('exam') ||
+                              (s.tag || '').toLowerCase().includes('prompt')
+                          ).length
+                        }
+                      </span>
+                    </button>
+                  )}
+
+                  {activeCategory.curated_sheets.some(
+                    (s) =>
+                      (s.tag || '').toLowerCase().includes('blueprint') ||
+                      (s.tag || '').toLowerCase().includes('technical') ||
+                      (s.tag || '').toLowerCase().includes('canon')
+                  ) && (
+                    <button
+                      onClick={() => setAtlasTab('blueprint')}
+                      className={`px-2.5 py-1 rounded-lg font-medium transition text-[11px] flex items-center gap-1.5 ${
+                        atlasTab === 'blueprint'
+                          ? 'bg-indigo-700 text-white font-semibold'
+                          : 'bg-indigo-50 text-indigo-800 border border-indigo-200 hover:bg-indigo-100'
+                      }`}
+                    >
+                      <span>Technical Blueprints</span>
+                      <span className="px-1 py-0.2 rounded-full text-[10px] bg-indigo-200/50">
+                        {
+                          activeCategory.curated_sheets.filter(
+                            (s) =>
+                              (s.tag || '').toLowerCase().includes('blueprint') ||
+                              (s.tag || '').toLowerCase().includes('technical') ||
+                              (s.tag || '').toLowerCase().includes('canon')
+                          ).length
+                        }
+                      </span>
+                    </button>
+                  )}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {activeCategory.curated_sheets
+                  .filter((sheet) => {
+                    if (atlasTab === 'all') return true;
+                    const tag = (sheet.tag || '').toLowerCase();
+                    if (atlasTab === 'core') return tag.includes('core') || tag.includes('atlas');
+                    if (atlasTab === 'exam') return tag.includes('exam') || tag.includes('prompt');
+                    if (atlasTab === 'blueprint')
+                      return (
+                        tag.includes('blueprint') ||
+                        tag.includes('technical') ||
+                        tag.includes('canon')
+                      );
+                    return true;
+                  })
+                  .map((sheet, idx) => {
+                    const isExam = (sheet.tag || '').toLowerCase().includes('exam');
+                    const isBlueprint =
+                      (sheet.tag || '').toLowerCase().includes('blueprint') ||
+                      (sheet.tag || '').toLowerCase().includes('canon') ||
+                      (sheet.tag || '').toLowerCase().includes('technical');
+
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => setActiveSheetModal(sheet)}
+                        className="group relative cursor-pointer overflow-hidden rounded-xl border border-[#E4E1DA] bg-stone-100 hover:border-stone-400 transition shadow-sm flex flex-col justify-between"
+                      >
+                        <div className="aspect-[4/3] w-full overflow-hidden bg-stone-200 relative">
+                          <img
+                            src={sheet.local_path}
+                            alt={sheet.caption}
+                            className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                            loading="lazy"
+                          />
+                          <div className="absolute top-2 left-2 flex items-center gap-1">
+                            {isExam ? (
+                              <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-amber-500/90 text-white shadow-xs backdrop-blur-xs">
+                                {sheet.year ? `${sheet.year} Exam` : 'Exam Solution'}
+                              </span>
+                            ) : isBlueprint ? (
+                              <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-indigo-600/90 text-white shadow-xs backdrop-blur-xs">
+                                Blueprint
+                              </span>
+                            ) : (
+                              <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-stone-900/80 text-white shadow-xs backdrop-blur-xs">
+                                Core Atlas
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="p-2.5 bg-white space-y-1">
+                          <div className="text-xs font-semibold text-stone-800 line-clamp-1" title={sheet.caption}>
+                            {sheet.caption || `Sheet ${sheet.index}`}
+                          </div>
+                          <div className="flex items-center justify-between text-[10px] text-stone-400">
+                            <span className="truncate pr-1">
+                              {sheet.tag || 'Reference Guide'}
+                            </span>
+                            <Maximize2 className="w-3 h-3 text-stone-400 group-hover:text-stone-800 transition flex-shrink-0" />
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-[10px] text-stone-400">
-                        <span>Click to view full size</span>
-                        <Maximize2 className="w-3 h-3 text-stone-400 group-hover:text-stone-800 transition" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -665,6 +805,59 @@ export const VisualLibrary: React.FC<VisualLibraryProps> = ({ onNavigateToStudio
                             </div>
                           </div>
 
+                          {/* Subject-Level Reference Blueprint Thumbnail & Sketching Tips */}
+                          {item.reference_sheet_url && (
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs">
+                              <div
+                                onClick={() =>
+                                  setActiveSheetModal({
+                                    index: 0,
+                                    filename: item.reference_sheet_url?.split('/').pop() || '',
+                                    local_path: item.reference_sheet_url || '',
+                                    caption: item.reference_title || `${item.name} Reference Sheet`,
+                                    tag: item.reference_tag,
+                                  })
+                                }
+                                className="flex items-center gap-2.5 cursor-pointer group flex-1 min-w-0"
+                              >
+                                <div className="w-12 h-12 rounded border border-stone-300 overflow-hidden bg-stone-200 flex-shrink-0 group-hover:border-stone-500 transition">
+                                  <img
+                                    src={item.reference_sheet_url}
+                                    alt={item.name}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition"
+                                    loading="lazy"
+                                  />
+                                </div>
+                                <div className="space-y-0.5 min-w-0">
+                                  <div className="flex items-center gap-1.5 flex-wrap">
+                                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-stone-200 text-stone-800 rounded">
+                                      {item.reference_tag || 'Target Reference'}
+                                    </span>
+                                    <span className="text-xs font-semibold text-stone-900 truncate">
+                                      {item.reference_title || `${item.name} Drawing Guide`}
+                                    </span>
+                                  </div>
+                                  <span className="text-[11px] text-stone-500 group-hover:text-stone-800 flex items-center gap-1">
+                                    <Eye className="w-3 h-3 text-stone-400 group-hover:text-stone-700" /> Click to view full reference sheet
+                                  </span>
+                                </div>
+                              </div>
+
+                              {item.sketching_tips && item.sketching_tips.length > 0 && (
+                                <div className="w-full sm:w-auto text-[11px] text-stone-600 bg-white/80 p-2 rounded border border-stone-200/80 sm:max-w-sm">
+                                  <span className="font-semibold text-stone-700 flex items-center gap-1 text-[10px] uppercase tracking-wider mb-1">
+                                    <Sparkles className="w-3 h-3 text-amber-500" /> Actionable Tips:
+                                  </span>
+                                  <ul className="list-disc list-inside space-y-0.5 text-stone-600">
+                                    {item.sketching_tips.map((tip, tIdx) => (
+                                      <li key={tIdx} className="leading-tight">{tip}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          )}
+
                           {/* Level 3 Exam Adaptation Mashup Prompt */}
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-amber-50/60 border border-amber-200/80 rounded-lg text-xs">
                             <div className="space-y-0.5">
@@ -829,20 +1022,53 @@ export const VisualLibrary: React.FC<VisualLibraryProps> = ({ onNavigateToStudio
               </div>
 
               {drillPeekVisible && (
-                <div className="p-3 bg-stone-100 border border-stone-300 rounded-xl animate-fade-in flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <p className="text-[11px] text-stone-600 font-serif italic">
-                      "Keep construction ellipses clean and line of action continuous."
-                    </p>
-                    <div className="flex gap-2 justify-center">
-                      {activeCategory.curated_sheets.map((sheet, i) => (
-                        <img
-                          key={i}
-                          src={sheet.local_path}
-                          alt="peek"
-                          className="h-24 w-auto rounded border border-stone-300 object-cover shadow-xs"
-                        />
-                      ))}
+                <div className="p-3.5 bg-stone-100 border border-stone-300 rounded-xl animate-fade-in space-y-3">
+                  <div className="flex flex-col sm:flex-row items-center gap-3.5">
+                    <div
+                      className="cursor-pointer group relative overflow-hidden rounded-lg border border-stone-300 bg-white flex-shrink-0"
+                      onClick={() =>
+                        setActiveSheetModal({
+                          index: 0,
+                          filename: (drillSubject.item.reference_sheet_url || '').split('/').pop() || '',
+                          local_path: drillSubject.item.reference_sheet_url || activeCategory.curated_sheets[0]?.local_path,
+                          caption: drillSubject.item.reference_title || drillSubject.item.name,
+                          tag: drillSubject.item.reference_tag,
+                        })
+                      }
+                    >
+                      <img
+                        src={drillSubject.item.reference_sheet_url || activeCategory.curated_sheets[0]?.local_path}
+                        alt={drillSubject.item.name}
+                        className="h-32 w-auto max-w-[180px] object-cover group-hover:scale-105 transition"
+                      />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-[10px] font-medium">
+                        Zoom Fullscreen
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 text-xs flex-1">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-amber-100 text-amber-900 rounded border border-amber-200">
+                          {drillSubject.item.reference_tag || 'Target Reference'}
+                        </span>
+                        <span className="font-semibold text-stone-800 text-xs">
+                          {drillSubject.item.reference_title || drillSubject.item.name}
+                        </span>
+                      </div>
+                      {drillSubject.item.sketching_tips && drillSubject.item.sketching_tips.length > 0 && (
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-bold text-stone-600 uppercase tracking-wider block">
+                            3 Golden Rules to Reproduce:
+                          </span>
+                          <ul className="list-disc list-inside text-[11px] text-stone-700 space-y-0.5">
+                            {drillSubject.item.sketching_tips.map((tip, idx) => (
+                              <li key={idx} className="leading-snug">{tip}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      <div className="text-[10px] text-stone-500 italic pt-0.5">
+                        Tap thumbnail to inspect full construction lines and cross-hatching.
+                      </div>
                     </div>
                   </div>
                 </div>

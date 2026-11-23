@@ -645,7 +645,7 @@ def test_visual_library_endpoints(tmp_path: Path) -> None:
 
     # Check a specific category and its curated sheets
     hf = next(c for c in cat_data["categories"] if c["id"] == "human_figures")
-    assert len(hf["curated_sheets"]) == 3
+    assert len(hf["curated_sheets"]) >= 3
     assert hf["curated_sheets"][0]["local_path"].startswith("/visual_library/curated/")
 
     # Update progress for an item
