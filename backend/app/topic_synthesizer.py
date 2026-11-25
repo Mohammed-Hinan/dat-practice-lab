@@ -915,7 +915,7 @@ def pick_nid_blueprint_and_topic(
     active_profiles: List[str],
     slot_idx: int = 0,
     historical_fingerprints: Optional[List[str]] = None,
-    blueprint_keyword: Optional[str] = None,
+    blueprint_keywords: Optional[List[str]] = None,
 ) -> Tuple[str, str]:
     """Select a fresh, authentic NID blueprint paired with a non-repeating topic.
 
@@ -936,12 +936,14 @@ def pick_nid_blueprint_and_topic(
     matching_bps = [bp for bp in pool if any(p in bp[1] for p in active_profiles)]
     usable_pool = matching_bps if matching_bps else pool
 
-    # If a specific CAT/NID paper slot blueprint is requested, lock onto that blueprint
-    if blueprint_keyword:
-        kw = blueprint_keyword.lower()
-        exact_bps = [bp for bp in pool if kw in bp[0].lower()]
-        if exact_bps:
-            bp_tuple = exact_bps[0]
+    # If CAT/NID paper slot blueprint families are provided, sample broadly across them or combinatorial synthesis
+    if blueprint_keywords and random.random() < 0.65:
+        kws = [k.lower() for k in blueprint_keywords]
+        matching_cat_bps = [
+            bp for bp in pool if any(k in bp[0].lower() for k in kws)
+        ]
+        if matching_cat_bps:
+            bp_tuple = random.choice(matching_cat_bps)
             bp_text, _, topics = bp_tuple
             available_topics = [
                 t for t in topics
@@ -952,7 +954,7 @@ def pick_nid_blueprint_and_topic(
             _RECENT_TOPIC_FINGERPRINTS.append(chosen_sig)
             if len(_RECENT_TOPIC_FINGERPRINTS) > 80:
                 _RECENT_TOPIC_FINGERPRINTS.pop(0)
-            return bp_text, f"Create a fresh, original scenario inspired by (but NOT copying) this style: {topic}"
+            return bp_text, topic
 
     # 50% chance of curated blueprint pool, 50% chance of combinatorial synthesis
     use_combinatorial = random.random() < 0.50

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import random
 import re
@@ -816,10 +817,10 @@ class QuestionGenerator:
             allocated = allocate_categories_mode_b(req.count, "completely_balanced", analytics.category_priorities)
             slots = [(cat, None) for cat in allocated]
 
-        generated: List[StoredGeneratedQuestion] = []
-        used_archetypes: List[str] = []
-        distribution: Dict[str, int] = {}
+        is_cloud = settings.provider in ("gemini", "groq", "openai", "custom")
+        sem = asyncio.Semaphore(8 if is_cloud else 1)
 
+        prepared_tasks = []
         for idx, (cat, theme) in enumerate(slots, start=1):
             modality = _pick_nid_blueprint_and_topic(
                 cat, active_profiles, slot_idx=idx - 1, historical_fingerprints=recent_fingerprints
@@ -827,25 +828,32 @@ class QuestionGenerator:
             target_diff = req.difficulty
             if target_diff in ("Random", "Mixed"):
                 target_diff = random.choice(["Easy", "Medium", "Hard"])
-            q = await self._generate_single(
-                settings=settings,
-                category=cat,
-                programme_tags=req.programme_tags,
-                active_profiles=active_profiles,
-                difficulty=target_diff,
-                time_minutes=req.time_minutes,
-                mode=req.mode,
-                analytics=analytics,
-                historical_records=historical_records,
-                recent_gen=recent_gen,
-                recent_fingerprints=recent_fingerprints,
-                theme=theme,
-                modality_hint=modality,
-                avoid_archetypes=used_archetypes[-3:] if len(slots) > 1 else None,
-                question_order=idx,
-            )
-            generated.append(q)
-            used_archetypes.extend(q.archetypes)
+            prepared_tasks.append((idx, cat, theme, modality, target_diff))
+
+        async def _run_batch_slot(idx: int, cat: str, theme: Optional[ThemePriorityItem], modality: Tuple[str, str], target_diff: str) -> StoredGeneratedQuestion:
+            async with sem:
+                return await self._generate_single(
+                    settings=settings,
+                    category=cat,
+                    programme_tags=req.programme_tags,
+                    active_profiles=active_profiles,
+                    difficulty=target_diff,
+                    time_minutes=req.time_minutes,
+                    mode=req.mode,
+                    analytics=analytics,
+                    historical_records=historical_records,
+                    recent_gen=recent_gen,
+                    recent_fingerprints=recent_fingerprints,
+                    theme=theme,
+                    modality_hint=modality,
+                    avoid_archetypes=None,
+                    question_order=idx,
+                )
+
+        generated = list(await asyncio.gather(*[_run_batch_slot(*t) for t in prepared_tasks]))
+        generated.sort(key=lambda x: x.question_order)
+        distribution: Dict[str, int] = {}
+        for q in generated:
             distribution[q.category] = distribution.get(q.category, 0) + 1
 
         return GenerateQuestionsResponse(
@@ -881,27 +889,27 @@ class QuestionGenerator:
             warnings.append(analytics.low_confidence_warning)
 
         # Determine categories, blueprint keywords, and optional themes across paper
-        slot_blueprint_keywords: List[Optional[str]] = [None] * req.num_questions
+        slot_blueprint_keywords: List[Optional[List[str]]] = [None] * req.num_questions
         slot_marks: List[Optional[int]] = [None] * req.num_questions
         per_q_times: List[int] = []
 
         if req.paper_strategy == "authentic_cat_paper" and req.category_distribution != "custom":
             cat_5hr_slots = [
-                ("Problem identification", 40, "Spatial interior & ergonomic product evaluation", 15),
-                ("Storyboard", 35, "3-Stage craft and culinary transformation", 12),
-                ("Logos, Symbols & Signs", 30, "Cognitive journey & route cartography", 10),
-                ("Drawing", 40, "Multi-figure dynamic sports & action", 13),
-                ("Drawing", 40, "High-angle aerial & balcony perspective", 13),
-                ("Creativity", 35, "Modular 3D geometric block showpiece", 12),
-                ("Drawing", 35, "Observational social scenario & human emotional reactions", 10),
-                ("Composition", 45, "Campaign + poster", 15),
+                ("Problem identification", 40, ["Spatial interior", "Inclusive everyday", "Everyday micro-action"], 15),
+                ("Storyboard", 35, ["3-Stage craft", "Circular craft", "Quick-response", "Wordless everyday twist"], 12),
+                ("Logos, Symbols & Signs", 30, ["route cartography", "Behavioural & wayfinding", "Identity & visual"], 10),
+                ("Drawing", 40, ["Multi-figure dynamic sports", "Expressions, gestures", "Body-constraint object"], 13),
+                ("Drawing", 40, ["High-angle aerial", "Dramatic perspective", "Plan-to-3D spatial"], 13),
+                ("Creativity", 35, ["Modular 3D", "Biomimetic", "Form Sensitivity", "Single-prop lateral", "Lateral thinking"], 12),
+                ("Product sketch", 35, None, 10),
+                ("Composition", 45, ["Campaign + poster", "Forced-metaphor", "Multi-point public", "Visualise a stark"], 15),
             ]
             nid_3hr_slots = [
-                ("Problem identification", 35, "Product innovation & ergonomic redesign", 20),
-                ("Storyboard", 35, "Wordless everyday twist (4 frames)", 20),
-                ("Drawing", 40, "Dramatic perspective & eye-level storytelling", 20),
-                ("Composition", 35, "Forced-metaphor poster", 20),
-                ("Creativity", 35, "Form Sensitivity & Product Translation", 20),
+                ("Problem identification", 35, None, 20),
+                ("Storyboard", 35, None, 20),
+                ("Drawing", 40, None, 20),
+                ("Composition", 35, None, 20),
+                ("Creativity", 35, None, 20),
             ]
             base_template = nid_3hr_slots if req.num_questions <= 5 else cat_5hr_slots
             chosen_slots = [base_template[i % len(base_template)] for i in range(req.num_questions)]
@@ -985,19 +993,27 @@ class QuestionGenerator:
         )
         self.db.create_exam_paper(paper)
 
-        used_archetypes: List[str] = []
+        is_cloud = settings.provider in ("gemini", "groq", "openai", "custom")
+        sem = asyncio.Semaphore(8 if is_cloud else 1)
+
+        prepared_exam_tasks = []
+        for idx, (cat, theme) in enumerate(slots, start=1):
+            modality = _pick_nid_blueprint_and_topic(
+                cat,
+                active_profiles,
+                slot_idx=idx - 1,
+                historical_fingerprints=recent_fingerprints,
+                blueprint_keywords=slot_blueprint_keywords[idx - 1],
+            )
+            prepared_exam_tasks.append((idx, cat, theme, modality))
+
         generated_questions: List[StoredGeneratedQuestion] = []
 
-        try:
-            for idx, (cat, theme) in enumerate(slots, start=1):
-                modality = _pick_nid_blueprint_and_topic(
-                    cat,
-                    active_profiles,
-                    slot_idx=idx - 1,
-                    historical_fingerprints=recent_fingerprints,
-                    blueprint_keyword=slot_blueprint_keywords[idx - 1],
-                )
-                q = await self._generate_single(
+        async def _run_exam_slot(
+            idx: int, cat: str, theme: Optional[ThemePriorityItem], modality: Tuple[str, str]
+        ) -> StoredGeneratedQuestion:
+            async with sem:
+                return await self._generate_single(
                     settings=settings,
                     category=cat,
                     programme_tags=req.programme_focus,
@@ -1011,13 +1027,17 @@ class QuestionGenerator:
                     recent_fingerprints=recent_fingerprints,
                     theme=theme,
                     modality_hint=modality,
-                    avoid_archetypes=used_archetypes[-4:],
+                    avoid_archetypes=None,
                     exam_paper_id=paper_id,
                     question_order=idx,
                     marks_override=slot_marks[idx - 1],
                 )
-                generated_questions.append(q)
-                used_archetypes.extend(q.archetypes)
+
+        try:
+            generated_questions = list(
+                await asyncio.gather(*[_run_exam_slot(*t) for t in prepared_exam_tasks])
+            )
+            generated_questions.sort(key=lambda x: x.question_order)
         except Exception:
             # Clean up empty/incomplete paper shell if generation fails mid-way
             if not generated_questions:
