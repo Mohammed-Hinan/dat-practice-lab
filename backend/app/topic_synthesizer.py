@@ -915,6 +915,7 @@ def pick_nid_blueprint_and_topic(
     active_profiles: List[str],
     slot_idx: int = 0,
     historical_fingerprints: Optional[List[str]] = None,
+    blueprint_keyword: Optional[str] = None,
 ) -> Tuple[str, str]:
     """Select a fresh, authentic NID blueprint paired with a non-repeating topic.
 
@@ -934,6 +935,24 @@ def pick_nid_blueprint_and_topic(
     # Filter pool by active_profiles so the 2026 common paper ("general_nid_mdes") gets authentic common blueprints
     matching_bps = [bp for bp in pool if any(p in bp[1] for p in active_profiles)]
     usable_pool = matching_bps if matching_bps else pool
+
+    # If a specific CAT/NID paper slot blueprint is requested, lock onto that blueprint
+    if blueprint_keyword:
+        kw = blueprint_keyword.lower()
+        exact_bps = [bp for bp in pool if kw in bp[0].lower()]
+        if exact_bps:
+            bp_tuple = exact_bps[0]
+            bp_text, _, topics = bp_tuple
+            available_topics = [
+                t for t in topics
+                if not any(_has_high_overlap(_fingerprint_text(t), r_sig) for r_sig in recent_sigs)
+            ]
+            topic = random.choice(available_topics) if available_topics else random.choice(topics)
+            chosen_sig = _fingerprint_text(topic)
+            _RECENT_TOPIC_FINGERPRINTS.append(chosen_sig)
+            if len(_RECENT_TOPIC_FINGERPRINTS) > 80:
+                _RECENT_TOPIC_FINGERPRINTS.pop(0)
+            return bp_text, f"Create a fresh, original scenario inspired by (but NOT copying) this style: {topic}"
 
     # 50% chance of curated blueprint pool, 50% chance of combinatorial synthesis
     use_combinatorial = random.random() < 0.50

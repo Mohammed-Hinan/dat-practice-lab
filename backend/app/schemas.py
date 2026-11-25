@@ -367,14 +367,14 @@ class GenerateQuestionsResponse(BaseModel):
 
 class ExamPaperCreateRequest(BaseModel):
     title: Optional[str] = None
-    num_questions: int = Field(default=3, ge=1, le=10)
-    total_time_minutes: int = Field(default=90, ge=15, le=300)
+    num_questions: int = Field(default=8, ge=1, le=12)
+    total_time_minutes: int = Field(default=300, ge=15, le=360)
     difficulty: Literal["Easy", "Medium", "Hard", "Mixed", "Random"] = "Mixed"
     category_distribution: Literal["balanced", "profile_weighted", "custom"] = "balanced"
     custom_categories: List[str] = Field(default_factory=list)
     programme_focus: List[str] = Field(default_factory=list)
     active_profiles: Optional[List[str]] = None
-    paper_strategy: Literal["random", "prediction_oriented"] = "prediction_oriented"
+    paper_strategy: Literal["random", "prediction_oriented", "authentic_cat_paper"] = "authentic_cat_paper"
     historical_relevance: Literal["low", "medium", "high"] = "high"
 
 

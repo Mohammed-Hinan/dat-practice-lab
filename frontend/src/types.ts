@@ -298,7 +298,7 @@ export interface ExamPaperCreateRequest {
   custom_categories: string[];
   programme_focus: string[];
   active_profiles?: string[];
-  paper_strategy: 'random' | 'prediction_oriented';
+  paper_strategy: 'random' | 'prediction_oriented' | 'authentic_cat_paper';
   historical_relevance: 'low' | 'medium' | 'high';
 }
 

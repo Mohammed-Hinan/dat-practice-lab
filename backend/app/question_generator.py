@@ -860,10 +860,41 @@ class QuestionGenerator:
         if analytics.low_confidence_warning and req.paper_strategy == "prediction_oriented":
             warnings.append(analytics.low_confidence_warning)
 
-        # Determine categories and optional themes across paper
-        if req.category_distribution == "custom" and req.custom_categories:
+        # Determine categories, blueprint keywords, and optional themes across paper
+        slot_blueprint_keywords: List[Optional[str]] = [None] * req.num_questions
+        per_q_times: List[int] = []
+
+        if req.paper_strategy == "authentic_cat_paper" and req.category_distribution != "custom":
+            cat_5hr_slots = [
+                ("Problem identification", 40, "Spatial interior & ergonomic product evaluation"),
+                ("Storyboard", 35, "3-Stage craft and culinary transformation"),
+                ("Logos, Symbols & Signs", 30, "Cognitive journey & route cartography"),
+                ("Drawing", 40, "Multi-figure dynamic sports & action"),
+                ("Drawing", 40, "High-angle aerial & balcony perspective"),
+                ("Creativity", 35, "Modular 3D geometric block showpiece"),
+                ("Drawing", 35, "Observational social scenario & human emotional reactions"),
+                ("Composition", 45, "Campaign + poster"),
+            ]
+            nid_3hr_slots = [
+                ("Problem identification", 35, "Product innovation & ergonomic redesign"),
+                ("Storyboard", 35, "Wordless everyday twist (4 frames)"),
+                ("Drawing", 40, "Dramatic perspective & eye-level storytelling"),
+                ("Composition", 35, "Forced-metaphor poster"),
+                ("Creativity", 35, "Form Sensitivity & Product Translation"),
+            ]
+            base_template = nid_3hr_slots if req.num_questions <= 5 else cat_5hr_slots
+            chosen_slots = [base_template[i % len(base_template)] for i in range(req.num_questions)]
+            slots = [(s[0], None) for s in chosen_slots]
+            slot_blueprint_keywords = [s[2] for s in chosen_slots]
+
+            raw_sum = sum(s[1] for s in chosen_slots) or 1
+            per_q_times = [max(15, round(s[1] * req.total_time_minutes / raw_sum)) for s in chosen_slots]
+            diff = req.total_time_minutes - sum(per_q_times)
+            if per_q_times:
+                per_q_times[-1] = max(10, per_q_times[-1] + diff)
+        elif req.category_distribution == "custom" and req.custom_categories:
             cats = allocate_categories_mode_a(req.custom_categories, req.num_questions)
-            slots: List[Tuple[str, Optional[ThemePriorityItem]]] = []
+            slots = []
             for i, cat in enumerate(cats):
                 theme = (
                     analytics.theme_priorities[i % len(analytics.theme_priorities)]
@@ -886,13 +917,14 @@ class QuestionGenerator:
             cats = allocate_categories_mode_b(req.num_questions, strategy, analytics.category_priorities)
             slots = [(cat, None) for cat in cats]
 
-        # Compute realistic per-question time splits summing exactly to total_time_minutes
-        base_time = max(10, req.total_time_minutes // req.num_questions)
-        per_q_times = [base_time] * req.num_questions
-        remainder = req.total_time_minutes - sum(per_q_times)
-        for i in range(abs(remainder)):
-            idx = i % req.num_questions
-            per_q_times[idx] += 1 if remainder > 0 else -1
+        # Compute realistic per-question time splits if not already set by authentic_cat_paper
+        if not per_q_times:
+            base_time = max(10, req.total_time_minutes // req.num_questions)
+            per_q_times = [base_time] * req.num_questions
+            remainder = req.total_time_minutes - sum(per_q_times)
+            for i in range(abs(remainder)):
+                idx = i % req.num_questions
+                per_q_times[idx] += 1 if remainder > 0 else -1
 
         # Difficulty mix for "Mixed" or "Random"
         if req.difficulty in ("Mixed", "Random"):
@@ -903,11 +935,16 @@ class QuestionGenerator:
             difficulties = [req.difficulty] * req.num_questions
 
         paper_id = str(uuid.uuid4())
-        paper_title = (
-            req.title.strip()
-            if req.title and req.title.strip()
-            else f"NID M.Des DAT Prelims Mock Paper ({req.num_questions}Q • {req.total_time_minutes} min)"
-        )
+        if req.title and req.title.strip():
+            paper_title = req.title.strip()
+        elif req.paper_strategy == "authentic_cat_paper":
+            paper_title = (
+                f"NID / CEED Creative Ability Test (CAT) Mock ({req.num_questions}Q • {req.total_time_minutes} min)"
+                if req.num_questions > 5
+                else f"NID M.Des DAT Authentic Mock Paper ({req.num_questions}Q • {req.total_time_minutes} min)"
+            )
+        else:
+            paper_title = f"NID M.Des DAT Prelims Mock Paper ({req.num_questions}Q • {req.total_time_minutes} min)"
 
         paper = ExamPaperRecord(
             id=paper_id,
@@ -932,7 +969,11 @@ class QuestionGenerator:
         try:
             for idx, (cat, theme) in enumerate(slots, start=1):
                 modality = _pick_nid_blueprint_and_topic(
-                    cat, active_profiles, slot_idx=idx - 1, historical_fingerprints=recent_fingerprints
+                    cat,
+                    active_profiles,
+                    slot_idx=idx - 1,
+                    historical_fingerprints=recent_fingerprints,
+                    blueprint_keyword=slot_blueprint_keywords[idx - 1],
                 )
                 q = await self._generate_single(
                     settings=settings,

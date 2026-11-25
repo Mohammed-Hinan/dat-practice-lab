@@ -53,7 +53,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
     'Logos, Symbols & Signs',
   ]);
   const [programmeFocus, setProgrammeFocus] = useState<string[]>([]);
-  const [paperStrategy, setPaperStrategy] = useState<'random' | 'prediction_oriented'>('prediction_oriented');
+  const [paperStrategy, setPaperStrategy] = useState<'random' | 'prediction_oriented' | 'authentic_cat_paper'>('authentic_cat_paper');
   const [historicalRelevance, setHistoricalRelevance] = useState<'low' | 'medium' | 'high'>('high');
 
   const [generating, setGenerating] = useState(false);
@@ -828,9 +828,12 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
               <label className="block text-xs font-medium text-[#44403C] mb-1">Paper Strategy</label>
               <select
                 value={paperStrategy}
-                onChange={(e) => setPaperStrategy(e.target.value as 'random' | 'prediction_oriented')}
+                onChange={(e) =>
+                  setPaperStrategy(e.target.value as 'random' | 'prediction_oriented' | 'authentic_cat_paper')
+                }
                 className="w-full text-sm px-3 py-2 rounded-lg border border-[#D8D4CB] bg-white"
               >
+                <option value="authentic_cat_paper">Authentic CAT / NID Pattern (Recommended)</option>
                 <option value="prediction_oriented">Prediction & Priority Oriented</option>
                 <option value="random">Completely Random & Diverse</option>
               </select>
@@ -848,6 +851,16 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
               </select>
             </div>
           </div>
+
+          {paperStrategy === 'authentic_cat_paper' && (
+            <div className="rounded-lg bg-[#1E3A5F]/5 border border-[#1E3A5F]/20 px-3.5 py-2.5 text-xs text-[#1E3A5F] leading-relaxed">
+              <strong>Authentic Paper Blueprint Active:</strong> The LLM will generate a brand-new, original mock paper
+              modeled directly on real{' '}
+              {numQuestions > 5
+                ? '5-hour 8-question CAT papers (Interior Ergonomics, 3-Step Process, Route Map, Dynamic Sports Figures, High-Angle Perspective, 3D Modular Cubes, Social Observation, and Campaign Poster).'
+                : '3-hour 5-question NID papers (Product Redesign, 4-Frame Wordless Storyboard, First-Person Perspective, Dual-Metaphor Poster, and Material Upcycling).'}
+            </div>
+          )}
 
           <div className="space-y-2">
             <label className="block text-xs font-medium text-[#44403C]">Category Distribution</label>
