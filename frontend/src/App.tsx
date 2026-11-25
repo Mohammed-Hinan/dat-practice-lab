@@ -22,9 +22,18 @@ import type {
   TaxonomyData,
 } from './types';
 
+const isLocalEnv =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.hostname === '0.0.0.0' ||
+    window.location.hostname.endsWith('.local') ||
+    import.meta.env.DEV ||
+    import.meta.env.VITE_ENABLE_VISUAL_LIBRARY === 'true');
+
 const NAV_ITEMS: { id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: 'generate', label: 'Practice Studio', icon: Sparkles },
-  { id: 'visual_library', label: 'Visual Library', icon: BookOpen },
+  ...(isLocalEnv ? [{ id: 'visual_library' as NavSection, label: 'Visual Library', icon: BookOpen }] : []),
   { id: 'simulator', label: 'Exam Simulator', icon: ClipboardList },
   { id: 'bank', label: 'Question Bank', icon: Archive },
 ];
@@ -44,6 +53,12 @@ export default function App() {
     categories?: string[];
     themeId?: string | null;
   } | null>(null);
+
+  useEffect(() => {
+    if (section === 'visual_library' && !isLocalEnv) {
+      setSection('generate');
+    }
+  }, [section]);
 
   const initStudio = async (retriesLeft = 3) => {
     try {
@@ -329,7 +344,7 @@ export default function App() {
               initialPreset={genPreset}
             />
           )}
-          {section === 'visual_library' && (
+          {section === 'visual_library' && isLocalEnv && (
             <VisualLibrary
               onNavigateToStudio={(sec, preset) => {
                 if (preset) setGenPreset(preset);
