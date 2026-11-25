@@ -35,6 +35,7 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "promoting groundwater recharging through rooftop rainwater harvesting in cities",
                 "discouraging rash honking and road rage among two-wheeler commuters",
                 "fostering intergenerational companionship between college students and lonely seniors",
+                "combating school bullying and fostering peer empathy among students",
             ],
         ),
         (
@@ -52,6 +53,7 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
                 "promoting regular eye and posture checkups for software developers and remote workers",
                 "celebrating the craft heritage of local handloom weavers and potters in urban spaces",
                 "building community preparedness for seasonal urban monsoon flash floods",
+                "an anti-bullying school awareness campaign to combat harassment and empower bystanders",
             ],
         ),
         (
@@ -121,6 +123,16 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
         ),
     ],
     "Creativity": [
+        (
+            "Modular 3D geometric block showpiece: You are provided with 16 identical wooden cubes in 4 distinct colours (4 of each colour). Subquestion A: Construct a stable 3D perspective or isometric sculptural showpiece displaying interlocking faces, cantilevers, voids, and structural equilibrium. Subquestion B: Explain the 4-colour distribution logic, tabletop context, and dimension scale reference.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "16 wooden cubes in 4 colors forming an artistic drawing-room tabletop showpiece",
+                "16 modular interlocking blocks in 4 wood species forming a contemplative Zen desk sculpture",
+                "12 triangular prisms in 3 tones forming an architectural modular desktop organizer",
+                "16 hexagonal blocks in 4 colors forming a tactile acoustic tabletop sound sculpture",
+            ],
+        ),
         (
             "Sensory object story: Weave the sensory qualities (sound, light, touch, smell) of any 4 of the listed everyday objects into a short original story, then draw the most vivid moment without dialogue.",
             ["nid_haryana_creative_leadership", "general_nid_mdes"],
@@ -224,6 +236,39 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
     ],
     "Drawing": [
         (
+            "Multi-figure dynamic sports & action: Subquestion A: Illustrate at least 4 interacting human figures in diverse athletic action postures (such as bowler, batsman, fielders, runners) with dynamic lines of action, balance, and foreshortening. Subquestion B: Depict the spatial ground plane, pitch markings, and environmental context with 3-tier line weight.",
+            ["general_nid_mdes", "nid_haryana_creative_leadership"],
+            [
+                "a lively group of boys playing gully cricket in an open neighbourhood ground",
+                "children playing kabaddi or kho-kho on an unpaved rural sports field",
+                "young athletes playing street football or soccer on a waterlogged monsoon lane",
+                "teenagers playing volleyball or badminton across an improvised rope net",
+                "children competing in tug-of-war or hopscotch during school recess",
+            ],
+        ),
+        (
+            "High-angle aerial & balcony perspective: Subquestion A: Construct a steep 3-point high-angle perspective looking down from an elevated vantage point (4th-floor balcony, pedestrian footbridge, or rooftop terrace), showing vertical line convergence. Subquestion B: Render strong directional sunlight, cast shadows, and foreshortened human figures seen from above.",
+            ["general_nid_mdes"],
+            [
+                "looking down from a 4th-floor apartment balcony at a neighbourhood place of worship surrounded by a landscaped garden on a busy sunny day",
+                "looking down from a high pedestrian overbridge onto a crowded railway junction platform during train arrival",
+                "looking down from a 3rd-floor terrace onto a bustling weekly open-air vegetable market",
+                "looking down from an apartment window onto a busy waterlogged street after a heavy monsoon downpour",
+                "looking down from a library mezzanine onto students working around study tables and bookshelves",
+            ],
+        ),
+        (
+            "Observational social scenario & human emotional reactions: Subquestion A: Depict the central subject's body posture, physical gesture, and immediate interaction with the environment. Subquestion B: Illustrate nearby bystanders and passersby exhibiting contrasting, realistic emotional reactions (disgust, protection, curiosity, indifference) in an authentic public setting.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "a man smoking a cigarette in a crowded bus shelter or railway tea stall",
+                "a street performer or magician gathering a crowd of spectators on a city promenade",
+                "a commuter dropping an open crate of fruits at a busy metro exit during rush hour",
+                "an argument over an auto-rickshaw fare in front of a crowded railway station",
+                "passengers reacting to a stray street dog wandering into a modern air-conditioned metro station",
+            ],
+        ),
+        (
             "Body-constraint object observation: Subquestion A: draw 3 existing everyday objects that match the given physical constraint in accurate proportion, naming each. Subquestion B: draw one of them being operated by a human hand or foot.",
             ["general_nid_mdes"],
             [
@@ -311,6 +356,16 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
         ),
     ],
     "Logos, Symbols & Signs": [
+        (
+            "Cognitive journey & route cartography: Subquestion A: Draw an intuitive hand-drawn cognitive route map from home or origin to an important destination (exam centre, regional market, hospital) showing transport modes, major turns, and spatial road spine. Subquestion B: Depict 5 recognizable urban landmarks, directional compass rose, and transit wayfinding legend.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "route traversed from home to reach examination centre (TCS iON Digital Zone-Aluva)",
+                "evacuation and relief route through flood-affected urban neighbourhood to relief camp",
+                "heritage walking trail through old walled city market to historic monument",
+                "daily pedestrian and bicycle commute from residential hostel to university campus",
+            ],
+        ),
         (
             "Behavioural & wayfinding signs: Design a coherent set of 4 clear, wordless or minimal-text public signs for the given everyday space. Subquestion A: draw 4 distinct signs using simple high-contrast shapes. Subquestion B: briefly explain how each sign guides or improves people's behaviour.",
             ["general_nid_mdes", "nid_gandhinagar_sdm"],
@@ -402,6 +457,16 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
         ),
     ],
     "Problem identification": [
+        (
+            "Spatial interior & ergonomic product evaluation: Subquestion A: Draw an eye-level or 2-point interior perspective room sketch specifically tailored for the target occupant (elderly individual or young child) showing furniture layout, circulation, and resident positioning. Subquestion B: Identify one product depicted, state its primary functional purpose, and describe 3 concrete ways to improve its functionality and safety.",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "room interior for an elderly person above 50 years old with mobility considerations",
+                "room interior for a growing child aged 6-10 years with active play and study needs",
+                "compact kitchen workspace tailored for a wheelchair user",
+                "study and sleeping room tailored for a visually impaired college student",
+            ],
+        ),
         (
             "Observation to insight chain: Picture spending 10 minutes observing how people use the given everyday Indian place. Subquestion A: write 8 crisp field observations and derive 3 distinct design opportunities from them. Subquestion B: sketch ONE practical product or spatial solution based on your strongest insight with short annotations.",
             ["general_nid_mdes", "nid_gandhinagar_sdm"],
@@ -545,6 +610,18 @@ NID_BLUEPRINTS: Dict[str, List[Tuple[str, List[str], List[str]]]] = {
         ),
     ],
     "Storyboard": [
+        (
+            "3-Stage craft and culinary transformation: Subquestion A: Illustrate Stage 1 (Raw material selection & preparation) and Stage 2 (Active intermediate transformation mechanism & hand craftsmanship) with hand-tool interactions. Subquestion B: Illustrate Stage 3 (Final outcome, packaging, and tactile in-use preservation).",
+            ["general_nid_mdes", "nid_gandhinagar_sdm"],
+            [
+                "raw green mangoes or fruit to jarred sun-preserved traditional pickle",
+                "raw coastal seashells and beads to finished handcrafted wearable jewellery",
+                "raw wet clay lump on potter's wheel to glazed terracotta water vessel",
+                "harvested raw cotton bolls to hand-spun charkha yarn and woven textile",
+                "fresh whole milk to artisanal clarified ghee and clay-pot butter",
+                "reclaimed scrap aluminium cans into sand-cast modular door handles",
+            ],
+        ),
         (
             "Product + circular sustainability system storyboard (4-6 frames): Design a practical reusable alternative for the given high-waste Indian context, considering usage, collection, washing, and return. Subquestion A: outline the product features and circular service loop briefly. Subquestion B: present both the product and the end-to-end user system in a clear 4-to-6 frame storyboard.",
             ["nid_gandhinagar_sdm", "general_nid_mdes"],

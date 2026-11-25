@@ -82,6 +82,11 @@ def create_app(db_instance: Optional[Database] = None) -> FastAPI:
     )
 
     db = db_instance or Database()
+    from .curated_papers import ensure_curated_papers
+    try:
+        ensure_curated_papers(db)
+    except Exception as exc:
+        logger.warning(f"Failed to ensure curated papers: {exc}")
     llm_service = LLMService()
     drawthings_service = DrawThingsService()
     generator = QuestionGenerator(db=db, llm_service=llm_service)

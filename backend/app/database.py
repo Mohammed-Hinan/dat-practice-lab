@@ -665,6 +665,7 @@ class Database:
 
     def delete_exam_paper(self, paper_id: str) -> bool:
         with self.connect() as conn:
+            conn.execute("DELETE FROM generated_questions WHERE exam_paper_id = ?", (paper_id,))
             cur = conn.execute("DELETE FROM exam_papers WHERE id = ?", (paper_id,))
             return cur.rowcount > 0
 
