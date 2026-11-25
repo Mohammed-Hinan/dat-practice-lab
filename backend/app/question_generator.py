@@ -301,6 +301,7 @@ def build_generation_prompt(
     theme: Optional[ThemePriorityItem] = None,
     modality_hint: Optional[Tuple[str, str]] = None,
     avoid_repetition_note: Optional[str] = None,
+    marks_override: Optional[int] = None,
 ) -> Tuple[str, List[str], Dict[str, object]]:
     hist_block, evidence_bullets = _summarize_historical_evidence(historical_records, category, theme)
 
@@ -313,7 +314,7 @@ def build_generation_prompt(
         chosen_blueprint, context_seed = _pick_nid_blueprint_and_topic(
             category, active_profiles, historical_fingerprints=recent_titles_and_scenarios
         )
-    default_marks = 20 if time_minutes <= 35 else (30 if time_minutes <= 60 else 40)
+    default_marks = marks_override if marks_override is not None else (20 if time_minutes <= 35 else (30 if time_minutes <= 60 else 40))
     half_marks = default_marks // 2
     rem_marks = default_marks - half_marks
 
@@ -377,6 +378,22 @@ def build_generation_prompt(
         "Drawing": 'Subquestion A: "3 proportional object studies", Subquestion B: "Human interaction sketch"',
         "Design aptitude": 'Subquestion A: "Key insights & analysis", Subquestion B: "Design concept drawing"',
     }.get(category, 'Subquestion A: "Structured observations", Subquestion B: "Annotated concept sketch"')
+
+    bp_lower = chosen_blueprint.lower()
+    if "route cartography" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "Hand-drawn cognitive route map showing turns and transit modes", Subquestion B: "5 key landmarks, compass rose & legend" (DO NOT ask for 4 pictogram marks)'
+    elif "3-stage craft" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "Stage 1 (Raw material prep) & Stage 2 (Active processing) sketches", Subquestion B: "Stage 3 (Finished outcome & usage) sketch" (MUST be 3 key steps, NOT 4 frames)'
+    elif "spatial interior" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "2-point interior room sketch with occupant positioned", Subquestion B: "Key function of one product & 3 improvements"'
+    elif "modular 3d" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "Isometric/3D sculptural assembly of 16 blocks", Subquestion B: "4-colour distribution strategy & tabletop context"'
+    elif "multi-figure dynamic sports" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "4+ interacting human figures in dynamic sports action", Subquestion B: "Playing pitch, ground plane & 3-tier depth"'
+    elif "high-angle aerial" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "Steep 3-point downward perspective from balcony/overbridge", Subquestion B: "Directional sunlight, cast shadows & foreshortened people"'
+    elif "observational social scenario" in bp_lower:
+        cat_deliverables_hint = 'Subquestion A: "Central subject posture & physical gesture", Subquestion B: "3+ bystanders with varied emotional reactions"'
 
     diff_cues = {
         "Easy": "Direct, accessible everyday observation or straightforward functional redesign with 1 user group.",
@@ -505,6 +522,7 @@ class QuestionGenerator:
         avoid_archetypes: Optional[List[str]] = None,
         exam_paper_id: Optional[str] = None,
         question_order: int = 1,
+        marks_override: Optional[int] = None,
     ) -> StoredGeneratedQuestion:
         archetypes = _pick_archetypes_for_slot(
             category=category,
@@ -524,6 +542,7 @@ class QuestionGenerator:
             recent_titles_and_scenarios=recent_fingerprints,
             theme=theme,
             modality_hint=modality_hint,
+            marks_override=marks_override,
         )
 
         payload, raw_response, model_used = await self.llm.generate_structured_question(
@@ -599,6 +618,7 @@ class QuestionGenerator:
             )
         )
         for sq in payload.subquestions:
+            sq.instruction = re.sub(r"^[\s:\-–]+", "", sq.instruction).strip()
             if is_physical_problem and any(bad in sq.instruction.lower() for bad in ("promotional poster", "poster", "advertising campaign")):
                 sq.instruction = "Present your redesigned concept in clean 3/4 perspective showing the product in active use on-site, with circular detail callouts for key mechanisms and material notes."
                 sq.deliverables = ["Annotated 3/4 perspective sketch", "Ergonomic & mechanism callouts"]
@@ -862,30 +882,32 @@ class QuestionGenerator:
 
         # Determine categories, blueprint keywords, and optional themes across paper
         slot_blueprint_keywords: List[Optional[str]] = [None] * req.num_questions
+        slot_marks: List[Optional[int]] = [None] * req.num_questions
         per_q_times: List[int] = []
 
         if req.paper_strategy == "authentic_cat_paper" and req.category_distribution != "custom":
             cat_5hr_slots = [
-                ("Problem identification", 40, "Spatial interior & ergonomic product evaluation"),
-                ("Storyboard", 35, "3-Stage craft and culinary transformation"),
-                ("Logos, Symbols & Signs", 30, "Cognitive journey & route cartography"),
-                ("Drawing", 40, "Multi-figure dynamic sports & action"),
-                ("Drawing", 40, "High-angle aerial & balcony perspective"),
-                ("Creativity", 35, "Modular 3D geometric block showpiece"),
-                ("Drawing", 35, "Observational social scenario & human emotional reactions"),
-                ("Composition", 45, "Campaign + poster"),
+                ("Problem identification", 40, "Spatial interior & ergonomic product evaluation", 15),
+                ("Storyboard", 35, "3-Stage craft and culinary transformation", 12),
+                ("Logos, Symbols & Signs", 30, "Cognitive journey & route cartography", 10),
+                ("Drawing", 40, "Multi-figure dynamic sports & action", 13),
+                ("Drawing", 40, "High-angle aerial & balcony perspective", 13),
+                ("Creativity", 35, "Modular 3D geometric block showpiece", 12),
+                ("Drawing", 35, "Observational social scenario & human emotional reactions", 10),
+                ("Composition", 45, "Campaign + poster", 15),
             ]
             nid_3hr_slots = [
-                ("Problem identification", 35, "Product innovation & ergonomic redesign"),
-                ("Storyboard", 35, "Wordless everyday twist (4 frames)"),
-                ("Drawing", 40, "Dramatic perspective & eye-level storytelling"),
-                ("Composition", 35, "Forced-metaphor poster"),
-                ("Creativity", 35, "Form Sensitivity & Product Translation"),
+                ("Problem identification", 35, "Product innovation & ergonomic redesign", 20),
+                ("Storyboard", 35, "Wordless everyday twist (4 frames)", 20),
+                ("Drawing", 40, "Dramatic perspective & eye-level storytelling", 20),
+                ("Composition", 35, "Forced-metaphor poster", 20),
+                ("Creativity", 35, "Form Sensitivity & Product Translation", 20),
             ]
             base_template = nid_3hr_slots if req.num_questions <= 5 else cat_5hr_slots
             chosen_slots = [base_template[i % len(base_template)] for i in range(req.num_questions)]
             slots = [(s[0], None) for s in chosen_slots]
             slot_blueprint_keywords = [s[2] for s in chosen_slots]
+            slot_marks = [s[3] for s in chosen_slots]
 
             raw_sum = sum(s[1] for s in chosen_slots) or 1
             per_q_times = [max(15, round(s[1] * req.total_time_minutes / raw_sum)) for s in chosen_slots]
@@ -992,6 +1014,7 @@ class QuestionGenerator:
                     avoid_archetypes=used_archetypes[-4:],
                     exam_paper_id=paper_id,
                     question_order=idx,
+                    marks_override=slot_marks[idx - 1],
                 )
                 generated_questions.append(q)
                 used_archetypes.extend(q.archetypes)
